@@ -1,0 +1,217 @@
+.box
+{
+    position: absolute;
+    left: 440px;
+    top: 40px;
+    padding: 42px 600px 631px 8px;
+
+    background: rgba(0, 250, 154, 0.62);
+}
+
+.box h2
+{
+    position: absolute;
+    width: 281px;
+    height: 84px;
+    left: 195px;
+    top: 10px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 47px;
+    line-height: 84px;
+
+    color: #000000;
+}
+
+#Email
+{
+    position: absolute;
+    width: 475px;
+    height: 68px;
+    left: 60px;
+    top: 190px;
+
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.enteringEmail
+{
+    position: absolute;
+    width: 121px;
+    height: 28px;
+    left: 87px;
+    top: 215px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #000000;
+}
+
+#Password
+{
+    position: absolute;
+    width: 475px;
+    height: 68px;
+    left: 60px;
+    top: 295px;
+
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.enteringPassword
+{
+    position: absolute;
+    width: 167px;
+    height: 28px;
+    left: 87px;
+    top: 319px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #000000;
+}
+
+.forgot
+{
+    position: absolute;
+    width: 161px;
+    height: 21px;
+    left: 67px;
+    top: 363px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.sign
+{
+    position: absolute;
+    width: 123px;
+    height: 42px;
+    left: 100px;
+    top: 428px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 42px;
+
+    color: #000000;
+}
+
+.log
+{
+    position: absolute;
+    width: 190px;
+    height: 50px;
+    left: 348px;
+    top: 428px;
+
+    background: #09C87F;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 42px;
+
+    color: #000000;
+
+}
+
+.box .inputBox input:focus ~ label,
+.box .inputBox input:valid ~ label
+{
+    top:195px;
+    left:70px;
+    color:#03a9f4;
+    font-size: 19px;
+}
+
+@media screen and (max-width: 640px)
+{
+    .box
+    {
+        width: 0;
+        margin-left: -440px;
+        padding: 5px 430px 665px 12px;
+        top: 50px;
+    }
+
+    .box h2
+    {
+        left: 31%;
+    }
+
+    #Email, #Password
+    {
+        width: 366px;
+        left: 34px;
+    }
+
+    .enteringEmail, .enteringPassword
+    {
+        left: 50px;
+    }
+
+    .forgot
+    {
+        left: 45px;
+    }
+
+    .sign
+    {
+        left: 68px;
+    }
+
+    .log
+    {
+        left: 50%;
+    }
+}
+
+.pict
+{
+    width: 270px;
+    border: 3px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
