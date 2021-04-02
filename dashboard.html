@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="mainStyles.css">
+
 </head>
 
 <body>
@@ -15,17 +16,17 @@
         <div class="icon"></div>
         <img src="./arrowDown.png" class="arrowDown" onclick="show()">
         <div id="test" class="arrowButton">
-            <span class="myProfile" onclick="goToProfile()">My profile</span>
-            <span class="logOut" onclick="logOut">Log out</span>
+            <button class="myProfile" onclick="goToProfile()">My profile</button>
+            <button class="logOut" onclick="logOut">Log out</button>
         </div>
     </div>
     <div class="toolBar2">
         <img src="./Logo_OpaTask.png" class="logo">
     </div>
     <div>
-        <button class="addingProject" onclick="addProject()">+</button>
+        <button class="add" onclick="addProject()">+</button>
         <div id="myModal" class="addProject">
-            <div class="addingNewProjectBackground">
+            <div class="newProjectBackground">
                 <h1 class="addingNewProject">Adding new project</h1>
             </div>
             <input class="nameProject" placeholder="Enter name project">

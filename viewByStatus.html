@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViewByStatus</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="viewByStatus.css">
     <link rel="stylesheet" href="mainStyles.css">
 </head>
 
@@ -16,26 +16,36 @@
         <div class="icon"></div>
         <img src="./arrowDown.png" class="arrowDown" onclick="show()">
         <div id="test" class="arrowButton">
-            <span class="myProfile" onclick="goToProfile()">My profile</span>
-            <span class="logOut" onclick="logOut">Log out</span>
+            <button class="myProfile" onclick="goToProfile()">My profile</button>
+            <button class="logOut" onclick="logOut">Log out</button>
         </div>
     </div>
     <div class="toolBar2">
         <img src="./Logo_OpaTask.png" class="logo">
-        <ul>
-
-        </ul>
     </div>
     <div class="background">
-        <button class="status5" onclick="showStatus5()">Status 5</button>
-        <button class="status4" onclick="showStatus5()">Status 4</button>
-        <button class="status3" onclick="showStatus5()">Status 3</button>
-        <button class="status2" onclick="showStatus5()">Status 2</button>
-        <button class="status1" onclick="showStatus5()">Status 1</button>
+        <button class="status5">Status 5</button>
+        <button class="status4">Status 4</button>
+        <button class="status3">Status 3</button>
+        <button class="status2">Status 2</button>
+        <button class="status1">Status 1</button>
     </div>
     <button class="viewByAssignee">View by assignee</button>
     <button class="viewByTask">View by tast</button>
-    <button class="addTask">+ Add task</button>
+    <button class="addTask" onclick="addTask()">+ Add task</button>
+    <div id="myModal" class="addTaskModal">
+        <div class="newProjectBackground">
+            <h1 class="addingNewTask">Adding new task</h1>
+        </div>
+        <input class="nameTask" placeholder="Enter name of task">
+        <input class="descriptionTask" placeholder="Enter description">
+        <input class="categoryTask" placeholder="Enter category">
+        <input class="priorityTask" placeholder="Enter priority">
+        <input class="assigneeTask" placeholder="Enter assignee">
+        <input class="participantsTask" placeholder="Enter participants">
+        <button class="deleteProject" onclick="del()">Delete</button>
+        <button class="done" onclick="add()">Done</button>
+    </div>
     <script src="./main.js "></script>
 </body>
 
