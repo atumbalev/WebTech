@@ -1,0 +1,359 @@
+                    body {
+                        position: absolute;
+                        margin: 0px;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 250, 154, 0.62);
+                    }
+                    
+                    .toolBar1 {
+                        position: absolute;
+                        width: 100%;
+                        height: 98px;
+                        background-color: rgba(9, 200, 127, 1);
+                    }
+                    
+                    .logo {
+                        position: absolute;
+                        width: 100px;
+                        height: 100px;
+                    }
+                    
+                    .myProfile {
+                        position: absolute;
+                        width: 100px;
+                        height: 50px;
+                        background-color: rgba(9, 200, 127, 1);
+                        display: flex;
+                        text-align: center;
+                        align-self: center;
+                        justify-content: center;
+                        border-bottom: 5px;
+                        border-bottom-color: black;
+                        margin-top: 10px;
+                    }
+                    
+                    .logOut {
+                        position: absolute;
+                        width: 100px;
+                        height: 50px;
+                        top: 55px;
+                        background-color: rgba(9, 200, 127, 1);
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
+                        border-top: 5px;
+                        border-top-color: black;
+                    }
+                    
+                    .arrowDown {
+                        position: absolute;
+                        width: 32px;
+                        height: 37px;
+                        left: 1489px;
+                        top: 32px;
+                    }
+                    
+                    .arrowButton {
+                        display: none;
+                        /* Hidden by default */
+                        position: fixed;
+                        /* Stay in place */
+                        z-index: 1;
+                        /* Sit on top */
+                        position: absolute;
+                        left: 1430px;
+                        top: 100px;
+                    }
+                    
+                    .icon {
+                        position: absolute;
+                        margin-left: 1375px;
+                        margin-right: auto;
+                        width: 100px;
+                        height: 100px;
+                        background: #FFFFFF;
+                    }
+                    
+                    .toolBar2 {
+                        position: absolute;
+                        width: 100px;
+                        height: 100%;
+                        left: 0px;
+                        top: 0px;
+                        background-color: rgba(9, 200, 127, 1);
+                    }
+                    
+                    .dashboard {
+                        position: absolute;
+                        width: 175px;
+                        height: 42px;
+                        left: 118px;
+                        top: 28px;
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 36px;
+                        line-height: 42px;
+                        color: #000000;
+                    }
+                    
+                    .name {
+                        position: absolute;
+                        width: 96px;
+                        height: 42px;
+                        left: 371px;
+                        top: 28px;
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 36px;
+                        line-height: 42px;
+                        color: #000000;
+                    }
+                    
+                    .addingProject {
+                        position: absolute;
+                        width: 229px;
+                        height: 165px;
+                        left: 118px;
+                        top: 122px;
+                        background: rgba(255, 255, 255, 0.74);
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 96px;
+                        line-height: 112px;
+                    }
+                    /* The Modal (background) */
+                    
+                    .modal {
+                        display: none;
+                        /* Hidden by default */
+                        position: fixed;
+                        /* Stay in place */
+                        z-index: 1;
+                        /* Sit on top */
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        /* Full width */
+                        height: 100%;
+                        /* Full height */
+                        overflow: auto;
+                        /* Enable scroll if needed */
+                        background-color: rgb(0, 0, 0);
+                        /* Fallback color */
+                        background-color: rgba(0, 0, 0, 0.4);
+                        /* Black w/ opacity */
+                    }
+                    /* Modal Content/Box */
+                    
+                    .modal-content {
+                        background-color: #fefefe;
+                        margin: 15% auto;
+                        /* 15% from the top and centered */
+                        padding: 20px;
+                        border: 1px solid #888;
+                        width: 80%;
+                        /* Could be more or less, depending on screen size */
+                    }
+                    /* The Close Button */
+                    
+                    .close {
+                        color: #aaa;
+                        float: right;
+                        font-size: 28px;
+                        font-weight: bold;
+                    }
+                    
+                    .close:hover,
+                    .close:focus {
+                        color: black;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+                    
+                    .addProject {
+                        display: none;
+                        /* Hidden by default */
+                        position: fixed;
+                        /* Stay in place */
+                        z-index: 1;
+                        /* Sit on top */
+                        position: absolute;
+                        width: 883px;
+                        height: 600px;
+                        left: 375px;
+                        top: 150px;
+                        background-color: honeydew;
+                        /*background: rgba(0, 250, 154, 0.62);*/
+                        box-shadow: 0px 4px 4px #000000;
+                    }
+                    
+                    .addingNewProjectBackground {
+                        position: absolute;
+                        width: 883px;
+                        height: 82px;
+                        left: 0px;
+                        top: 0px;
+                        background: rgba(9, 200, 127, 1);
+                    }
+                    
+                    .addingNewProject {
+                        position: absolute;
+                        width: 308px;
+                        height: 42px;
+                        left: 274px;
+                        top: 0px;
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 36px;
+                        line-height: 42px;
+                        color: #000000;
+                    }
+                    
+                    .nameProject {
+                        position: absolute;
+                        width: 846px;
+                        height: 64px;
+                        left: 14px;
+                        top: 115px;
+                        background: rgba(255, 255, 255, 0.74);
+                    }
+                    
+                    .descriptionProject {
+                        position: absolute;
+                        width: 846px;
+                        height: 64px;
+                        left: 14px;
+                        top: 201px;
+                        background: rgba(255, 255, 255, 0.74);
+                    }
+                    
+                    .deleteProject {
+                        position: absolute;
+                        width: 200px;
+                        height: 64px;
+                        left: 20px;
+                        top: 500px;
+                        background: #09C87F;
+                    }
+                    
+                    .done {
+                        position: absolute;
+                        width: 200px;
+                        height: 64px;
+                        left: 667px;
+                        top: 500px;
+                        background: #09C87F;
+                    }
+                    
+                    .background {
+                        position: absolute;
+                        width: 1339px;
+                        height: 500px;
+                        left: 150px;
+                        top: 147px;
+                        background: rgba(255, 255, 255, 0.74);
+                    }
+                    
+                    .status5 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 0px;
+                        background: #09C87F;
+                    }
+                    
+                    .status41 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 276px;
+                        background: #09C87F;
+                    }
+                    
+                    .status31 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 332px;
+                        background: #09C87F;
+                    }
+                    
+                    .status21 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 388px;
+                        background: #09C87F;
+                    }
+                    
+                    .status11 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 444px;
+                        background: #09C87F;
+                    }
+                    
+                    .viewByAssignee {
+                        position: absolute;
+                        width: 200px;
+                        height: 50px;
+                        left: 150px;
+                        top: 680px;
+                        background: #09C87F;
+                    }
+                    
+                    .viewByTask {
+                        position: absolute;
+                        width: 200px;
+                        height: 50px;
+                        left: 400px;
+                        top: 680px;
+                        background: #09C87F;
+                    }
+                    
+                    .addTask {
+                        position: absolute;
+                        width: 200px;
+                        height: 60px;
+                        left: 1290px;
+                        top: 680px;
+                        background: #09C87F;
+                    }
+                    
+                    .status4 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 56px;
+                        background: #09C87F;
+                    }
+                    
+                    .status3 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 112px;
+                        background: #09C87F;
+                    }
+                    
+                    .status2 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 168px;
+                        background: #09C87F;
+                    }
+                    
+                    .status1 {
+                        position: absolute;
+                        width: 1339px;
+                        height: 40px;
+                        top: 224px;
+                        background: #09C87F;
+                    }
