@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashBoard.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="mainStyles.css">
+
+</head>
+
+<body>
+    <nav class="main-navbar">
+        <div class="navbar-logo">
+            <img src="Logo_OpaTask.png" class="logo" alt="OpaTask" />
+            <h>Dashboard</h>
+        </div>
+        <div class="navbar-profile">
+            <img src="arrowDown.png" class="arrowDown" onclick="show()">
+        </div>
+    </nav>
+    <div class="main-content">
+        <aside class="toolBar">
+        </aside>
+        <main>
+            <div class="board-container">
+                <div id="issues">
+                    <div class="issue-container">
+                        <h2>Open</h2>
+                        <ul class="issues-list" id="open">
+                        </ul>
+                    </div>
+                    <div class="issue-container">
+                        <h2>In Progress</h2>
+                        <ul class="issues-list" id="in-progress">
+
+                        </ul>
+                    </div>
+                    <div class="issue-container">
+                        <h2>Resolved</h2>
+                        <ul class="issues-list" id="resolved">
+
+                        </ul>
+                    </div>
+                    <div class="issue-container">
+                        <h2>Closed</h2>
+                        <ul class="issues-list" id="closed">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="controls-left">
+                    <button>View by assignee</button>
+                    <button>View by status</button>
+                </div>
+                <div class="controls-right">
+                    <button>+ Add task</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,101 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    padding: 3rem 5%;
+    height: 80vh;
+}
+
+.board-container {
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    flex-direction: column;
+}
+
+.issues-block {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+.issue-container {
+    height: 100%;
+    margin: 0 auto;
+    width: 23%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#issues {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.issue-container h2 {
+    margin: .5rem;
+    background-color:  rgba(9, 200, 127, 1);
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    margin: 0;
+}
+
+.issues-list {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    list-style: none;
+    margin: 0;
+    padding: .5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* overflow-y: scroll; */
+}
+
+.issue {
+    margin: .5rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.controls-left {
+    margin-left: 0.2rem;
+    width: 50%;
+}
+
+.controls-left button {
+    width: 46%;
+}
+
+.controls-right {
+    width: 25%;
+}
+
+.controls-right button {
+    width: 94%;
+}
+
+button {
+    background-color:  rgba(9, 200, 127, 1);
+    border: none;
+    font-size: 1.5rem;
+    width: 100%;
+    margin: 1rem 0.5rem;
+    padding: 1rem 2rem;
+}
