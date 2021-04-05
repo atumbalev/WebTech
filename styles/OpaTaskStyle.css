@@ -1,217 +1,142 @@
-.box
-{
+.box {
     position: absolute;
     left: 440px;
     top: 40px;
     padding: 42px 600px 631px 8px;
-
+    font-family: Arial, Helvetica, sans-serif;
     background: rgba(0, 250, 154, 0.62);
 }
 
-.box h2
-{
+.box h2 {
     position: absolute;
     width: 281px;
     height: 84px;
     left: 195px;
     top: 10px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 47px;
     line-height: 84px;
-
-    color: #000000;
 }
 
-#Email
-{
+.box h2,
+.enteringEmail,
+.enteringPassword,
+.forgot,
+.sign,
+.log {
+    color: #000;
+}
+
+#Email {
     position: absolute;
     width: 475px;
     height: 68px;
     left: 60px;
     top: 190px;
-
     background: rgba(255, 255, 255, 0.74);
+    font-size: 23px;
 }
 
-.enteringEmail
-{
+.enteringEmail {
     position: absolute;
     width: 121px;
     height: 28px;
     left: 87px;
-    top: 215px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
+    top: 203px;
     font-size: 24px;
     line-height: 28px;
-
-    color: #000000;
 }
 
-#Password
-{
+#Password {
     position: absolute;
     width: 475px;
     height: 68px;
     left: 60px;
     top: 295px;
-
     background: rgba(255, 255, 255, 0.74);
+    font-size: 23px;
 }
 
-.enteringPassword
-{
+.enteringPassword {
     position: absolute;
     width: 167px;
     height: 28px;
     left: 87px;
     top: 319px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 24px;
     line-height: 28px;
-
-    color: #000000;
 }
 
-.forgot
-{
+.forgot {
     position: absolute;
     width: 161px;
     height: 21px;
     left: 67px;
     top: 363px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 18px;
     line-height: 21px;
-    color: #000000;
 }
 
-.sign
-{
+.sign {
     position: absolute;
     width: 123px;
     height: 42px;
     left: 100px;
     top: 428px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 29px;
     line-height: 42px;
-
-    color: #000000;
 }
 
-.log
-{
+.log {
     position: absolute;
     width: 190px;
     height: 50px;
     left: 348px;
     top: 428px;
-
     background: #09C87F;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 29px;
     line-height: 42px;
-
-    color: #000000;
-
 }
 
-.box .inputBox input:focus ~ label,
-.box .inputBox input:valid ~ label
-{
-    top:195px;
-    left:70px;
-    color:#03a9f4;
-    font-size: 19px;
-}
-
-@media screen and (max-width: 640px)
-{
-    .box
-    {
-        width: 0;
-        margin-left: -440px;
-        padding: 5px 430px 665px 12px;
-        top: 50px;
+@media screen and (max-width: 640px) {
+    .box {
+        width: 45px;
+        left: 70px;
+        /*margin-left: -440px;*/
+        padding: 5px 230px 560px 12px;
+        top: 37px;
     }
-
-    .box h2
-    {
-        left: 31%;
+    .box h2 {
+        left: 48px;
     }
-
-    #Email, #Password
-    {
-        width: 366px;
-        left: 34px;
+    #Email {
+        top: 210px;
     }
-
-    .enteringEmail, .enteringPassword
-    {
+    #Email,
+    #Password {
+        width: 240px;
+        height: 60px;
+        left: 19px;
+    }
+    .enteringEmail,
+    .enteringPassword {
         left: 50px;
     }
-
-    .forgot
-    {
-        left: 45px;
+    .forgot {
+        left: 28px;
+        font-size: 18px;
     }
-
-    .sign
-    {
-        left: 68px;
+    .sign {
+        left: 35px;
+        font-size: 18px;
     }
-
-    .log
-    {
-        left: 50%;
+    .log {
+        width: 90px;
+        left: 174px;
+        font-size: 18px;
     }
 }
 
-.pict
-{
+.pict {
     width: 270px;
     border: 3px solid black;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
