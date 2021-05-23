@@ -110,16 +110,6 @@ input:focus {
     zoom: 1;
 }
 
-.row:before,
-.row:after {
-    content: "";
-    display: table;
-}
-.row:after {
-    clear: both;
-}
-
-
 .input-group:before,
 .input-group:after {
     content: "";
