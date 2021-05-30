@@ -1,0 +1,310 @@
+.name {
+    position: absolute;
+    width: 96px;
+    height: 42px;
+    left: 250px;
+    top: 14px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 33px;
+    line-height: 42px;
+    color: #000000;
+}
+
+.background {
+    position: absolute;
+    width: 1339px;
+    height: 500px;
+    left: 150px;
+    top: 147px;
+    background: rgba(0, 250, 154, 0.62);
+}
+
+th {
+    width: 268px;
+    height: 40px;
+    text-align: center;
+    background: #09C87F;
+}
+
+.status5 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 0px;
+    background: #09C87F;
+}
+
+.status41 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 276px;
+    background: #09C87F;
+}
+
+.status31 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 332px;
+    background: #09C87F;
+}
+
+.status21 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 388px;
+    background: #09C87F;
+}
+
+.status11 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 444px;
+    background: #09C87F;
+}
+
+.viewByAssignee {
+    width: 200px;
+    height: 50px;
+    left: 150px;
+    top: 680px;
+    border: none;
+    border-radius: 3px;
+    background-color: #09c87f;
+    color: black;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    position: absolute;
+}
+
+.viewByStatus {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 150px;
+    top: 680px;
+    background: #09C87F;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.viewByStatus1 {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 150px;
+    top: 680px;
+    background: #09C87F;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.viewByTask {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 400px;
+    top: 680px;
+    background: #09C87F;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.addTask {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    left: 1290px;
+    top: 680px;
+    background: #09C87F;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.status4 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 56px;
+    background: #09C87F;
+}
+
+.status3 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 112px;
+    background: #09C87F;
+}
+
+.status2 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 168px;
+    background: #09C87F;
+}
+
+.status1 {
+    position: absolute;
+    width: 1339px;
+    height: 40px;
+    top: 224px;
+    background: #09C87F;
+}
+
+.addTaskModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    position: absolute;
+    width: 900px;
+    height: 650px;
+    left: 375px;
+    top: 100px;
+    background-color: rgba(255, 255, 255, 0.74);
+    box-shadow: 0px 4px 4px #000000;
+}
+
+.newProjectBackground {
+    position: absolute;
+    width: 900px;
+    height: 82px;
+    left: 0px;
+    top: 0px;
+    background: rgba(9, 200, 127, 1);
+}
+
+.addingNewTask {
+    position: absolute;
+    width: 308px;
+    height: 42px;
+    left: 274px;
+    top: 0px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    color: #000000;
+}
+
+.nameTask {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 100px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.descriptionTask {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 180px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.categoryTask {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 260px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.priorityTask {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 340px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.assigneeTask {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 420px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.participantsTask {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 500px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.deleteProject {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    left: 20px;
+    top: 580px;
+    background: #09C87F;
+}
+
+.done {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    left: 667px;
+    top: 580px;
+    background: #09C87F;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+.issue-container {
+    height: 100%;
+    margin: 0 auto;
+    width: 23%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(9, 200, 127, 1);
+}
+
+.issues-list {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 250, 154, 0.62);
+    list-style: none;
+    margin: 0;
+    padding: .5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* overflow-y: scroll; */
+}
+
+#issues {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}

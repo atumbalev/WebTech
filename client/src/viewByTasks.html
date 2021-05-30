@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewByTasks</title>
+    <link rel="stylesheet" href="styles/viewBy.css">
+    <link rel="stylesheet" href="styles/mainStyles.css">
+</head>
+
+<body>
+    <main>
+        <nav class="toolBar1">
+            <h class="dashboard">Dashboard</h>
+            <!-- <h class="name">Name</h>  this has to be dinamic-->
+            <div id="icon"></div>
+            <!--this has to be from the database-->
+            <img src="source/arrowDown.png" class="arrowDown" onclick="show()">
+            <div id="hamburgerMenu" class="arrowButton">
+                <a href="PersonalInfo.html"><button class="myProfile">My profile</button></a>
+                <a href="OpaTask.html"><button class="logOut">Log out</button></a>
+            </div>
+        </nav>
+        <aside class="toolBar2">
+            <img src="source/Logo_OpaTask.jpg" class="logo">
+            <li id="collaburatorsList">
+                <!--list with collaburators && backend-->
+            </li>
+        </aside>
+        <section>
+            <section class="background">
+                <div id="issues">
+                    <div class="issue-container">
+                        <h2>Open</h2>
+                        <ul class="issues-list" id="open"></ul>
+                    </div>
+                    <div class="issue-container">
+                        <h2>In Progress</h2>
+                        <ul class="issues-list" id="in-progress"></ul>
+                    </div>
+                    <div class="issue-container">
+                        <h2>Resolved</h2>
+                        <ul class="issues-list" id="resolved"></ul>
+                    </div>
+                    <div class="issue-container">
+                        <h2>Closed</h2>
+                        <ul class="issues-list" id="closed"></ul>
+                    </div>
+                </div>
+            </section>
+            <nav>
+                <a href="viewByAssignee.html"><button class="viewByAssignee">View by assignee</button></a>
+                <a href="viewByStatus.html"><button class="viewByStatus1">View by status</button></a>
+                <button class="addTask" onclick="addTask()">+ Add task</button>
+                <!--backend && NAsko-->
+            </nav>
+            <section id="myModal" class="addTaskModal">
+                <div class="newProjectBackground">
+                    <h1 class="addingNewTask">Adding new task</h1>
+                </div>
+                <div>
+                    <input class="nameTask" placeholder="Enter name of task">
+                    <input class="descriptionTask" placeholder="Enter description">
+                    <input class="categoryTask" placeholder="Enter category">
+                    <input class="priorityTask" placeholder="Enter priority">
+                    <input class="assigneeTask" placeholder="Enter assignee">
+                    <input class="participantsTask" placeholder="Enter participants">
+                    <button class="deleteProject" onclick="del()">Delete</button>
+                    <button class="done" onclick="add()">Done</button>
+                    <!--database && backend-->
+                </div>
+            </section>
+        </section>
+        <script src="scripts/main.js"></script>
+    </main>
+</body>
+
+</html>
+
+</html>

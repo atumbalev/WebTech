@@ -1,0 +1,172 @@
+body {
+    background-color: #E5E5E5;
+}
+
+.box {
+    position: absolute;
+    left: 440px;
+    top: 40px;
+    padding: 42px 600px 631px 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    border-radius: 4.2px;
+    box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+    display: flexbox;
+    max-width: 40em;
+}
+
+.box h2 {
+    position: absolute;
+    width: 281px;
+    height: 84px;
+    left: 195px;
+    top: 10px;
+    font-size: 47px;
+    line-height: 84px;
+}
+
+.box h2,
+.enteringEmail,
+.enteringPassword,
+.forgot,
+.sign,
+.log {
+    color: #000;
+}
+
+#Email {
+    position: absolute;
+    width: 475px;
+    height: 68px;
+    left: 60px;
+    top: 190px;
+    font-size: 23px;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+
+#Email:hover {
+    outline: 0;
+    border-color: #09C87F;
+}
+
+.enteringEmail {
+    position: absolute;
+    width: 121px;
+    height: 28px;
+    left: 87px;
+    top: 203px;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+#Password {
+    position: absolute;
+    width: 475px;
+    height: 68px;
+    left: 60px;
+    top: 295px;
+    font-size: 23px;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+
+#Password:hover {
+    outline: 0;
+    border-color: #09C87F;
+}
+
+.enteringPassword {
+    position: absolute;
+    width: 167px;
+    height: 28px;
+    left: 87px;
+    top: 319px;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.forgot {
+    position: absolute;
+    width: 161px;
+    height: 21px;
+    left: 67px;
+    top: 363px;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.sign {
+    position: absolute;
+    width: 123px;
+    height: 42px;
+    left: 100px;
+    top: 428px;
+    font-size: 29px;
+    line-height: 42px;
+}
+
+.log {
+    position: absolute;
+    width: 190px;
+    height: 50px;
+    left: 348px;
+    top: 428px;
+    background: #09C87F;
+    font-size: 29px;
+    line-height: 42px;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 640px) {
+    .box {
+        width: 45px;
+        left: 70px;
+        /*margin-left: -440px;*/
+        padding: 5px 230px 560px 12px;
+        top: 37px;
+    }
+    .box h2 {
+        left: 48px;
+    }
+    #Email {
+        top: 210px;
+    }
+    #Email,
+    #Password {
+        width: 240px;
+        height: 60px;
+        left: 19px;
+    }
+    .enteringEmail,
+    .enteringPassword {
+        left: 50px;
+    }
+    .forgot {
+        left: 28px;
+        font-size: 18px;
+    }
+    .sign {
+        left: 35px;
+        font-size: 18px;
+    }
+    .log {
+        width: 90px;
+        left: 174px;
+        font-size: 18px;
+    }
+}
+
+.pict {
+    width: 270px;
+    border: 3px solid black;
+}
