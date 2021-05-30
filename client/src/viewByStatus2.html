@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewByStatus</title>
+    <link rel="stylesheet" href="styles/viewBy.css">
+    <link rel="stylesheet" href="styles/mainStyles.css">
+</head>
+
+<body>
+    <main>
+        <nav class="toolBar1">
+            <h class="dashboard">Dashboard</h>
+            <!-- <h class="name">Name</h> -->
+            <div id="icon"></div>
+            <img src="source/arrowDown.png" class="arrowDown" onclick="show()">
+            <div id="hamburgerMenu" class="arrowButton">
+                <a href="PersonalInfo.html"><button class="myProfile">My profile</button></a>
+                <a href="OpaTask.html"><button class="logOut">Log out</button></a>
+            </div>
+        </nav>
+        <aside class="toolBar2">
+            <img src="source/Logo_OpaTask.jpg" class="logo">
+            <li id="collaburatorsList">
+                <!--list with collaburators && backend-->
+            </li>
+        </aside>
+        <nav class="background">
+            <button class="status5"><a href="viewByStatus5.html">Status 5</a></button>
+            <button class="status4"><a href="viewByStatus4.html">Status 4</a></button>
+            <button class="status3"><a href="viewByStatus3.html">Status 3</a></button>
+            <button class="status2"><a href="viewByStatus.html">Status 2</a></button>
+            <div>
+                <!--here some info -->
+            </div>
+            <button class="status11"><a href="viewByStatus1.html">Status 1</a></button>
+        </nav>
+        <nav>
+            <a href="viewByAssignee.html"><button class="viewByAssignee">View by assignee</button></a>
+            <a href="viewByTasks.html"><button class="viewByTask">View by task</button></a>
+            <button class="addTask" onclick="addTask()">+ Add task</button>
+        </nav>
+        <section id="myModal" class="addTaskModal">
+            <div class="newProjectBackground">
+                <h1 class="addingNewTask">Adding new task</h1>
+            </div>
+            <div>
+                <input class="nameTask" placeholder="Enter name of task">
+                <input class="descriptionTask" placeholder="Enter description">
+                <input class="categoryTask" placeholder="Enter category">
+                <input class="priorityTask" placeholder="Enter priority">
+                <input class="assigneeTask" placeholder="Enter assignee">
+                <input class="participantsTask" placeholder="Enter participants">
+                <button class="deleteProject" onclick="del()">Delete</button>
+                <button class="done" onclick="add()">Done</button>
+            </div>
+        </section>
+
+        <script src="scripts/main.js"></script>
+    </main>
+</body>
+
+</html>
+
+</html>

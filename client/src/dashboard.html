@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/mainStyles.css">
+</head>
+
+<body>
+    <main>
+        <nav class="toolBar1">
+            <h class="dashboard">Dashboard</h>
+            <img id="icon"></img>
+            <!--this has to be from the database-->
+            <img src="source/arrowDown.png" class="arrowDown" onclick="show()">
+            <div id="hamburgerMenu" class="arrowButton">
+                <a href="PersonalInfo.html"><button class="myProfile">My profile</button></a>
+                <a href="OpaTask.html"><button class="logOut">Log out</button></a>
+            </div>
+        </nav>
+        <aside class="toolBar2">
+            <img src="source/Logo_OpaTask.jpg" class="logo">
+            <li id="collaburatorsList">
+                <!--list with collaburators && backend-->
+            </li>
+        </aside>
+        <section>
+            <button class="add" onclick="addProject()">+</button>
+            <div id="myModal" class="addProject">
+                <div class="newProjectBackground">
+                    <h1 class="addingNewProject">Adding new project</h1>
+                </div>
+                <div>
+                    <input class="nameProject" placeholder="Enter name project">
+                    <input class="descriptionProject" placeholder="Enter description">
+                    <button class="deleteProject" onclick="del()">Delete</button>
+                    <!--database && backend-->
+                    <button class="done" onclick="add()">Done</button>
+                </div>
+            </div>
+        </section>
+        <script src="scripts/main.js"></script>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close");
+
+function addProject() {
+    modal.style.display = "block";
+}
+
+function addTask() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+//to show myProfile and LogOut
+var test = document.getElementById("hamburgerMenu");
+var counter = 0;
+
+function show() {
+    if (counter % 2 == 0) {
+        test.style.display = "block";
+        test.style.textAlign = "justify";
+    } else {
+        test.style.display = "none";
+    }
+
+    counter++;
+
+}
