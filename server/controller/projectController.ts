@@ -1,3 +1,5 @@
+import { Request, Response } from 'express'
+
 let worksOnTable = [ //cascade update/add/delete
     { id: 1, projectID: 1, contirbuterID: 1, contributerEmail: 'email1', ticketID: 1 },
     { id: 4, projectID: 2, contirbuterID: 1, contributerEmail: 'email1', ticketID: 1 },
@@ -25,19 +27,19 @@ let tickets = [
 
 ]
 
-export const getAllProjects = (req, res) => {
-    let worksOnProjects = worksOnTable.filter(el => el.contirbuterID == req.params.ID);
+export const getAllProjects = (req: Request, res: Response) => {
+    let worksOnProjects = worksOnTable.filter(el => el.contirbuterID == parseInt(req.params.ID));
     let result = [];
-    for (var y in worksOnProjects)
-        for (var x in projects) {
-            if (projects[x].projectID == worksOnProjects[y].projectID)
-                result.push(projects[x]);
+    for (var y of worksOnProjects)
+        for (var x of projects) {
+            if (x.projectID == y.projectID)
+                result.push(x);
         }
     res.status(200);
     res.send(result);
 }
 
-export const posNewProjects = (req, res) => { //post new projects
+export const posNewProjects = (req: Request, res: Response) => { //post new projects
     if (projects.find(el => el.projectName == req.body.projectName)) {
         res.status(400).send('This project name already exist.')
         return;
@@ -45,7 +47,7 @@ export const posNewProjects = (req, res) => { //post new projects
 
     //add new
     var newProject = {
-        "projectID": parseInt(projects.length + 1),
+        "projectID": projects.length + 1,
         "projectName": req.body.projectName,
         "creator": req.params.id, //valid user
         "about": req.body.about
@@ -55,12 +57,12 @@ export const posNewProjects = (req, res) => { //post new projects
     res.status(200).send(newProject);
 };
 
-export const getAllTickets = (req, res) => {
-    let allTickets = worksOnTable.filter(el => el.projectID == req.params.projectID);
+export const getAllTickets = (req: Request, res: Response) => {
+    let allTickets = worksOnTable.filter(el => el.projectID == parseInt(req.params.projectID));
     res.status(200).send(allTickets);
 };
 
-export const putNewTicket = (req, res) => {
+export const putNewTicket = (req: Request, res: Response) => {
     //TO DO:
     const categories = {}
     const priorities = {}
@@ -68,7 +70,7 @@ export const putNewTicket = (req, res) => {
     //enums -> for validation
 
     //validation
-    const toUpdate = tickets.find(el => el.ticketID == req.body.ticketID && el.projectID == req.params.projectID);
+    const toUpdate = tickets.find(el => el.id == req.body.ticketID && el.projectID == parseInt(req.params.projectID));
     if (!toUpdate) {
         res.status(400).send('Invalid ticket modification.');
         return;
@@ -76,6 +78,7 @@ export const putNewTicket = (req, res) => {
 
     //  update
     const ticket = {
+        "id": tickets.length+1,
         "projectID": parseInt(req.params.projectID),
         "ticketName": req.body.ticketName,
         "category": req.body.category,
@@ -91,41 +94,41 @@ export const putNewTicket = (req, res) => {
     res.status(200).send(ticket);
 };
 
-export const deleteAllTickets = (req, res) => {
+export const deleteAllTickets = (req: Request, res: Response) => {
     //validation
-    if (!projects.find(el => el.projectID == req.params.projectID)) {
+    if (!projects.find(el => el.projectID == parseInt(req.params.projectID))) {
         res.status(400).send('Invalid projectID. Tickets are not deleted.');
         return;
     }
 
     for (var t in tickets) {
-        if (tickets[t].projectID == req.params.projectID)
-            tickets.splice(t, 1);
+        if (tickets[t].projectID == parseInt(req.params.projectID))
+            tickets.splice(parseInt(t), 1);
     }
 
     res.status(200).send(new String('All tickets in project with id: ' + req.params.projectID + ' are deleted.'));
 };
 
-export const getAllContributers = (req, res) => {
+export const getAllContributers = (req: Request, res: Response) => {
     //   validation
-    if (!projects.find(el => el.projectID == req.params.projectID)) {
+    if (!projects.find(el => el.projectID == parseInt(req.params.projectID))) {
         res.status(400).send('Invalid projectID.');
         return;
     }
 
-    let allProjects = worksOnTable.filter(el => el.projectID == req.params.projectID);
+    let allProjects = worksOnTable.filter(el => el.projectID == parseInt(req.params.projectID));
 
     let contributors = []; //names only
-    for (var x in allProjects)
-        contributors.push(users.find(el => el.id == allProjects[x].contirbuterID));
+    for (var x of allProjects)
+        contributors.push(users.find(el => el.id == x.contirbuterID));
     res.send(contributors);
 };
 
-export const deleteContributer = (req, res) => {
+export const deleteContributer = (req: Request, res: Response) => {
     let toDelContribID = req.body.toDelID;
     let userID = req.body.userID;
 
-    let prjCreator = projects.find(el => el.projectID == req.params.projectID);
+    let prjCreator = projects.find(el => el.projectID == parseInt(req.params.projectID));
 
     if (userID != prjCreator.creator &&
         userID != toDelContribID) {
@@ -146,8 +149,8 @@ export const deleteContributer = (req, res) => {
         return;
     }
 
-    for (var x in toDel) {//if tasks are in the same table
-        worksOnTable.splice(worksOnTable.indexOf(toDel[x]), 1);
+    for (var x of toDel) {//if tasks are in the same table
+        worksOnTable.splice(worksOnTable.indexOf(x), 1);
     }
 
     res.status(200).send(toDel);
