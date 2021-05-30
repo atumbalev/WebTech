@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {getAllProjects, posNewProjects,getAllTickets, putNewTicket,deleteAllTickets,getAllContributers,deleteContributer} from '../controller/projectController'
+import {getAllProjects, posNewProjects,getAllTickets, putNewTicket,deleteAllTickets,getAllContributers,deleteContributer} from '../controllers/projectController'
 const router = Router();
 
 //5

@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import ticketsRoutes from './routes/ticketsRouter.js'
+import ticketsRoutes from './src/routes/ticketsRouter.js'
 const app = express();
 const PORT = 3000;
 app.use(bodyParser.json());
