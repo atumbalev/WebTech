@@ -1,13 +1,19 @@
 import * as express from 'express';
-import users from '../src/routes/user';
-import loginForm from '../src/routes/login'
+
+//routes
+import loginLogoutRoutes from './routes/loginLogoutroutes'
+import userRoutes from './routes/userRoutes';
 
 const app = express();
 
-app.use(express.json());
-app.use('/api', users);
-app.use('/api', loginForm);
+app.use('/api', loginLogoutRoutes); //login & logout
+app.use('/users', userRoutes); //users
 
-app.listen(3001, () => {
-    console.log("Server is listening on port 3001.");
-});
+app.use(express.json());
+
+//server
+const PORT = 8080;
+app.set("port",PORT);
+app.listen(PORT, () =>console.log ('Issue tracker listening at http://localhost:%s',PORT))
+
+export default app;

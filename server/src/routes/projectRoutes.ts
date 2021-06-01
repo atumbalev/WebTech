@@ -1,22 +1,29 @@
-import { Router } from 'express';
-import {getAllProjects, posNewProjects,getAllTickets, putNewTicket,deleteAllTickets,getAllContributers,deleteContributer} from '../controllers/projectController'
-const router = Router();
+import * as express from 'express';
+import * as projectEndpoints from '../controller/projectController'
+import ticketsRoutes from './ticketsRouter'
+
+const router = express.Router();
 
 //5
-router.get('/:ID', getAllProjects);
+router.get('/:ID', projectEndpoints.getAllProjects);
 
-router.post('/:ID',posNewProjects);
+router.post('/:ID',projectEndpoints.posNewProjects);
 
 //6
-router.get('/:projectID/tickets',getAllTickets);
+router.get('/:projectID/tickets',projectEndpoints.getAllTickets);
 
-router.put('/:projectID/tickets', putNewTicket);
+router.put('/:projectID/tickets', projectEndpoints.putNewTicket);
 
-router.delete('/:projectID/tickets', deleteAllTickets);
+router.delete('/:projectID/tickets', projectEndpoints.deleteAllTickets);
 
 //7
-router.get('/:projectID/users', getAllContributers);
+router.get('/:projectID/users', projectEndpoints.getAllContributers);
 
-router.delete('/:projectID/users', deleteContributer);
+router.delete('/:projectID/users', projectEndpoints.deleteContributer);
+
+
+//tickets
+router.use('/:ID/tickets',ticketsRoutes)
+
 
 export default router;
