@@ -4,7 +4,7 @@ import errorCatch from '../middleware/error-handler'
 
 const users:  express.Router = express.Router();
 
-users.post('/marks', errorCatch(async (request: express.Request, response: express.Response) => {
+users.post('/users/invitation', errorCatch(async (request: express.Request, response: express.Response) => {
     const { body } = request;
     addUserToProject(body);
 

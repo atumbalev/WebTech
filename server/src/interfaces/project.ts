@@ -1,13 +1,13 @@
 import ITicket from "./ticket";
 import IUser from "./user";
 
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 
 interface IProject {
     name: string,
     description: string,
-    tickets: ITicket[],
-    contributors: string[]
+    ticket_ids: string[],
+    contributor_ids: string[]
 }
 
 export default IProject;

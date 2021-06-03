@@ -5,7 +5,7 @@ interface ITicket {
     description: string,
     categoty: string,
     status: string,
-    assignee: IUser,
+    assignee_id: string
 }
 
 export default ITicket;
