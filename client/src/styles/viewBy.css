@@ -278,7 +278,7 @@ a:active {
     text-decoration: none;
 }
 
-.issue-container {
+.issueContainer {
     height: 100%;
     margin: 0 auto;
     width: 23%;
@@ -289,7 +289,7 @@ a:active {
     background-color: rgba(9, 200, 127, 1);
 }
 
-.issues-list {
+.issuesList {
     height: 100%;
     width: 100%;
     background-color: rgba(0, 250, 154, 0.62);

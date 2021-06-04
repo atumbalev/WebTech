@@ -11,7 +11,7 @@
 
 <body>
     <main>
-        <nav class="toolBar1">
+        <nav class="toolBarFirst">
             <h class="dashboard">Dashboard</h>
             <img id="icon"></img>
             <!--this has to be from the database-->
@@ -21,27 +21,29 @@
                 <a href="OpaTask.html"><button class="logOut">Log out</button></a>
             </div>
         </nav>
-        <aside class="toolBar2">
+        <aside class="toolBarSecond">
             <img src="source/Logo_OpaTask.jpg" class="logo">
             <li id="collaburatorsList">
                 <!--list with collaburators && backend-->
             </li>
         </aside>
-        <section>
+        <div>
             <button class="add" onclick="addProject()">+</button>
-            <div id="myModal" class="addProject">
-                <div class="newProjectBackground">
-                    <h1 class="addingNewProject">Adding new project</h1>
+            <form>
+                <div id="myModal" class="addProject">
+                    <div class="newProjectBackground">
+                        <h1 class="addingNewProject">Adding new project</h1>
+                    </div>
+                    <div>
+                        <input class="nameProject" placeholder="Enter name project">
+                        <input class="descriptionProject" placeholder="Enter description">
+                        <button class="deleteProject" onclick="del()">Delete</button>
+                        <!--database && backend-->
+                        <button class="done" onclick="add()">Done</button>
+                    </div>
                 </div>
-                <div>
-                    <input class="nameProject" placeholder="Enter name project">
-                    <input class="descriptionProject" placeholder="Enter description">
-                    <button class="deleteProject" onclick="del()">Delete</button>
-                    <!--database && backend-->
-                    <button class="done" onclick="add()">Done</button>
-                </div>
-            </div>
-        </section>
+            </form>
+        </div>
         <script src="scripts/main.js"></script>
     </main>
 </body>
