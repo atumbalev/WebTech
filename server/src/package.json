@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "main": "index.ts",
     "scripts": {
-        "start": "ts-node index.ts",
+        "start": "ts-node-dev index.ts",
+        "db-test": "ts-node src/db/index.ts",
         "test": "test"
     },
     "dependencies": {

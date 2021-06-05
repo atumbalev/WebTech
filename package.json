@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mongoose": "^5.12.12",
+    "safe-buffer": "^5.2.1"
+  }
+}

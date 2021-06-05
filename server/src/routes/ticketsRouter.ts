@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { deleteById, updateByID } from '../controller/ticketsController'
 import { sortByAssignee, sortByStatus } from '../helpers/sortHelper'
-import Ticket from '../interfaces/ticketInterface'
+import Ticket from '../models/ticketInterface'
 
 const router = Router();
 

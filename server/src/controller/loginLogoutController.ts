@@ -18,6 +18,11 @@ export const login = (request: Request, response: Response) => {
     response.status(200).json({ success: true });
 }
 
+// const logout = async (req: Express.Request, res: Express.Response) => {
+//     res.clearCookie('sessionId');
+//     res.json({ logout: true });
+// };
+
 //logout
 const {
     SESSION_SECRET = 'please keep this secret',

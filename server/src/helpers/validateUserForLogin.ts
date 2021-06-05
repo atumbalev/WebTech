@@ -1,6 +1,6 @@
 import { request, Request, Response } from 'express';
 import LoginController from '../controller/loginControllerClass';
-import ILoginInfo from '../interfaces/loginInfoInterface';
+import ILoginInfo from '../models/loginInfo';
 
 const controller: LoginController = new LoginController();
 

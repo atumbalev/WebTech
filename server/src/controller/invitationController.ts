@@ -1,27 +1,18 @@
 import {read, write} from '../utils/fileUtils'
-import IProject from '../interfaces/projectInterface';
+import IUser from '../models/users'
+import IProject from '../models/project';
+import { Router, Request, Response } from 'express'
+import * as mongoose from 'mongoose'
+import Project from '../schemas/ProjectSchema'
+import { userInfo } from 'os';
 
-const filePath = '../resources/';
-const fileName = 'projects.json';
 
-async function readProjects() : Promise<{ [projects: string] : IProject[] }> {
-    const projects: string = await read(filePath, fileName);
-    const projectsObjects: { [projects: string] : IProject[] } = JSON.parse(projects);
-    return projectsObjects;
-}
+export default async function addUserToProject(request: Request, response: Response): Promise<void> {
+    const { user, projectName}: any = request.body;
 
-async function addUserToProjectAction(userName: string, projectName: string): Promise<void> {
-    const projects:{ [projects: string] : IProject[] } = await readProjects();
-    let targetProject = projects.projects.find(pr => pr.name == projectName);
-
-    if (targetProject !== undefined)
-    {
-        targetProject.contributorIDs.push(userName);
-        await write(filePath, fileName, JSON.stringify(projects));
+    const update = { $push: {contrubitorsIDs: user} }
+    const currentProject = await Project.findOne({name: projectName}).select('contributorIDs').exec();
+    if (currentProject) {
+        const users = currentProject.get('contributerIDs', null, {getters: false});
     }
-}
-
-export default async function addUserToProject(POSTBody: string): Promise<void> {
-    const user: { [key: string]: string } = JSON.parse(POSTBody);
-    addUserToProjectAction(user['user'], user['projectname']);
 }

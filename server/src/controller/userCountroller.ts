@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 uuidv4();
 
 import {read, write} from '../utils/fileUtils';
-import IUsersAbout from '../interfaces/usersAboutInterface';
+import IUser from '../models/users';
 
 const filePath: string = '../resources';
 const fileName: string = '/pseudo_database.json';
@@ -13,12 +13,11 @@ export const getUsers = async function(request:Request, response:Response){
     const { id } = request.params;
 
     let usersInformation: string = await read(filePath, fileName); 
-    const usersUsedHere: {[key: string]: Array<IUsersAbout>} = JSON.parse(usersInformation);
+    const usersUsedHere: {[key: string]: Array<IUser>} = JSON.parse(usersInformation);
 
-    const foundedUser: IUsersAbout = await usersUsedHere.users.find((user) => {user.name == id});
+    const foundedUser: IUser = await usersUsedHere.users.find((user) => {user.name == id});
 
     response.status(200).json(foundedUser);
-    response.send('Hello');
 }
 
 export const postUser = async function(request:Request, response:Response){
@@ -29,7 +28,7 @@ export const postUser = async function(request:Request, response:Response){
         const userWithId: any = {...ourUser, id: userId};
     
         let usersInformation: string = await read(filePath, fileName);
-        const usersUsedHere: {[key: string]: Array<IUsersAbout>} = JSON.parse(usersInformation);
+        const usersUsedHere: {[key: string]: Array<IUser>} = JSON.parse(usersInformation);
     
         usersUsedHere.users.push(userWithId);
     
@@ -44,9 +43,9 @@ export const deleteUser = async function(request:Request, response:Response){
     const { id } = request.params;
 
     let usersInformation: string = await read(filePath, fileName);
-    const usersUsedHere: {[key: string]: Array<IUsersAbout>} = JSON.parse(usersInformation);
+    const usersUsedHere: {[key: string]: Array<IUser>} = JSON.parse(usersInformation);
 
-    const deletedUser: Array<IUsersAbout> = await usersUsedHere.users.filter((user) => {user.name !== id});
+    const deletedUser: Array<IUser> = await usersUsedHere.users.filter((user) => {user.name !== id});
 
     usersUsedHere.users = deletedUser;
     usersInformation = JSON.stringify(usersUsedHere);
@@ -61,15 +60,15 @@ export const putUser = async function(request:Request, response:Response){
     const { name, phone, description, profile_picture } = express.request.body;
 
     let usersInformation: string = await read(filePath, fileName);
-    const usersUsedHere: {[key: string]: Array<IUsersAbout>} = JSON.parse(usersInformation);
+    const usersUsedHere: {[key: string]: Array<IUser>} = JSON.parse(usersInformation);
 
-    const userId: IUsersAbout = usersUsedHere.users.find((user) => {user.name === id});
+    const userId: IUser = usersUsedHere.users.find((user) => {user.name === id});
 
     if(name) userId.name = name;
     if(phone) userId.phone = phone;
     if(description) userId.description = description;
 
-    if(profile_picture) userId.profile_picture = profile_picture;
+    if(profile_picture) userId.profilePicture = profile_picture;
 
     usersUsedHere.users.push(userId);
 

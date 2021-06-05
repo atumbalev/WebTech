@@ -1,39 +1,11 @@
 import { Request, Response } from 'express'
-import Project from '../interfaces/projectInterface'
-import Ticket from '../interfaces/ticketInterface'
-import UserInfo from '../interfaces/usersAboutInterface'
-import User from '../interfaces/loginInfoInterface'
+import ProjectService  from '../services/projectService';
 
-
-let usersInfo: UserInfo[] = [
-    { id: "1", name: "Ivan", email: "1.@...", phone: "07777", description: "", profilePicture: "", authToken: "gsdgsd" },
-    { id: "2", name: "Gosho", email: "2..@...", phone: "08244", description: "", profilePicture: "", authToken: "fafs" },
-    { id: "3", name: "Pesho", email: "3..@...", phone: "0725235", description: "", profilePicture: "", authToken: "gsdgs" }
-]
-
-let users: User[] = [
-    { email: "1.@...", password: "fasfas" },
-    { email: "2.@...", password: "fasfas" },
-    { email: "3.@...", password: "fasfas" }
-];
-
-let projects: Project[] = [
-    { id: "1", name: 'A', creatorID: "1", description: "Adesc", ticketIDs: ["1", "2", "3"], contributorIDs: ["1,2"] },
-    { id: "2", name: 'B', creatorID: "2", description: "Bdesc", ticketIDs: ["1", "2",], contributorIDs: ["2,3"] },
-    { id: "3", name: 'C', creatorID: "3", description: "Cdesc", ticketIDs: ["2", "3"], contributorIDs: ["1,2"] },
-    { id: "4", name: 'D', creatorID: "4", description: "Ddesc", ticketIDs: ["1", "3"], contributorIDs: ["2,3"] },
-]
-
-let tickets: Ticket[] = [
-    { id: "1", taskName: 'A', description: '', category: '', status: 'In progress', assigneeID: "1" ,contributorIDs: ["2"]},
-    { id: "2", taskName: 'B', description: '', category: '', status: 'In progress', assigneeID: "2", contributorIDs: ["3"]},
-    { id: "3", taskName: 'C', description: '', category: '', status: 'In progress', assigneeID: "3", contributorIDs: ["1","2"]}
-]
-
-export const getAllProjects = (req: Request, res: Response) => {
-    res.status(200).send(
-        projects.filter(el => el.contributorIDs.find(el => el == req.params.ID))
-    );
+export const getAllProjects = async (req: Request, res: Response) => {
+    if (req.params) {
+        await res.send(ProjectService.getProjectsByID(req.params.ID)).status(200);
+        return;
+    }
 }
 
 export const posNewProjects = (req: Request, res: Response) => { //post new project
@@ -48,7 +20,7 @@ export const posNewProjects = (req: Request, res: Response) => { //post new proj
         name: req.body.name,
         creatorID: req.params.ID,
         description: req.body.description,
-        ticketIDs: req.body.ticket_ids,
+        tickets: [],
         contributorIDs: req.body.contributor_ids
     }
 
@@ -57,10 +29,7 @@ export const posNewProjects = (req: Request, res: Response) => { //post new proj
 };
 
 export const getAllTickets = (req: Request, res: Response) => {
-    let tiket_ids: String[] = projects.find(el => el.id == req.params.projectID).ticketIDs;
-    let result: Ticket[] = [];
-    tiket_ids.forEach(t_id => result.push(tickets.find(el => el.id == t_id)));
-    res.status(200).send(result);
+    res.status(200).send(projects.find(el => el.id == req.params.projectID).tickets);
 };
 
 export const putNewTicket = (req: Request, res: Response) => {
@@ -91,18 +60,19 @@ export const putNewTicket = (req: Request, res: Response) => {
 
 export const deleteAllTickets = (req: Request, res: Response) => {
     //validation
-    let curProj:Project = projects.find(el => el.id == req.params.projectID);
-    projects.find(el => el == curProj).ticketIDs=[];
+    let curProj: Project = projects.find(el => el.id == req.params.projectID);
+    projects.find(el => el == curProj).tickets = [];
 
     if (!curProj) {
         res.status(400).send('Invalid projectID. Tickets are not deleted.');
         return;
     }
 
-    let tiket_ids: String[] = curProj.ticketIDs;
+    let tiketIds: String[];
+    curProj.tickets.forEach(el => tiketIds.push(el.id));
 
-    for (var t in tickets){
-        if(tiket_ids.find(el => el == tickets[t].id))
+    for (var t in tickets) {
+        if (tiketIds.find(el => el == tickets[t].id))
             tickets.splice(parseInt(t), 1);
     }
 
@@ -123,7 +93,7 @@ export const getAllContributers = (req: Request, res: Response) => {
 };
 
 export const deleteContributer = (req: Request, res: Response) => {
-    let toDelContribID =  req.body.toDelID;
+    let toDelContribID = req.body.toDelID;
     let userID = req.body.userID;
 
     let curProject: Project = projects.find(el => el.id == req.params.projectID);

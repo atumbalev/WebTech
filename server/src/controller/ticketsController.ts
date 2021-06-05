@@ -1,5 +1,8 @@
 import { Request, Response } from 'express'
 
+// 1. Get current Project
+// 2. Get Tickets from project
+// 3. Manipulate
 let tickets = [
     { id: 1, projectID: 1, assigneeID: "1", ticketName: 'A', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
     { id: 2, projectID: 4, assigneeID: "1", ticketName: 'B', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },

@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 // import * as _ from 'lodash';
-import ILoginInfo from '../interfaces/loginInfoInterface';
+import ILoginInfo from '../models/loginInfo';
 import { read, write } from '../utils/fileUtils';
 
 const filePath: string = '../resources';
