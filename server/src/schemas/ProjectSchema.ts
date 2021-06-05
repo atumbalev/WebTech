@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 import IProject from '../models/project'
-import Ticket from './TicketSchema'
+
+import {Ticket, TicketSchema} from './TicketSchema'
 const { Schema } = mongoose;
 
 const projectSchema = new Schema<IProject>({
@@ -16,7 +17,7 @@ const projectSchema = new Schema<IProject>({
     required: true //??
   },
   description: String,
-  tickets: [Ticket],
+  tickets: [TicketSchema],
   contrubitors: [{
     type: Schema.Types.ObjectId,
     refPath: 'onModel'

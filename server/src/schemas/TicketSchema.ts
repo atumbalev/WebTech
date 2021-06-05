@@ -23,7 +23,7 @@ const ticketSchema = new Schema<ITicket>({
     assignor: {
       type: Schema.Types.ObjectId,
       refPath: 'onModel',
-      required: true,
+      //required: true,
     },
     assignees: [{
       type: Schema.Types.ObjectId,
@@ -32,5 +32,7 @@ const ticketSchema = new Schema<ITicket>({
 })
 
 const Ticket = mongoose.model<ITicket>('Ticket', ticketSchema);
+const TicketSchema = ticketSchema;
 
+export {Ticket, TicketSchema};
 export default Ticket;

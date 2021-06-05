@@ -10,16 +10,16 @@ router.get('/:ID', projectEndpoints.getAllProjects);
 router.post('/:ID',projectEndpoints.posNewProjects);
 
 //6
-router.get('/:projectID/tickets',projectEndpoints.getAllTickets);
+router.get('/:ID/tickets',projectEndpoints.getAllTickets);
 
-router.put('/:projectID/tickets', projectEndpoints.putNewTicket);
+router.put('/:ID/tickets', projectEndpoints.putTicket);
 
-router.delete('/:projectID/tickets', projectEndpoints.deleteAllTickets);
+router.delete('/:ID/tickets', projectEndpoints.deleteAllTickets);
 
 //7
-router.get('/:projectID/users', projectEndpoints.getAllContributers);
+router.get('/:ID/users', projectEndpoints.getAllContributers);
 
-router.delete('/:projectID/users', projectEndpoints.deleteContributer);
+router.delete('/:ID/users', projectEndpoints.deleteContributer);
 
 
 //tickets

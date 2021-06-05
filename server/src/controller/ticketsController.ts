@@ -1,37 +1,25 @@
 import { Request, Response } from 'express'
+import TicketService from '../services/ticketService';
+import Ticket from '../schemas/TicketSchema';
+import ITicket from '../models/ticket';
 
-// 1. Get current Project
-// 2. Get Tickets from project
-// 3. Manipulate
-let tickets = [
-    { id: 1, projectID: 1, assigneeID: "1", ticketName: 'A', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
-    { id: 2, projectID: 4, assigneeID: "1", ticketName: 'B', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
-    { id: 3, projectID: 2, assigneeID: "1", ticketName: 'C', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
-]
-
-export const deleteById = (req: Request, res: Response) => {
+export const deleteById = async (req: Request, res: Response) => {
     const { id } = req.params;
-    tickets = tickets.filter((element) => element.id !== parseInt(id));
-    res.status(200).send(`Ticket with ${id} deleted`);
+    await TicketService.deleteTicket(id).then(() => {
+        res.sendStatus(200);
+    }).catch(err => {
+        res.sendStatus(404).send(err);
+    });
 }
 
-export const updateByID = (req: Request, res: Response) => {
+export const updateByID = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const {
-        ticketName,
-        description,
-        category,
-        status,
-        assigneeID,
-        // participants -- worksOnTable update?
-    } = req.body;
-    const ticketToBeUpdated = tickets.find((element) => element.id === parseInt(id));
-    if (ticketName) ticketToBeUpdated.ticketName = ticketName;
-    if (description) ticketToBeUpdated.description = description;
-    if (category) ticketToBeUpdated.category = category;
-    if (status) ticketToBeUpdated.status = status;
-    if (assigneeID) ticketToBeUpdated.assigneeID = assigneeID;
-    // if (participants) ticketToBeUpdated.participants = participants;
-
-    res.status(200).send(`User with the id ${id} updated`);
+    const body: ITicket = req.body;
+    await TicketService.updateTicket(body.id, body.taskName, body.description, body.category, body.status, body.assignor, body.assignees)
+        .then(() => {
+            res.sendStatus(200);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(401);
+        })
 }
