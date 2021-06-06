@@ -3,19 +3,16 @@ import UserService from '../services/userService';
 import User from '../schemas/UserSchema';
 import IUser from '../models/users';
 
-export const getUsers = async function (request: Request, response: Response) { 
-    const id = request.params.ID;
-    if (id) {
-        const user = await User.findOne({ _id: id });
-        if (user) {
-            response.status(200).json({ "user": user });
-            return;
-        }
-        response.status(400).json("error: No user found");
-    }
-    else {
-        response.send(404).send();
-    }
+// export const getUsers = async function (request: Request, response: Response) { 
+//         const users = await User.find();
+//         if (users) {
+//             response.status(200).json({ "users": users});
+//             return;
+//         }
+//         response.status(400).json("error: No users found");
+// }
+
+export const getUser = async function (request: Request, response: Response) {
 }
 
 export const postUsers = async function (request: Request, response: Response) {
@@ -26,15 +23,15 @@ export const postUsers = async function (request: Request, response: Response) {
     });
 }
 
-export const deleteUser = async function (request: Request, response: Response) {
-    const { id } = request.params;
+// export const deleteUser = async function (request: Request, response: Response) {
+//     const { id } = request.params;
 
-    await UserService.deleteUser(id).then(() => {
-        response.sendStatus(200);
-    }).catch(err => {
-        response.sendStatus(404).send(err);
-    });
-}
+//     await UserService.deleteUser(id).then(() => {
+//         response.sendStatus(200);
+//     }).catch(err => {
+//         response.sendStatus(404).send(err);
+//     });
+// }
 
 export const updateUser = async function (request: Request, response: Response) {
     const body: IUser = request.body;
@@ -50,3 +47,4 @@ export const updateUser = async function (request: Request, response: Response) 
         });
     }
 }
+

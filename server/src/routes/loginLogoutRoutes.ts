@@ -4,15 +4,18 @@ import {Router} from 'express'
 import HelperService from '../services/helperService';
 
 //controller & routes
-import {login, logout} from '../controller/loginLogoutController'
-import projectRoutes from '../routes/projectRoutes'
+import {login, logout, register} from '../controller/loginLogoutController';
+import projectRoutes from '../routes/projectRoutes';
+import UserService from '../services/userService';
 
 const router: Router = Router();
 
 //login-------
-router.post('/login', HelperService.validateUserForLogin, HelperService.auth, HelperService.errorCatch(login));
+router.post('/login', HelperService.validateUserForLogin, HelperService.auth, login); 
 
-router.post('/logout', HelperService.errorCatch(logout));
+router.post('/register', HelperService.validateUserForLogin, register); 
+
+router.post('/logout', logout);
 
 
 //projects

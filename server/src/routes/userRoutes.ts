@@ -1,15 +1,17 @@
 import * as express from 'express';
-import HelperService from '../services/helperService'
-import {getUsers, postUsers, deleteUser, updateUser} from '../controller/userCountroller'
+import {postUsers, getUser, updateUser} from '../controller/userCountroller'
 
 const router: express.Router = express.Router();
 
-router.get('/', HelperService.errorCatch(getUsers));
+// router.get('/', HelperService.errorCatch(getUsers));//raboti
 
-router.post('/',HelperService.errorCatch(postUsers));
+router.get('/id', getUser);//raboti
 
-router.delete('/:id', HelperService.errorCatch(deleteUser));
 
-router.put('/:id',HelperService.errorCatch(updateUser));
+router.post('/',postUsers);
+
+// router.delete('/:id', HelperService.errorCatch(deleteUser));
+
+router.put('/:id',updateUser);
 
 export default router;

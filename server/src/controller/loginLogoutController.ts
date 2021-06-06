@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import ILoginInfo from '../models/loginInfo';
 import UserService from '../services/userService';
+import LoginController from '../services/loginService';
+
 
 //login
 export const login = async (request: Request, response: Response) => {
@@ -18,11 +20,10 @@ export const login = async (request: Request, response: Response) => {
     // response.status(200).json({ success: true });
     const body: ILoginInfo = request.body;
     await UserService.login(body.email, body.password).then( () => {
-        response.sendStatus(200);
+        response.sendStatus(200).send;
     }).catch((error) => {
         response.sendStatus(401);
       });
-
 }
 
 // logout
@@ -44,4 +45,19 @@ const logoutFunc = async (request: any /*Request*/, response: Response) => {
 export const logout = async (request: Request, response: Response) =>{
     await logoutFunc(request, response);
     response.status(200).json({message: 'OK'});
+}
+
+
+let controller: LoginController;
+
+export const register = async (req: Request, res: Response) => {
+    const userExist = await controller.findUser(req.body.email);
+
+    if (userExist) {
+        res.status(400).json({ success: false, error: 'Email is already taken' });
+    } else {
+        controller.createUser(req.body);
+    
+        res.status(200).json({success: true});
+    }
 }

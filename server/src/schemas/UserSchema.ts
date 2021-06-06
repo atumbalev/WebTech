@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
-import IUser from '../models/users'
+import IUser from '../models/users';
+import {Project, ProjectSchema} from './ProjectSchema'
 const { Schema } = mongoose;
 
 const userSchema = new Schema<IUser>({
@@ -22,17 +23,11 @@ const userSchema = new Schema<IUser>({
   description: String ,
   profilePicture: Buffer,
   authToken: String,
-  projects: [{
-    type: Schema.Types.ObjectId,
-    refPath: 'onModel'
-  }],
-  onModel:{
-    type: String,
-    required: true,
-    enum: ['Project']
-  }
+  projects: [ProjectSchema]
 });
 
 const User = mongoose.model<IUser>('User', userSchema);
+
+
 
 export default User;

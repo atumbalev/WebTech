@@ -1,6 +1,6 @@
 import {Request, Response } from 'express';
 import * as bcrypt from 'bcrypt';
-import LoginController from '../controller/loginControllerClass';
+import LoginController from '../services/loginService';
 import ILoginInfo from '../models/loginInfo';
 
 const controller: LoginController = new LoginController();

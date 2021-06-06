@@ -38,7 +38,7 @@ import Ticket from '../schemas/TicketSchema'
         })
     }
     
-    private notExists = (taskName: string) => {
+    notExists = (taskName: string) => {
         return new Promise(async (res, rej) => {
             const task = await Ticket.findOne({ taskName: taskName }).exec();
             if (task) {

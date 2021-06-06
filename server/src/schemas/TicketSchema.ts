@@ -13,12 +13,12 @@ const ticketSchema = new Schema<ITicket>({
     category: {
       type: String,
       enum: ['Open', 'In progress', 'Resolved', 'Closed'],
-      required: true,
+      // required: true,
     },
     status:{
       type: Number,
-      enum: ['1', '2', '3', '4', '5'],
-      required: true,
+      enum: [1, 2, 3, 4, 5],
+      // required: true,
     },
     assignor: {
       type: Schema.Types.ObjectId,

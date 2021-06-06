@@ -54,12 +54,12 @@ class UserService {
         })
     };
 
-    async login(email: string, password: string): Promise<Boolean> {
+    async login(email: string, password: string): Promise<IUsers> {
         return new Promise((res, rej) => {
             this.exists(email).then(async () => {
                 const user: IUsers = await User.findOne({ email: email }).select('password').exec();
                 if (bcrypt.compare(password, user.password)) {
-                    res(true);
+                    res(user);
                 }
                 rej("Invalid password");
             })
@@ -109,6 +109,11 @@ class UserService {
             )
         })
     };
+
+
+    // async addProject(project: IProject){
+
+    // }
 
 
 };

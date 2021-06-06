@@ -13,22 +13,19 @@ const projectSchema = new Schema<IProject>({
 },
   creator: {
     type: Schema.Types.ObjectId,
-    refPath: 'onModel',
-    required: true //??
+    ref: 'User',
+    //required: true //??
   },
   description: String,
   tickets: [TicketSchema],
   contrubitors: [{
     type: Schema.Types.ObjectId,
-    refPath: 'onModel'
-  }],
-  onModel:{
-    type: String,
-    required: true,
-    enum: ['User']
-  }
+    ref: 'User'
+  }]
 });
 
 const Project = mongoose.model<IProject>('Project', projectSchema);
+const ProjectSchema = projectSchema;
 
+export {Project, ProjectSchema};
 export default Project;

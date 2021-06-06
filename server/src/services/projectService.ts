@@ -39,9 +39,9 @@ class ProjectService {
     //     })
     // };
 
-    async deleteProject(ID: string): Promise<Boolean>{
+    async deleteProject(name: string): Promise<Boolean>{
         return new Promise(async (res, rej) => {
-            const deletedProject = await Project.deleteOne({ _id: ID }).exec();
+            const deletedProject = await Project.deleteOne({ name: name }).exec();
             if (deletedProject) {
                 res(true);
             }
@@ -82,7 +82,11 @@ class ProjectService {
                     tickets: project.tickets,
                     contributors: project.contributors
                 });
+
                 await newProject.save();
+
+                User.updateOne({_id: project.creator}, {$push: {projects: newProject}}).exec();
+
                 res(true);
             }).catch((err) => {
                 console.log(`ProjectService: addProject: Error: ${err}`);

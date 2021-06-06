@@ -2,28 +2,31 @@ import * as express from 'express';
 import * as projectEndpoints from '../controller/projectController'
 import ticketsRoutes from './ticketsRouter'
 
-const router = express.Router();
+    const router = express.Router();
 
 //5
-router.get('/:ID', projectEndpoints.getAllProjects);
+router.get('/:email', projectEndpoints.getAllProjects);//raboti
 
-router.post('/:ID',projectEndpoints.postNewProjects);
+router.post('/:email',projectEndpoints.postNewProject);
 
 //6
-router.get('/:ID/tickets',projectEndpoints.getAllTickets);
+router.get('/:name/tickets/:ticketName',projectEndpoints.getTicket);//raboti
 
-router.put('/:ID/tickets', projectEndpoints.putTicket);
+router.put('/:name/tickets/:ticketName', projectEndpoints.putTicket);
 
-router.delete('/:ID/tickets', projectEndpoints.deleteAllTickets);
+router.post('/:name/tickets/:ticketName', projectEndpoints.postTicket);
+
+router.delete('/:name/tickets/:ticketName', projectEndpoints.deleteTicket);
 
 //7
-router.get('/:ID/users', projectEndpoints.getAllContributers);
+router.get('/:name/users', projectEndpoints.getAllContributers);//raboti
 
-router.delete('/:ID/users', projectEndpoints.deleteContributer);
+// router.delete('/:name/users', projectEndpoints.deleteContributer);//nqma front-end
 
 
 //tickets
-router.use('/:ID/tickets',ticketsRoutes)
+router.use('/',ticketsRoutes)
+
 
 
 export default router;

@@ -4,19 +4,23 @@
     "version": "1.0.0",
     "main": "index.ts",
     "scripts": {
-        "start": "ts-node index.ts",
+        "start": "ts-node-dev index.ts",
         "db-test": "ts-node src/db/index.ts",
         "test": "test"
     },
     "dependencies": {
+        "@types/mongoose": "^5.11.97",
         "@types/uuid": "^8.3.0",
         "bcrypt": "^5.0.1",
+        "body-parser": "^1.19.0",
         "concurrently": "^6.2.0",
         "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
         "express-session": "^1.17.1",
         "lodash": "^4.17.21",
         "mongoose": "^5.12.13",
         "nodemon": "^2.0.7",
+        "ts-node-dev": "^1.1.6",
         "types": "^0.1.1",
         "uuid": "^8.3.2"
     },
