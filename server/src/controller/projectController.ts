@@ -1,23 +1,31 @@
 import { Request, Response } from 'express'
 import IProject from '../models/project';
+
 import Project from '../schemas/ProjectSchema'
 import Ticket from '../schemas/TicketSchema'
+import User from '../schemas/UserSchema'
+
 import ProjectService from '../services/projectService';
-import UserService from '../services/userService';
 import TicketService from '../services/ticketService';
 
 export const getAllProjects = async (req: Request, res: Response) => {
     const id = req.params.ID;
     if (id) {
-        const projects: String[] = await (await UserService.getUser(req.params.ID)).projects;
-        res.status(200).send(projects);
+        const user = await User.findOne({ _id: id }).select('projects').exec();
+        if (user) {
+            const projects = user.get('projects', null, { getters: false });
+
+            res.status(200).json({ "projects": projects });
+            return;
+        }
+        res.status(400).json("error: No tickets found");
     }
     else {
         res.send(404).send();
     }
 }
 
-export const posNewProjects = async (req: Request, res: Response) => { //post new project
+export const postNewProjects = async (req: Request, res: Response) => { //post new project
     const body: IProject = req.body;
     await ProjectService.addProject(body);
 };
@@ -27,7 +35,7 @@ export const getAllTickets = async (req: Request, res: Response) => {
     if (id) {
         const project = await Project.findOne({ _id: id }).select('tickets').exec();
         if (project) {
-            const tickets = project.get('tickets', null, { getters: false }); // -> tickets: []
+            const tickets = project.get('tickets', null, { getters: false });
             res.status(200).json({ "tickets": tickets });
             return;
         }
@@ -62,7 +70,7 @@ export const putTicket = async (req: Request, res: Response) => {
 export const deleteAllTickets = async (req: Request, res: Response) => {
     const ID = req.params.ID;
 
-    await Project.findOne({ _id: ID }).select('tickets').remove().exec().then(() =>{
+    await Project.findOne({ _id: ID }).select('tickets').remove().exec().then(() => {
         res.sendStatus(200);
         return;
     }).catch(err => {
@@ -114,7 +122,7 @@ export const deleteContributer = async (req: Request, res: Response) => {
     // }
 
 
-    
+
     //================OLD=================
     // let toDelContribID = req.body.toDelID;
     // let userID = req.body.userID;

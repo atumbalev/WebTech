@@ -1,9 +1,7 @@
 import {Router} from 'express'
 
 //helpers
-import auth from '../helpers/auth';
-import validateUserForLogin from '../helpers/validateUserForLogin';
-import errorCatch from '../helpers/errorHandler'
+import HelperService from '../services/helperService';
 
 //controller & routes
 import {login, logout} from '../controller/loginLogoutController'
@@ -12,9 +10,9 @@ import projectRoutes from '../routes/projectRoutes'
 const router: Router = Router();
 
 //login-------
-router.post('/login', validateUserForLogin, auth, errorCatch(login));
+router.post('/login', HelperService.validateUserForLogin, HelperService.auth, HelperService.errorCatch(login));
 
-router.post('/logout', errorCatch(logout));
+router.post('/logout', HelperService.errorCatch(logout));
 
 
 //projects

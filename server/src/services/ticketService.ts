@@ -58,15 +58,15 @@ import Ticket from '../schemas/TicketSchema'
         })
     };
 
-    async getTicket(ID: string) : Promise<ITicket> {
-        return new Promise<ITicket>(async (res, rej) => {
-            const user: ITicket = await User.findOne({ _id: ID }).exec().then();
-            if (user) {
-                res(user);
-            }
-            rej("User does not exists");
-        })
-    };
+    // async getTicket(ID: string) : Promise<ITicket> {
+    //     return new Promise<ITicket>(async (res, rej) => {
+    //         const user: ITicket = await User.findOne({ _id: ID }).exec().then();
+    //         if (user) {
+    //             res(user);
+    //         }
+    //         rej("User does not exists");
+    //     })
+    // };
 
     async deleteTicket(ID: string): Promise<Boolean>{
         return new Promise(async (res, rej) => {

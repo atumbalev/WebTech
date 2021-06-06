@@ -7,7 +7,7 @@ const router = express.Router();
 //5
 router.get('/:ID', projectEndpoints.getAllProjects);
 
-router.post('/:ID',projectEndpoints.posNewProjects);
+router.post('/:ID',projectEndpoints.postNewProjects);
 
 //6
 router.get('/:ID/tickets',projectEndpoints.getAllTickets);

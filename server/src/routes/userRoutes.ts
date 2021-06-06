@@ -1,15 +1,15 @@
 import * as express from 'express';
-import errorCatch from '../helpers/errorHandler'
+import HelperService from '../services/helperService'
 import {getUsers, postUsers, deleteUser, updateUser} from '../controller/userCountroller'
 
 const router: express.Router = express.Router();
 
-router.get('/', errorCatch(getUsers));
+router.get('/', HelperService.errorCatch(getUsers));
 
-router.post('/',errorCatch(postUsers));
+router.post('/',HelperService.errorCatch(postUsers));
 
-router.delete('/:id', errorCatch(deleteUser));
+router.delete('/:id', HelperService.errorCatch(deleteUser));
 
-router.put('/:id', errorCatch(updateUser));
+router.put('/:id',HelperService.errorCatch(updateUser));
 
 export default router;

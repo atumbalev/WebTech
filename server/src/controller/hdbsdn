@@ -1,9 +1,0 @@
-export default async function addUserToProject(request: Request, response: Response): Promise<void> {
-    const { user, projectName}: any = request.body;
-
-    const update = { $push: {contrubitorsIDs: user} }
-    const currentProject = await Project.findOne({name: projectName}).select('contributorIDs').exec();
-    if (currentProject) {
-        const users = currentProject.get('contributerIDs', null, {getters: false});
-    }
-}

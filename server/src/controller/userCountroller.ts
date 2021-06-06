@@ -3,14 +3,19 @@ import UserService from '../services/userService';
 import User from '../schemas/UserSchema';
 import IUser from '../models/users';
 
-export const getUsers = async function (request: Request, response: Response) {
-    await UserService.getUser(request.params.ID).then(() => {
-        response.status(200).send();
-    })
-        .catch(error => {
-            response.status(404).send(error);
+export const getUsers = async function (request: Request, response: Response) { 
+    const id = request.params.ID;
+    if (id) {
+        const user = await User.findOne({ _id: id });
+        if (user) {
+            response.status(200).json({ "user": user });
+            return;
         }
-        );
+        response.status(400).json("error: No user found");
+    }
+    else {
+        response.send(404).send();
+    }
 }
 
 export const postUsers = async function (request: Request, response: Response) {

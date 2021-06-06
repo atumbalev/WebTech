@@ -29,15 +29,15 @@ class ProjectService {
         })
     };
 
-    async getProject (ID: string){
-        return new Promise(async (res, rej) => {
-            const project = await Project.findOne({ _id: ID }).exec();
-            if (project) {
-                res(project);
-            }
-            rej("Project does not exists");
-        })
-    };
+    // async getProject (ID: string){
+    //     return new Promise(async (res, rej) => {
+    //         const project = await Project.findOne({ _id: ID }).exec();
+    //         if (project) {
+    //             res(project);
+    //         }
+    //         rej("Project does not exists");
+    //     })
+    // };
 
     async deleteProject(ID: string): Promise<Boolean>{
         return new Promise(async (res, rej) => {

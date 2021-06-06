@@ -66,15 +66,15 @@ class UserService {
         })
     };
 
-    async getUser(ID: string) : Promise<IUsers> {
-        return new Promise<IUsers>(async (res, rej) => {
-            const user: IUsers = await User.findOne({ _id: ID }).exec().then();
-            if (user) {
-                res(user);
-            }
-            rej("User does not exists");
-        })
-    };
+    // async getUser(ID: string) : Promise<IUsers> {
+    //     return new Promise<IUsers>(async (res, rej) => {
+    //         const user: IUsers = await User.findOne({ _id: ID }).exec().then();
+    //         if (user) {
+    //             res(user);
+    //         }
+    //         rej("User does not exists");
+    //     })
+    // };
 
     async deleteUser(ID: string): Promise<Boolean> {
         return new Promise(async (res, rej) => {
