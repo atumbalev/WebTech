@@ -11,7 +11,7 @@
 
 <body>
     <main>
-        <nav class="toolBar1">
+        <div class="toolBarFirst">
             <h class="dashboard">Dashboard</h>
             <h class="name">Name</h>
             <div id="icon"></div>
@@ -20,8 +20,8 @@
                 <a href="PersonalInfo.html"><button class="myProfile">My profile</button></a>
                 <a href="OpaTask.html"><button class="logOut">Log out</button></a>
             </div>
-        </nav>
-        <aside class="toolBar2">
+        </div>
+        <aside class="toolBarSecond">
             <img src="source/Logo_OpaTask.jpg" class="logo">
             <li id="collaburatorsList">
                 <!--list with collaburators && backend-->
@@ -42,21 +42,23 @@
             <a href="viewByTasks.html"><button class="viewByTask">View by task</button></a>
             <button class="addTask" onclick="addTask()">+ Add task</button>
         </nav>
-        <section id="myModal" class="addTaskModal">
-            <div class="newProjectBackground">
-                <h1 class="addingNewTask">Adding new task</h1>
-            </div>
-            <div>
-                <input class="nameTask" placeholder="Enter name of task">
-                <input class="descriptionTask" placeholder="Enter description">
-                <input class="categoryTask" placeholder="Enter category">
-                <input class="priorityTask" placeholder="Enter priority">
-                <input class="assigneeTask" placeholder="Enter assignee">
-                <input class="participantsTask" placeholder="Enter participants">
-                <button class="deleteProject" onclick="del()">Delete</button>
-                <button class="done" onclick="add()">Done</button>
-            </div>
-        </section>
+        <div id="myModal" class="addTaskModal">
+            <form>
+                <div class="newProjectBackground">
+                    <h1 class="addingNewTask">Adding new task</h1>
+                </div>
+                <div>
+                    <input class="nameTask" placeholder="Enter name of task">
+                    <input class="descriptionTask" placeholder="Enter description">
+                    <input class="categoryTask" placeholder="Enter category">
+                    <input class="priorityTask" placeholder="Enter priority">
+                    <input class="assigneeTask" placeholder="Enter assignee">
+                    <input class="participantsTask" placeholder="Enter participants">
+                    <button class="deleteProject" onclick="del()">Delete</button>
+                    <button class="done" onclick="add()">Done</button>
+                </div>
+            </form>
+        </div>
         <script src="scripts/main.js"></script>
     </main>
 </body>

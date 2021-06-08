@@ -1,34 +1,103 @@
 import { Request, Response } from 'express'
+import ITicket from '../models/ticket';
+import TicketService from '../services/ticketService'
+import Project from '../schemas/ProjectSchema'
 
-let tickets = [
-    { id: 1, projectID: 1, assigneeID: "1", ticketName: 'A', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
-    { id: 2, projectID: 4, assigneeID: "1", ticketName: 'B', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
-    { id: 3, projectID: 2, assigneeID: "1", ticketName: 'C', category: '', status: 'In progress', priority: 'high', description: '', notes: '' },
-]
+export const addTask = async (req: Request, res: Response) => {
+    const body: ITicket = req.body;
+    const projectName: string = req.params.projectName;
 
-export const deleteById = (req: Request, res: Response) => {
-    const { id } = req.params;
-    tickets = tickets.filter((element) => element.id !== parseInt(id));
-    res.status(200).send(`Ticket with ${id} deleted`);
+    await TicketService.addTicket(projectName, body).then(() => {
+        res.sendStatus(200);
+    }).catch(err => {
+        res.status(400).send(err);
+    });
+
 }
 
-export const updateByID = (req: Request, res: Response) => {
-    const { id } = req.params;
-    const {
-        ticketName,
-        description,
-        category,
-        status,
-        assigneeID,
-        // participants -- worksOnTable update?
-    } = req.body;
-    const ticketToBeUpdated = tickets.find((element) => element.id === parseInt(id));
-    if (ticketName) ticketToBeUpdated.ticketName = ticketName;
-    if (description) ticketToBeUpdated.description = description;
-    if (category) ticketToBeUpdated.category = category;
-    if (status) ticketToBeUpdated.status = status;
-    if (assigneeID) ticketToBeUpdated.assigneeID = assigneeID;
-    // if (participants) ticketToBeUpdated.participants = participants;
+export const getByAssignee = async (req: Request, res: Response) => {
+    const name = req.params.name;
 
-    res.status(200).send(`User with the id ${id} updated`);
+    const ticketsArr = await Project.findOne({ name: name }).select('tickets').exec();
+    const currentTickets = ticketsArr.get('tickets', null, { getters: false });
+
+    if (currentTickets) {
+        let ticketsByAssignee: Array<any> = [];
+        currentTickets.forEach((el: any) => {
+            ticketsByAssignee.push({
+                taskName: el.taskName,
+                description: el.description,
+                assignee: el.assignor,
+                status: el.status,
+                category: el.category
+            });
+        })
+        res.status(200).json(ticketsByAssignee);
+        return;
+    }
+    res.status(400).json("error: No tickets found");
+}
+
+export const getByStatus = async (req: Request, res: Response) => {//raboti
+    const name = req.params.name;
+    const status = req.params.status;
+
+    const ticketsArr = await Project.findOne({ name: name }).select('tickets').exec();
+    const currentTickets = ticketsArr.get('tickets', null, { getters: false });
+    console.log(currentTickets);
+    if (currentTickets) {
+        let ticketsByStatus: Array<any> = [];
+        currentTickets.forEach((el: any) => {
+            if (el.status === status) {
+                console.log(status);
+                ticketsByStatus.push({
+                    taskName: el.taskName,
+                    description: el.description,
+                    assignee: el.assignor,
+                    status: el.status,
+                    category: el.category
+                });
+            }
+        })
+        res.status(200).json(ticketsByStatus);
+        return;
+    }
+    res.status(400).json("error: No tickets found");
+}
+
+export const getByTasks = async (req: Request, res: Response) => {
+    const name = req.params.name;
+    await Project.findOne({ name: name }).select('tickets').exec().then((p: any) => {
+        res.status(200).json(p.tickets);
+    }).catch(err => {
+        res.status(400).send(err);
+    });
+}
+
+export const getByCategory = async (req: Request, res: Response) => {
+    const name = req.params.name;
+    const category = req.params.category;
+
+    const ticketsArr = await Project.findOne({ name: name }).select('tickets').exec();
+    const currentTickets = ticketsArr.get('tickets', null, { getters: false });
+    console.log(currentTickets);
+    if (currentTickets) {
+        let ticketsByStatus: Array<any> = [];
+        currentTickets.forEach((el: any) => {
+            console.log(el.category);
+            if (el.category === category) {
+                console.log(category);
+                ticketsByStatus.push({
+                    taskName: el.taskName,
+                    description: el.description,
+                    assignee: el.assignor,
+                    status: el.status,
+                    category: el.category
+                });
+            }
+        })
+        res.status(200).json(ticketsByStatus);
+        return;
+    }
+    res.status(400).json("error: No tickets found");
 }

@@ -1,29 +1,32 @@
 import * as express from 'express';
-import * as projectEndpoints from '../controller/projectController'
+import * as projectController from '../controller/projectController'
 import ticketsRoutes from './ticketsRouter'
 
-const router = express.Router();
+    const router = express.Router();
 
 //5
-router.get('/:ID', projectEndpoints.getAllProjects);
+router.get('/:email', projectController.getAllProjects);//raboti
 
-router.post('/:ID',projectEndpoints.posNewProjects);
+router.post('/:email',projectController.postNewProject);//raboti
 
 //6
-router.get('/:projectID/tickets',projectEndpoints.getAllTickets);
+router.get('/:name/tickets/:ticketName',projectController.getTicket);//raboti
 
-router.put('/:projectID/tickets', projectEndpoints.putNewTicket);
+router.put('/:name/tickets/:ticketName', projectController.putTicket);//raboti
 
-router.delete('/:projectID/tickets', projectEndpoints.deleteAllTickets);
+router.post('/:name/tickets', projectController.postTicket);//raboti
+
+router.delete('/:name/tickets/:ticketName', projectController.deleteTicket);//raboti
 
 //7
-router.get('/:projectID/users', projectEndpoints.getAllContributers);
+router.get('/:name/users', projectController.getAllContributers);//raboti
 
-router.delete('/:projectID/users', projectEndpoints.deleteContributer);
+
 
 
 //tickets
-router.use('/:ID/tickets',ticketsRoutes)
+router.use('/',ticketsRoutes)
+
 
 
 export default router;

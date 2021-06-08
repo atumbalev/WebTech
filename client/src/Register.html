@@ -5,17 +5,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LogIn</title>
-    <link rel="stylesheet" href="styles/OpaTaskStyle.css" />
+    <link rel="stylesheet" href="styles/register.css" />
 </head>
 
 <body>
-    <form class="box">
+    <form id="register-form" class="box" action="#" method="POST">
         <h2>OpaTask</h2>
-        <input type="email" id="Email" name="Email" placeholder="   Enter email" required/>
-        <input type="password" id="Password" name="Password" placeholder="   Enter password" required/>
-        <p class="forgot">Forgotten password</p>
-        <a href="RegisterPersonalInfo.html"><button class="log">Sign up</button></a>
+        <div>
+            <input type="email" id="EmailRegister" name="Email" placeholder="   Enter email" required/>
+        </div>
+        <div>
+            <input type="password" id="PasswordRegister" name="Password" placeholder="   Enter password" required/>
+        </div>
+        <div class="regError"></div>
+        <a href="RegisterPersonalInfo.html">
+            <button id="regBut">Sign up</button>
+        </a>
     </form>
+    <script src="./scripts/register.js"></script>
 </body>
 
 </html>

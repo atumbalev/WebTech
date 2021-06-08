@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form class="box">
+    <form id="login-form" class="box" action="#" method="POST">
         <h2>OpaTask</h2>
         <div>
             <input type="email" id="Email" name="Email" placeholder="   Enter email" required/>
@@ -17,11 +17,13 @@
         <div>
             <input type="password" id="Password" name="Password" placeholder="   Enter password" required/>
         </div>
-        <p class="forgot">Forgotten password</p>
+        <div class="forgot"></div>
         <a class="sign" href="Register.html">Sign up</a>
-        <button class="log">Log in</button>
+        <button id="login" class="log">Log in</button>
         <!--tva se vrazva sas dashboard c back-end i baza-->
     </form>
+    <script src="./scripts/service/fetch-service.js"></script>
+    <script src="./scripts/login.js"></script>
 </body>
 
 </html>

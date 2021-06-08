@@ -10,35 +10,37 @@
 <body>
     <main class="container">
         <form>
-            <section>
+            <div>
                 <img id="logo" src="source/Logo_OpaTask.jpg">
-                <h3 class="header-top">Personal info</h3>
-            </section>
-            <section class="row">
-                <img class='profile-pic' src="source/profile.png">
-                <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Full Name" />
-                    <div class="input-icon"><i class="fa fa-user"></i></div>
+                <h3 class="headerTop">Personal info</h3>
+            </div>
+            <div class="row">
+                <img class='profilePicture' src="source/profile.png">
+                <div class="inputGroup inputGroupIcon">
+                    <input id="fullName" type="text" placeholder="Full Name" />
+                    <div class="inputIcon"><i class="faFaUser"></i></div>
                 </div>
-                <div class="input-group input-group-icon">
-                    <input type="email" placeholder="Email Adress" />
-                    <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                <div class="inputGroup inputGroupIcon">
+                    <input id="emailAddress" type="email" placeholder="Email Adress" />
+                    <div class="inputIcon"><i class="faFaEnvelope"></i></div>
                 </div>
-                <div class="input-group input-group-icon">
-                    <input type="tel" placeholder="Phone number" />
-                    <div class="input-icon"><i class="fa fa-phone"></i></div>
+                <div class="inputGroup inputGroupIcon">
+                    <input id="phone" type="tel" placeholder="Phone number" />
+                    <div class="inputIcon"><i class="faFaPhone"></i></div>
                 </div>
 
-                <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Something about you" />
-                    <div class="input-icon"><i class="fa fa-heart"></i></div>
+                <div class="inputGroup inputGroupIcon">
+                    <input id="infoPer" type="text" placeholder="Something about you" />
+                    <div class="inputIcon"><i class="faFaHeart"></i></div>
                 </div>
                 <div>
                     <button class="btn">EDIT</button>
-                    <button class="btn">CLOSE</button>
+                    <a href='dashboard.html'>Dashboard</a>
+                    <button class="btn" onclick="window.location.href='./dashboard.html'">CLOSE</button>
                     <!--need to think about how to edit and close dinamic input-->
                 </div>
-            </section>
+            </div>
         </form>
     </main>
+    <!-- <script src="./scripts/personalInfo.js"></script> -->
 </body>

@@ -11,7 +11,7 @@
 
 <body>
     <main>
-        <nav class="toolBar1">
+        <nav class="toolBarFirst">
             <h class="dashboard">Dashboard</h>
             <img id="icon"></img>
             <!--this has to be from the database-->
@@ -21,28 +21,39 @@
                 <a href="OpaTask.html"><button class="logOut">Log out</button></a>
             </div>
         </nav>
-        <aside class="toolBar2">
+        <aside class="toolBarSecond">
             <img src="source/Logo_OpaTask.jpg" class="logo">
             <li id="collaburatorsList">
                 <!--list with collaburators && backend-->
             </li>
         </aside>
-        <section>
-            <button class="add" onclick="addProject()">+</button>
-            <div id="myModal" class="addProject">
-                <div class="newProjectBackground">
-                    <h1 class="addingNewProject">Adding new project</h1>
+        <div>
+            <ul id="projects-container">
+                <li id="add">
+                    <button class="add-project" onclick="addProject()">+</button>
+                </li>
+            </ul>
+
+            <form method="POST">
+                <div id="myModal" class="addProject">
+                    <div class="newProjectBackground">
+                        <span class="close">&times;</span>
+                        <!--makes x in the modal -->
+                        <h1 class="addingNewProject">Adding new project</h1>
+                    </div>
+                    <div>
+                        <input id="projectName" class="nameProject" placeholder="Enter name project">
+                        <input id="projectDescription" class="descriptionProject" placeholder="Enter description">
+                        <button id="deleteProject">Cancel</button>
+                        <!--onclick=" del() " -->
+                        <!--database && backend-->
+                        <button id="done" onclick="add() ">Done</button>
+                    </div>
                 </div>
-                <div>
-                    <input class="nameProject" placeholder="Enter name project">
-                    <input class="descriptionProject" placeholder="Enter description">
-                    <button class="deleteProject" onclick="del()">Delete</button>
-                    <!--database && backend-->
-                    <button class="done" onclick="add()">Done</button>
-                </div>
-            </div>
-        </section>
-        <script src="scripts/main.js"></script>
+            </form>
+        </div>
+        <script src="scripts/main.js "></script>
+        <script src="scripts/dashboard.js "></script>
     </main>
 </body>
 

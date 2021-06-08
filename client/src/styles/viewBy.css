@@ -278,7 +278,7 @@ a:active {
     text-decoration: none;
 }
 
-.issue-container {
+.issueContainer {
     height: 100%;
     margin: 0 auto;
     width: 23%;
@@ -289,7 +289,7 @@ a:active {
     background-color: rgba(9, 200, 127, 1);
 }
 
-.issues-list {
+.issuesList {
     height: 100%;
     width: 100%;
     background-color: rgba(0, 250, 154, 0.62);
@@ -307,4 +307,38 @@ a:active {
     height: 100%;
     display: flex;
     flex-direction: row;
+}
+
+.issue {
+    width: 90%;
+    margin: .5rem;
+    border: 1px solid black;
+    border-radius: .25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.issue-title {
+    align-self: center;
+    margin: .5rem 0;
+    color: #436C81;
+    word-wrap: break-word;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.issue-description {
+    align-self: center;
+    margin: .1rem 0;
+    color: darkgray;
+    word-wrap: break-word;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
 }
