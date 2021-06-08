@@ -1,5 +1,12 @@
-.name {
-    position: absolute;
+.background {
+    width: 1339px;
+    height: 500px;
+    left: 150px;
+    top: 147px;
+    background: rgba(0, 250, 154, 0.62);
+}
+
+#name {
     width: 96px;
     height: 42px;
     left: 250px;
@@ -10,15 +17,6 @@
     font-size: 33px;
     line-height: 42px;
     color: #000000;
-}
-
-.background {
-    position: absolute;
-    width: 1339px;
-    height: 500px;
-    left: 150px;
-    top: 147px;
-    background: rgba(0, 250, 154, 0.62);
 }
 
 th {

@@ -31,6 +31,7 @@ const PersonalInfro = event => {
 
 // const loginUser = response => {
 //     if (response.success) {
+
 //         // kakvo se slutchva sled vavejdane na dannite
 //     } else {
 //         console.log(response.error);

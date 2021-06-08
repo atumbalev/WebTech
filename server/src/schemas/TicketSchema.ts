@@ -7,23 +7,23 @@ const ticketSchema = new Schema<ITicket>({
     taskName: {
       type: String,
       required: true,
-      //unique: true,
+      unique: true,
     },
     description: String,
     category: {
       type: String,
       enum: ['Open', 'In progress', 'Resolved', 'Closed'],
-      // required: true,
+      required: true,
     },
     status:{
       type: Number,
       enum: [1, 2, 3, 4, 5],
-      // required: true,
+      required: true,
     },
     assignor: {
       type: Schema.Types.ObjectId,
       refPath: 'onModel',
-      //required: true,
+      required: true,
     },
     assignees: [{
       type: Schema.Types.ObjectId,

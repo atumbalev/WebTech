@@ -112,8 +112,6 @@ function createProject() {
         body: JSON.stringify(project)
     };
 
-    console.log(JSON.stringify(project))
-
     fetch(url, options)
         .then(res => console.log(res))
         .then(getProjects())
@@ -139,4 +137,3 @@ function createProject() {
         modal.style.display = "none";
     }
 })();
-o
