@@ -1,8 +1,8 @@
 .background {
-    width: 1339px;
-    height: 500px;
-    left: 150px;
-    top: 147px;
+    width: 1389px;
+    height: 550px;
+    margin-left: 100px;
+    margin-top: -660px;
     background: rgba(0, 250, 154, 0.62);
 }
 
@@ -26,58 +26,24 @@ th {
     background: #09C87F;
 }
 
-.status5 {
-    position: absolute;
-    width: 1339px;
+#status5 {
+    width: 1389px;
     height: 40px;
-    top: 0px;
-    background: #09C87F;
-}
-
-.status41 {
-    position: absolute;
-    width: 1339px;
-    height: 40px;
-    top: 276px;
-    background: #09C87F;
-}
-
-.status31 {
-    position: absolute;
-    width: 1339px;
-    height: 40px;
-    top: 332px;
-    background: #09C87F;
-}
-
-.status21 {
-    position: absolute;
-    width: 1339px;
-    height: 40px;
-    top: 388px;
-    background: #09C87F;
-}
-
-.status11 {
-    position: absolute;
-    width: 1339px;
-    height: 40px;
-    top: 444px;
+    margin-top: 0px;
     background: #09C87F;
 }
 
 .viewByAssignee {
     width: 200px;
     height: 50px;
-    left: 150px;
-    top: 680px;
+    margin-left: 150px;
+    margin-top: 36px;
     border: none;
     border-radius: 3px;
     background-color: #09c87f;
     color: black;
     font-family: "Roboto", sans-serif;
     cursor: pointer;
-    position: absolute;
 }
 
 .viewByStatus {
@@ -105,11 +71,10 @@ th {
 }
 
 .viewByTask {
-    position: absolute;
     width: 200px;
-    height: 50px;
-    left: 400px;
-    top: 680px;
+    height: 51px;
+    margin-left: 40px;
+    margin-top: 34px;
     background: #09C87F;
     border-radius: 3px;
     border: none;
@@ -117,46 +82,41 @@ th {
 }
 
 .addTask {
-    position: absolute;
     width: 200px;
-    height: 60px;
-    left: 1290px;
-    top: 680px;
+    height: 50px;
+    margin-left: 690px;
+    margin-top: 36px;
     background: #09C87F;
     border-radius: 3px;
     border: none;
     cursor: pointer;
 }
 
-.status4 {
-    position: absolute;
-    width: 1339px;
+#status4 {
+    width: 1389px;
     height: 40px;
-    top: 56px;
+    margin-top: 20px;
     background: #09C87F;
 }
 
-.status3 {
-    position: absolute;
-    width: 1339px;
+#status3 {
+    width: 1389px;
     height: 40px;
-    top: 112px;
+    margin-top: 20px;
     background: #09C87F;
 }
 
-.status2 {
-    position: absolute;
-    width: 1339px;
+#status2 {
+    width: 1389px;
     height: 40px;
-    top: 168px;
+    margin-top: 20px;
     background: #09C87F;
 }
 
-.status1 {
-    position: absolute;
-    width: 1339px;
+#status1 {
+    width: 1389px;
     height: 40px;
-    top: 224px;
+    margin-top: 20px;
     background: #09C87F;
 }
 
@@ -339,4 +299,53 @@ a:active {
     width: 100%;
     text-align: center;
     font-style: italic;
+}
+
+@media screen and (max-width: 400px) {
+    .background {
+        width: 500px;
+        height: 880px;
+        margin-top: -998px;
+    }
+    #status5,
+    #status4,
+    #status3,
+    #status2,
+    #status1 {
+        width: 500px;
+        /* height: 40px;
+        margin-top: 0px; */
+    }
+    .viewByAssignee {
+        /* width: 200px;
+        height: 50px;
+        left: 150px; */
+        top: 680px;
+        /* border: none;
+        border-radius: 3px;
+        font-family: "Roboto", sans-serif;
+        cursor: pointer; */
+    }
+    .viewByAssignee {
+        width: 100px;
+        height: 40px;
+        margin-left: 100px;
+        padding-top: 10px;
+        /* margin-top: 30px; */
+    }
+    .viewByTask {
+        width: 100px;
+        height: 41px;
+        margin-left: 40px;
+        /* margin-top: 40px; */
+    }
+    /* .navButtons {
+        margin-top: 0px;
+    } */
+    .addTask {
+        width: 100px;
+        height: 40px;
+        margin-left: 495px;
+        margin-top: -60px;
+    }
 }
