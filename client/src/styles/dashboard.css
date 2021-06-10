@@ -1,0 +1,86 @@
+.nameProject {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 100px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.descriptionProject {
+    position: absolute;
+    width: 866px;
+    height: 60px;
+    left: 14px;
+    top: 180px;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+#deleteProject {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    left: 20px;
+    top: 580px;
+    background: #09C87F;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+#done {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    left: 667px;
+    top: 580px;
+    background: #09C87F;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+#projects-container {
+    width: 100%;
+    height: 100%;
+    left: 10%;
+    top: 30%;
+    background-color: lightgreen;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+}
+
+#projects-container li {
+    border: 1px solid black;
+    text-align: center;
+    padding: 2rem;
+    max-height: 10rem;
+    max-width: 15rem;
+}
+
+.add-project {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.74);
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 83px;
+    line-height: 60px;
+}
+
+.project-name {
+    align-self: center;
+    margin: .5rem 0;
+    color: black;
+    word-wrap: break-word;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    font-size: 36px;
+}
