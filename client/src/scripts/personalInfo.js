@@ -43,3 +43,18 @@ const PersonalInfro = event => {
 
     doneBtn.addEventListener('click', dashboard);
 })();
+
+const lockAll = () => {
+    document.getElementById('fullName').readOnly = true;
+    document.getElementById('emailAddress').readOnly = true;
+    document.getElementById('phone').readOnly = true;
+    document.getElementById('infoPer').readOnly = true;
+}
+
+const editProfile = () => {
+    document.getElementById('fullName').readOnly = true;
+    document.getElementById('emailAddress').readOnly = true;
+    document.getElementById('phone').readOnly = false;
+    document.getElementById('infoPer').disabled = this.checked;
+}
+re

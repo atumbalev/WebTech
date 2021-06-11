@@ -4,24 +4,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LogIn</title>
-    <link rel="stylesheet" href="styles/register.css" />
+    <title>Register</title>
+    <link rel="stylesheet" href="styles/opaTaskStyle.css" />
+    <link rel="stylesheet" href="styles/loginAndPersonal.css" />
 </head>
 
 <body>
-    <form id="register-form" class="box" action="#" method="POST">
-        <h2>OpaTask</h2>
-        <div>
-            <input type="email" id="EmailRegister" name="Email" placeholder="   Enter email" required/>
-        </div>
-        <div>
-            <input type="password" id="PasswordRegister" name="Password" placeholder="   Enter password" required/>
-        </div>
-        <div class="regError"></div>
-        <a href="RegisterPersonalInfo.html">
-            <button id="regBut">Sign up</button>
-        </a>
-    </form>
+    <main class="box" method="POST">
+        <form>
+            <img id="logo" src="source/logoOpaTask.jpg">
+            <h1 class="headerTop">OpaTask</h1>
+
+            <div>
+                <input type="email" id="EmailRegister" class="input" placeholder="Enter email" required/>
+                <input type="password" id="PasswordRegister" class="input" placeholder="Enter password" required/>
+            </div>
+            <div class="regError"></div>
+            <a href="registerPersonalInfo.html">
+                <button class="button" id="centerButton">Sign up</button>
+            </a>
+        </form>
+    </main>
     <script src="./scripts/register.js"></script>
 </body>
 

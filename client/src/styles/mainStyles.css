@@ -20,13 +20,13 @@ body {
     justify-content: space-between;
 }
 
-.navbar-left {
+.navbarLeft {
     justify-content: center;
     height: 100%;
     display: flex;
 }
 
-.navbar-right {
+.navbarRight {
     display: flex;
     margin-right: 3rem;
 }
@@ -103,15 +103,6 @@ body {
     max-width: 75rem;
 }
 
-@media screen and (max-width: 400px) {
-    .toolBarFirst {
-        width: 162%;
-    }
-    .toolBarSecond {
-        height: 1050px;
-    }
-}
-
 .button {
     display: inline-block;
     padding: 0.3em 1.2em;
@@ -129,13 +120,6 @@ body {
 
 .button:hover {
     background-color: #4095c6;
-}
-
-@media all and (max-width:30em) {
-    .button {
-        display: block;
-        margin: 0.2em auto;
-    }
 }
 
 #rightButton {

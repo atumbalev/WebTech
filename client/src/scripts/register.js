@@ -35,7 +35,7 @@ const redirect = response => {
     console.log(response);
     console.log(response.successk);
     if (response.ok) {
-        window.location = 'PersonalInfo.html';
+        window.location = 'personalInfo.html';
     } else {
         const errors = document.getElementsByClassName('regError');
         errors.innerHTML = response.error;
