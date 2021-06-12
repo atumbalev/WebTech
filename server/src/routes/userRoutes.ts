@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import projectRoutes from '../routes/projectRoutes';
-import { register, login, updateInfo, getInfo, logout } from '../controller/userController'
+import { register, login, updateInfo, getInfo, logout} from '../controller/userController'
 const router: Router = Router();
 
 router.post('/register', register); //raboti
-router.post('/login', login);//raboti
+router.post('/login', login); //raboti
 router.post('/logout', logout);
 
-router.put('/update', updateInfo)
-router.get('/:email/personalInfo', getInfo)
+router.put('/:email/update', updateInfo) //rabotiii
+router.get('/:email/personalInfo', getInfo) //rabotii
 
 //projects
 router.use('/projects', projectRoutes);

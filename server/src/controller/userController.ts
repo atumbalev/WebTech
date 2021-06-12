@@ -7,46 +7,56 @@ import * as bcrypt from 'bcrypt';
 
 //uodateInfo
 export const updateInfo = async (req: Request, res: Response) => {
-    await UserService.updateUserInfo(req.body.email, req.body.phone, req.body.name, req.body.description, req.body.profilePicture)
-    .then(() => {
-        res.status(200).send("Successful update!");
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !req.params.email) {
+        res.status(400).send("Invalid input");
         return;
-    }).catch((err : Error) => {
-        res.status(304).json({"error": err});
-        return;
-    });
+    }
+
+    await UserService.updateUserInfo(req.params.email, req.body.phone, req.body.name, req.body.description, req.body.profilePicture)
+        .then(() => {
+            res.status(200).send("Successful update!");
+            return;
+        }).catch((err: Error) => {
+            res.status(304).json({ "error": err });
+            return;
+        });
 }
 
 // getInfo
 export const getInfo = async (req: Request, res: Response) => {
-    if(req.params.email === 'undefined' || req.params.email === null){
+    if (!req.params.email) {
         res.status(400).send("Invalid email");
         return;
     }
-   const userInfo = await UserService.getUserInfo(req.params.email)
-    .then(() => {
-        res.status(200).json({"userInfo": userInfo});
+    const userInfo = await User.findOne({ email: req.params.email }).exec();
+    if(userInfo){
+        res.status(200).json({ "userInfo": userInfo });
         return;
-    }).catch((err : Error) => {
-        res.status(400).json({"error": err});
-        return;
-    });
+    }
+    res.status(400).json("error");
 }
 
 
 //register
 export const register = async (req: Request, res: Response) => {
     const body = req.body;
-    if(body === 'undefined' || body === null){
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !req.body.password || !req.body.email) {
         res.status(406).send("Invalid input");
         return;
     }
 
-    await UserService.register(body.email,body.password).then(() => {
-        res.sendStatus(200);
+    await UserService.addUser(body).then(() => {
+        const token = jwt.sign(
+            { email: body.email },
+            process.env.TOKEN_SECRET,
+            { expiresIn: '5h' }
+        );
+
+        res.setHeader('Authorization', token);
+        res.status(200).json({ "token": token });
         return;
-    }).catch((err : Error) => {
-        res.status(406).json({"error": err});
+    }).catch((err: Error) => {
+        res.status(406).json({ "error": err });
         return;
     });
 }
@@ -55,10 +65,11 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     const body = req.body;
     //body check
-    if(body === 'undefined' || body === null){
-        res.status(406).send("Invalid email or pasword");
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !req.body.email || !req.body.password) {
+        res.status(406).send("Invalid input");
         return;
     }
+
     UserService.login(body.email, body.password)
         .then(() => {
             const token = jwt.sign(

@@ -6,33 +6,21 @@ const fs = require('fs');
 
 mongoose.set('useFindAndModify', false);
 
+const SALT_ROUNDS = 10;
+
 class UserService {
     contructor() { }
 
-    async register(email: string, password: string) {
-        return new Promise(async (res, rej) => {
-            if (this.notExists(email)) {
-                rej("User already exists");
-                return;
-            }
-            const newUser: IUsers = new User({
-                email: email,
-                password: password
-            })
-
-            this.addUser(newUser).then(() => {
-                res(true);
-                return;
-            }).catch((err) => {
-                rej("User not added");
-            });
-        });
-    }
-
-
     async addUser(user: IUsers) {
         return new Promise(async (res, rej) => {
-            const hashedPassword = await bcrypt.hash(user.password, process.env.SALT_ROUNDS);
+
+            let passRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+            if (!user.password.match(passRegex)) {
+                rej("Invalid pass");
+                return;
+            }
+
+            const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
             this.notExists(user.email).then(async () => {
                 const newUser = new User({
                     _id: new mongoose.Types.ObjectId(),
@@ -42,7 +30,6 @@ class UserService {
                     phone: user.phone,
                     description: user.description,
                     profilePicture: user.profilePicture,
-                    //authToken: user.authToken,
                     projects: []
                 });
                 await newUser.save();
@@ -50,46 +37,47 @@ class UserService {
                 return;
             }).catch((err) => {
                 console.log(`UserService: addUser: Error: ${err}`);
-                rej("User exists");
+                rej({ "error": err });
             });
         })
     }
 
     private notExists = (email: string) => {
         return new Promise(async (res, rej) => {
-            const user = await User.findOne({ email: email }).exec().then(()=>{
-                res(user);
+            const user = await User.findOne({ email: email }).exec();
+            if (user) {
+                rej("User exists gv");
                 return;
-            }).catch(()=>{
-                rej("User exists");
-            })
+            }
+            res(true);
         });
     };
 
-    exists = (email: string) => {
+    private exists = (email: string) => {
         return new Promise(async (res, rej) => {
-            const user = await User.findOne({ email: email }).exec().then(()=>{
+            const user = await User.findOne({ email: email }).exec();
+            if (user) {
                 res(true);
                 return;
-            }).catch(()=>{
-                rej("User does not exists");
-            })
+            }
+            rej("User does not exists");
         })
     };
 
     async login(email: string, password: string): Promise<IUsers> {
         return new Promise((res, rej) => {
             this.exists(email).then(async () => {
-                const user: IUsers = await User.findOne({ email: email }).select('password').get('password').exec();
-                
-                const pass = await bcrypt.compare(password, user.password);
-                if (pass) {
+                const user: IUsers = await User.findOne({ email: email }).select('password').exec();
+                const pass = user.get('password', null, { getters: false });
+
+                const isOK = await bcrypt.compare(password, pass);
+                if (isOK) {
                     res(user);
                     return;
                 }
                 rej("Invalid password");
-            })
-            .catch(()=>{
+                return;
+            }).catch(() => {
                 rej("Invalid user");
             })
         })
@@ -105,35 +93,23 @@ class UserService {
         return new Promise(async (res, rej) => {
 
             const profilePictureVar: any = {
-                data: profilePicture ? fs.readFileSync(profilePicture) : fs.readFileSync('/client/src/source/profile.png'),
+                data: profilePicture ? fs.readFileSync(profilePicture) : null,
                 contentType: 'image/png'
             }
-           const user =  await User.findOneAndUpdate({ email: email }, {
+            
+            const user = await User.findOneAndUpdate({ email: email }, {
                 name: name,
                 phone: phone,
                 description: description,
                 profilePicture: profilePictureVar
             }).exec()
                 .then(() => {
-                    res(user);
-                    return;
-                }
-                ).catch((err: Error) => rej(err));
-        });
-    };
-
-
-    async getUserInfo(email: string) {
-        return new Promise(async (res, rej) => {
-            const userInfo = await User.findOne({ email: email }).exec()
-                .then(() => {
-                    res(userInfo);
+                    res(true);
                     return;
                 })
-                .catch((err: Error) => rej(err))
-        });
-
-    };
+                .catch((err: Error) => {console.log(err); rej(err)});
+        }); 
+}
 
 };
 

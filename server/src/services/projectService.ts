@@ -51,7 +51,7 @@ class ProjectService {
     };
 
     async addProject(project: IProject) {
-        return new Promise((res, rej) => {
+        return new Promise(async (res, rej) => {
             this.notExists(project.name).then(async () => {
                 const newProject = new Project({
                     _id: new mongoose.Types.ObjectId(),
@@ -61,10 +61,9 @@ class ProjectService {
                     tickets: project.tickets,
                     contributors: project.contributors
                 });
-
                 await newProject.save();
 
-                User.updateOne({ email: project.creator }, { $push: { projects: newProject } }).exec();
+                await User.updateOne({ email: newProject.creator }, { $addToSet: { projects: newProject.name } }).exec();//needs to be fixed
 
                 res(true);
             }).catch((err) => {
@@ -76,13 +75,13 @@ class ProjectService {
 
     async getProjectByEmail(email: string) {
         return new Promise(async (res, rej) => {
-            const project = await User.findOne({ email: email }).select('projects').get('projects').exec()
-                .then(() => {
-                    res(project);
-                    return;
-                })
-                .catch((err: Error) => rej("No project found"))
-
+            const projectArr = await User.findOne({ email: email }).select('projects').exec();
+            const currentProject = projectArr.get('projects', null, { getters: false });
+            if(currentProject){
+                res(currentProject);
+                return;
+            }
+            rej("No project found");
         });
     }
 
@@ -114,12 +113,12 @@ class ProjectService {
         return new Promise(async (res, rej) => {
 
             Project.updateOne({ name: name }, { $addToSet: { contributers: email } }).exec()
-            .then(() => {
-                res(email);
-            })
-            .catch((err: Error) => {
-                rej(err);
-            });
+                .then(() => {
+                    res(email);
+                })
+                .catch((err: Error) => {
+                    rej(err);
+                });
 
         });
     }

@@ -25,13 +25,15 @@ export const postNewProject = async (req: Request, res: Response) => {
     let body: IProject = req.body;
     body.creator = email;
 
-    if (!req.params.email || !req.body) {
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !req.params.email || !req.body.name) {
         res.status(400).json("error: Invalid input");
         return;
     }
 
+
     await ProjectService.addProject(body).then(() => {
         res.status(200).json("Project added");
+        return;
     }).catch((err: Error) => {
         res.sendStatus(400).json({ "Error ": err });
     })
@@ -56,7 +58,7 @@ export const getAllContributers = async (req: Request, res: Response) => {
 export const addContributer = async (req: Request, res: Response) => {
     const name = req.params.name;
     const contributorEmail = req.body.email;
-    if(!name || !contributorEmail){
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !contributorEmail || !name) {
         res.send(404).json("error: No valid input");
         return;
     }

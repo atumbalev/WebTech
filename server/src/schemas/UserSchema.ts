@@ -18,8 +18,7 @@ const userSchema = new Schema<IUser>({
   password: {
     type: String,
     required: true,
-    min: (8),
-    regex: (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/) //special/number/capital
+    min: 8
   },
   phone: {
     type: String,
