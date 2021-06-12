@@ -1,7 +1,8 @@
 import * as express from 'express';
+import {verifyTokenMiddleware} from './middleware/auth'
 const bp = require('body-parser')
 
-//db
+//dbs
 import { connect } from 'http2';
 import models, { connectDB } from './db/dbConnetion';
 
@@ -25,6 +26,7 @@ app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
 app.use('/', userRoutes); //login & logout
+app.use(verifyTokenMiddleware);
 
 app.use(express.json());
 

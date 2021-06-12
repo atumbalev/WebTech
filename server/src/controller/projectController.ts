@@ -31,7 +31,7 @@ export const postNewProject = async (req: Request, res: Response) => {
     await ProjectService.addProject(body).then(() => {
         res.status(200).json("Project added");
     }).catch(err => {
-        res.sendStatus(404).json("No project added");
+        res.sendStatus(404).json({"No project added. Error ": err});
     })
 };
 
@@ -82,7 +82,7 @@ export const deleteTicket = async (req: Request, res: Response) => {
     await Project.updateOne({name: name}, {$pull: {tickets: {taskName:ticketName} }}).then(() => {
         res.sendStatus(200).json("Deleted!");
         return;
-    }).catch(err => {
+    }).catch(err =>{
         res.sendStatus(404).send("No ticket added");
     });
 };

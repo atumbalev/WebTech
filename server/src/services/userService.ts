@@ -6,8 +6,6 @@ const fs = require('fs');
 
 mongoose.set('useFindAndModify', false);
 
-const SALT_ROUNDS = 10;
-
 class UserService {
     contructor() { }
 
@@ -33,7 +31,7 @@ class UserService {
 
     async addUser(user: IUsers) {
         return new Promise(async (res, rej) => {
-            const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
+            const hashedPassword = await bcrypt.hash(user.password, process.env.SALT_ROUNDS);
             this.notExists(user.email).then(async () => {
                 const newUser = new User({
                     _id: new mongoose.Types.ObjectId(),
@@ -79,6 +77,9 @@ class UserService {
         return new Promise((res, rej) => {
             this.exists(email).then(async () => {
                 const user: IUsers = await User.findOne({ email: email }).select('password').exec();
+                if(!user){
+                    
+                }
                 const pass = await bcrypt.compare(password, user.password);
                 if (pass) {
                     res(user);

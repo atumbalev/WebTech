@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import UserService from '../services/userService';
 import User from '../schemas/UserSchema';
+import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcrypt';
+
 
 //uodateInfo
 export const updateInfo = async (req: Request, res: Response) => {
@@ -41,13 +44,28 @@ export const register = async (req: Request, res: Response) => {
 //login
 export const login = async (request: Request, response: Response) => {
     const body = request.body;
+    UserService.login(body.email, body.password)
+        .then(() => {
+            const token = jwt.sign(
+                { email: body.email },
+                process.env.SALT_ROUNDS,
+                // bcrypt.hash(process.env.TOKEN_SECRET,process.env.SALT_ROUNDS),
+                { expiresIn: '5h' }
+            );
 
-    await UserService.login(body.email, body.password).then(() => {
-        response.sendStatus(200).send();
-    }).catch((error) => {
-        response.sendStatus(401);
-    });
-}
+            response.setHeader('Authorization', token);
+            response.status(200).json({ "token": token });
+        }).catch((err: Error) => {
+            response.status(401).json({ "error": err });
+        });
+};
+
+export const logout = async (req: Express.Request, res: Express.Response) => {
+    localStorage.clear();
+    // res.json({ logout: true });
+    
+};
+
 
 // // logout
 // const {
@@ -55,7 +73,7 @@ export const login = async (request: Request, response: Response) => {
 //     SESSION_NAME = 'sid'
 // } = process.env;
 
-// const logoutFunc = async (request: any /*Request*/, response: Response) => {
+// const logoutFunc = async (request: Request, response: Response) => {
 //     new Promise<void>((resolve, reject: any) => {
 //         request.session!.destroy((err: Error) => {
 //             if (err) reject(err);
