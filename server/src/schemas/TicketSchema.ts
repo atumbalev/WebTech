@@ -15,16 +15,16 @@ const ticketSchema = new Schema<ITicket>({
     category: {
       type: String,
       enum: ['Open', 'In progress', 'Resolved', 'Closed'],
-      required: true,
+      //required: true,
     },
     status:{
-      type: Number,
+      type: String,
       enum: ['Highest','High','Normal', 'Low', 'Lowest'],
-      required: true,
+      //required: true,
     },
     assignor: {
       type: String,
-      required: true,
+      //required: true,
       match:/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
     },
     assignees: [{

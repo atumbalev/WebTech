@@ -30,7 +30,7 @@ class UserService {
                     phone: user.phone,
                     description: user.description,
                     profilePicture: user.profilePicture,
-                    projects: []
+                    projects: [{name:"jkdk", tickets: [{taskName:"hvbsfd"}]}]
                 });
                 await newUser.save();
                 res(true);

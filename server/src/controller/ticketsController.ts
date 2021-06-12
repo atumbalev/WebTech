@@ -7,26 +7,37 @@ import Project from '../schemas/ProjectSchema'
 
 export const putTicket = async (req: Request, res: Response) => {
     const name = req.params.name;
-    const taskName = req.params.ticketName;
+    const taskName = req.params.taskName;
     const ticket = req.body;
+
+    // if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !name || !taskName || !ticket.category || !ticket.status) {
+    //     res.status(400).json("error: Invalid input");
+    //     return;
+    // }
+
     if (!name || !taskName || !ticket) {
         res.status(400).json("error: Invalid input");
         return;
     }
 
-    const updatedTicket = await TicketService.updateTicket(name, taskName, ticket.description, ticket.category,
-        ticket.status, ticket.assignee)
-        .then(() => {
-            res.status(200).json({ "updatedTicket": updatedTicket });
-            return;
-        }).catch((err: Error) => {
-            res.send(304).json({ "error": err });
-        })
+    TicketService.updateTicket(name, taskName, ticket.description, ticket.category, ticket.status, ticket.assignee).then(async (updatedTicket) => {
+        res.status(200).json({ "updatedTicket": updatedTicket });
+        return;
+    }).catch((err: Error) => {
+        res.status(304).json({ "error": err });
+    })
 };
 
 export const postTicket = async (req: Request, res: Response) => {
     const name = req.params.name;
     const newTicket = req.body;
+
+  // if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !name || !newTicket.taskName || !newTicket.category || !newTicket.status) {
+    //     res.status(400).json("error: Invalid input");
+    //     return;
+    // }
+
+
     if (!name || !newTicket) {
         res.status(400).json("error: Invalid input");
         return;
@@ -34,7 +45,7 @@ export const postTicket = async (req: Request, res: Response) => {
 
     await TicketService.addTicket(name, newTicket)
         .then(() => {
-            res.sendStatus(200);
+            res.status(200).json({'msg': 'Ticked added successfully'});
         })
         .catch((err: Error) => {
             res.status(304).json({ "error": err });
@@ -48,8 +59,7 @@ export const getByAssignee = async (req: Request, res: Response) => {
         return;
     }
 
-    const ticketsByAssignee = await TicketService.getByAssignee(name)
-        .then(() => {
+    await TicketService.getByAssignee(name).then((ticketsByAssignee) => {
             res.status(200).json(ticketsByAssignee);
             return;
         })
@@ -66,8 +76,8 @@ export const getByStatus = async (req: Request, res: Response) => {//raboti
         res.status(400).json("error: Invalid input");
         return;
     }
-    const ticketsByStatus = await TicketService.getByStatus(name, status)
-        .then(() => {
+    await TicketService.getByStatus(name, status)
+        .then((ticketsByStatus) => {
             res.status(200).json(ticketsByStatus);
             return;
         })
@@ -85,8 +95,8 @@ export const getByTasks = async (req: Request, res: Response) => {
         return;
     }
     await Project.findOne({ name: name }).select('tickets').exec()
-        .then((p: any) => {
-            res.status(200).json(p.tickets);
+        .then((project: any) => {
+            res.status(200).json(project.tickets);
             return;
         })
         .catch((err: Error) => {
@@ -103,8 +113,8 @@ export const getByCategory = async (req: Request, res: Response) => {
         res.status(400).json("error: Invalid input");
         return;
     }
-    const ticketsByCategory = await TicketService.getByCategory(name, category)
-        .then(() => {
+    await TicketService.getByCategory(name, category)
+        .then((ticketsByCategory) => {
             res.status(200).json(ticketsByCategory);
             return;
         })

@@ -5,6 +5,7 @@ import IProject from '../models/project'
 import User from '../schemas/UserSchema'
 import Project from '../schemas/ProjectSchema'
 import Ticket from '../schemas/TicketSchema'
+import { nextTick } from 'process'
 
 
 class TicketService {
@@ -16,7 +17,7 @@ class TicketService {
           _id: new mongoose.Types.ObjectId(),
           taskName: ticket.taskName,
           description: ticket.description,
-          category: ticket.category,
+          category: "Open",
           status: ticket.status,
           assignor: ticket.assignor,
           assignees: ticket.assignees
@@ -24,9 +25,13 @@ class TicketService {
 
         await newTicket.save();
 
-        Project.updateOne({ name: name }, { $addToSet: { tickets: newTicket } }).exec();
+        Project.updateOne({ name: name }, { $addToSet: { tickets: newTicket } }).exec().then(() => {
+          res("ticket added");
+        }).catch((err : Error) => {
+          rej("error: " +  err);
+        })
 
-        res(true);
+        // res(true);
       }).catch((err) => {
         console.log(`ProjectService: addProject: Error: ${err}`);
         rej("Project exists");
@@ -64,9 +69,7 @@ class TicketService {
     assignees?: [string]
   ) {
     return new Promise(async (res, rej) => {
-      const project = await Project.findOne({ name: name })
-        .select('tickets')
-        .exec();
+      const project = await Project.findOne({ name: name }).select('tickets').exec();
       if (project) {
         let tickets = project.tickets;
         tickets.forEach((el: any) => {
@@ -77,11 +80,10 @@ class TicketService {
             el.assignees = assignees === null ? el.assignees : assignees;
           }
         });
-
-        Project.findOneAndUpdate({ name: name }, { tickets: tickets })
-          .exec()
-          .then((p: any) => {
-            res(true);
+        
+        Project.findOneAndUpdate({ name: name }, { tickets: tickets }).exec().then(async (project: any) => {
+          const tic = (await Project.findOne({name:project.name}).select("tickets").exec()).tickets;
+            res(tic);
           })
           .catch((err: Error) => rej(err));
       } else {
@@ -94,14 +96,15 @@ class TicketService {
   async getByAssignee(name: string) {
     return new Promise(async (res, rej) => {
 
-      const ticketsArr = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
-        .then(() => {
+   await Project.findOne({ name: name }).select('tickets').exec()
+        .then((tickets) => {
+          const ticketsArr = tickets.tickets;
           let ticketsByAssignee: Array<any> = [];
           ticketsArr.forEach((el: any) => {
             ticketsByAssignee.push({
               taskName: el.taskName,
               description: el.description,
-              assignee: el.assignor,
+              assignor: el.assignor,
               status: el.status,
               category: el.category
             });
@@ -118,9 +121,9 @@ class TicketService {
   async getByStatus(name: string, status: string) {
     return new Promise(async (res, rej) => {
 
-      const ticketsArr = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
-        .then(() => {
-
+     await Project.findOne({ name: name }).select('tickets').exec()
+        .then((tickets) => {
+          const ticketsArr = tickets.tickets;
           let ticketsByStatus: Array<any> = [];
 
           ticketsArr.forEach((el: any) => {
@@ -129,8 +132,7 @@ class TicketService {
               ticketsByStatus.push({
                 taskName: el.taskName,
                 description: el.description,
-                assignee: el.assignor,
-                status: el.status,
+                assignor: el.assignor,
                 category: el.category
               });
             }
@@ -146,10 +148,10 @@ class TicketService {
   async getByCategory(name: string, category: string) {
     return new Promise(async (res, rej) => {
 
-      const ticketsArr = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
-        .then(() => {
+      await Project.findOne({ name: name }).select('tickets').exec()
+        .then((tickets) => {
           let ticketsByCategory: Array<any> = [];
-
+          const ticketsArr = tickets.tickets;
           ticketsArr.forEach((el: any) => {
             if (el.category === category) {
               ticketsByCategory.push({

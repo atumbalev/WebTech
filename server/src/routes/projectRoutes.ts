@@ -6,23 +6,23 @@ import ticketsRoutes from './ticketsRouter'
 const router = express.Router();
 
 //5
-router.get('/:email', projectController.getAllProjects);
+router.get('/:email', projectController.getAllProjects);//raboti
 
-router.post('/:email',projectController.postNewProject);//needs to be fixed
+router.post('/:email',projectController.postNewProject);//raboti
 
 //6
-router.get('/:name/tickets/:ticketName',projectController.getTickets);
+router.get('/:name/tickets',projectController.getTickets);//raboti
 
-router.put('/:name/tickets/:ticketName', ticketsController.putTicket);
+router.put('/:name/tickets/:taskName', ticketsController.putTicket);//raboti
 
-router.post('/:name/tickets', ticketsController.postTicket);
+router.post('/:name/tickets', ticketsController.postTicket);//raboti
 
-router.delete('/:name/tickets/:ticketName', projectController.deleteTicket);
+router.delete('/:name/tickets/:ticketName', projectController.deleteTicket);//raboti
 
 router.post('/:name/contributers', projectController.addContributer);
 
 //7
-router.get('/:name/users', projectController.getAllContributers);
+router.get('/:name/users', projectController.getAllContributers);//raboti
 
 
 

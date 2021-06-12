@@ -11,7 +11,7 @@ export const getAllProjects = async (req: Request, res: Response) => {
         return;
     }
 
-    const projects = await ProjectService.getProjectByEmail(req.params.email).then(() => {
+    await ProjectService.getProjectByEmail(req.params.email).then(async(projects) => {
         res.status(200).json({ "projects": projects });
         return;
     }).catch((err: Error) => {
@@ -35,7 +35,7 @@ export const postNewProject = async (req: Request, res: Response) => {
         res.status(200).json("Project added");
         return;
     }).catch((err: Error) => {
-        res.sendStatus(400).json({ "Error ": err });
+        res.status(400).json({ "Error ": err });
     })
 };
 
@@ -46,7 +46,7 @@ export const getAllContributers = async (req: Request, res: Response) => {
         return;
     }
 
-    const contrubitors = await ProjectService.getAllContributors(name).then(() => {
+    await ProjectService.getAllContributors(name).then((contrubitors) => {
         res.status(200).json({ "contrubitors": contrubitors });
         return;
     }).catch((err: Error) => {
@@ -56,12 +56,15 @@ export const getAllContributers = async (req: Request, res: Response) => {
 };
 
 export const addContributer = async (req: Request, res: Response) => {
+    console.log(req.body);
     const name = req.params.name;
     const contributorEmail = req.body.email;
-    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !contributorEmail || !name) {
-        res.send(404).json("error: No valid input");
-        return;
-    }
+    // if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !contributorEmail || !name) {
+    //     res.send(404).json("error: No valid input");
+    //     return;
+    // }
+
+    console.log(name);
 
     await ProjectService.addContributer(name, contributorEmail).then(() => {
         res.status(200).json("Contrubitor added");
@@ -80,12 +83,13 @@ export const getTickets = async (req: Request, res: Response) => {
         res.status(400).json("error: Invalid input");
         return;
     }
-    const tickets = await ProjectService.getTickets(name)
-        .then(() => {
+    
+    await ProjectService.getTickets(name)
+        .then((tickets) => {
             res.status(200).json({ "tickets": tickets });
             return;
         }).catch((err: Error) => {
-            res.send(404).json({ "error": err });
+            res.status(404).json({ "error": err });
             return;
         });
 };

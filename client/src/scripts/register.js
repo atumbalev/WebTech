@@ -6,7 +6,8 @@ const sendForm = event => {
 
     const user = {
         "email": email,
-        "password": password
+        "password": password,
+        // "projects"
     };
 
     localStorage.setItem('email', email);

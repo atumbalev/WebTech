@@ -63,7 +63,7 @@ class ProjectService {
                 });
                 await newProject.save();
 
-                await User.updateOne({ email: newProject.creator }, { $addToSet: { projects: newProject.name } }).exec();//needs to be fixed
+                await User.updateOne({ email: newProject.creator }, { $push: { projects: newProject } }).exec();//needs to be fixed
 
                 res(true);
             }).catch((err) => {
@@ -78,6 +78,7 @@ class ProjectService {
             const projectArr = await User.findOne({ email: email }).select('projects').exec();
             const currentProject = projectArr.get('projects', null, { getters: false });
             if(currentProject){
+                //console.log(currentProject);
                 res(currentProject);
                 return;
             }
@@ -87,21 +88,21 @@ class ProjectService {
 
     async getAllContributors(name: string) {
         return new Promise(async (res, rej) => {
-            const contrubitors = await Project.findOne({ name: name }).select('contrubitors').get('contrubitors').exec()
-                .then(() => {
-                    res(contrubitors);
-                    return;
-                })
-                .catch((err: Error) => rej("No contrubitors found"))
+            const contrubitors = (await Project.findOne({ name: name }).select('contrubitors').exec()).get('contrubitors');
+            if(contrubitors) {
+                res(contrubitors);
+            } else {
+                rej("No contrubitors");
+            }
         });
 
     }
 
     async getTickets(name: string) {
         return new Promise(async (res, rej) => {
-            const tickets = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
-                .then(() => {
-                    res(tickets);
+            await Project.findOne({ name: name }).select('tickets').exec()
+                .then((project) => {
+                    res(project.tickets);
                     return;
                 })
                 .catch((err: Error) => rej("No tickets found"))
@@ -112,11 +113,13 @@ class ProjectService {
     async addContributer(name: string, email: string) {
         return new Promise(async (res, rej) => {
 
-            Project.updateOne({ name: name }, { $addToSet: { contributers: email } }).exec()
+            await Project.updateOne({ name: name }, { $addToSet: { contributers: email } }).exec()
                 .then(() => {
-                    res(email);
+                    console.log("in bull")
+                    res(true);
                 })
                 .catch((err: Error) => {
+                    console.log(err);
                     rej(err);
                 });
 
