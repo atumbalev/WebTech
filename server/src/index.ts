@@ -46,13 +46,14 @@ app.set("view engine", "ejs"); //pics????
 
 //server
 const PORT = 3000;
-connectDB()
-  .then(async () => {
-    app.listen(PORT, () => {
-      console.log('Issue tracker listening at http://localhost:%s!', PORT);
-    });
-  })
-  .catch((error: Error) => {
-    console.log(error);
-  });
+console.log(process.env.DATABASE_URL);
+// connectDB()
+//   .then(async () => {
+//     app.listen(PORT, () => {
+//       console.log('Issue tracker listening at http://localhost:%s!', PORT);
+//     });
+//   })
+//   .catch((error: Error) => {
+//     console.log(error);
+//   });
   

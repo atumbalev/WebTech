@@ -10,7 +10,7 @@ export function verifyTokenMiddleware(req: Request, res: Response, next: NextFun
         if (!bearerToken) {
             return res.sendStatus(401);
         }
-	    const user = jwt.verify(bcrypt.compare(bearerToken, process.env.TOKEN_SECRET));//true or false ??
+	    const user = jwt.verify(bearerToken, process.env.TOKEN_SECRET);//true or false ??
         if (!user) {
             return res.sendStatus(403);
         }

@@ -11,18 +11,17 @@ const projectSchema = new Schema<IProject>({
     required: true,
     unique: true,
 },
-  creator: {
-    type: String
-    // type: Schema.Types.ObjectId,
-    // ref: 'User',
-    // required: true //??
+  creator: { 
+    type: String,
+    match: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/ //email
   },
-  description: String,
+  description: {
+    type:String
+  },
   tickets: [TicketSchema],
   contrubitors: [{
-    //type: String
-    type: Schema.Types.ObjectId,
-    ref: 'User'
+    type: String,
+    match: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/ //email
   }]
 });
 

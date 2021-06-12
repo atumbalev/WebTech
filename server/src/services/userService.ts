@@ -22,6 +22,7 @@ class UserService {
 
             this.addUser(newUser).then(() => {
                 res(true);
+                return;
             }).catch((err) => {
                 rej("User not added");
             });
@@ -46,6 +47,7 @@ class UserService {
                 });
                 await newUser.save();
                 res(true);
+                return;
             }).catch((err) => {
                 console.log(`UserService: addUser: Error: ${err}`);
                 rej("User exists");
@@ -55,37 +57,40 @@ class UserService {
 
     private notExists = (email: string) => {
         return new Promise(async (res, rej) => {
-            const user = await User.findOne({ email: email }).exec();
-            if (user) {
+            const user = await User.findOne({ email: email }).exec().then(()=>{
+                res(user);
+                return;
+            }).catch(()=>{
                 rej("User exists");
-            }
-            res(true);
+            })
         });
     };
 
     exists = (email: string) => {
         return new Promise(async (res, rej) => {
-            const user = await User.findOne({ email: email }).exec();
-            if (user) {
+            const user = await User.findOne({ email: email }).exec().then(()=>{
                 res(true);
-            }
-            rej("User does not exists");
+                return;
+            }).catch(()=>{
+                rej("User does not exists");
+            })
         })
     };
 
     async login(email: string, password: string): Promise<IUsers> {
         return new Promise((res, rej) => {
             this.exists(email).then(async () => {
-                const user: IUsers = await User.findOne({ email: email }).select('password').exec();
-                if(!user){
-                    
-                }
+                const user: IUsers = await User.findOne({ email: email }).select('password').get('password').exec();
+                
                 const pass = await bcrypt.compare(password, user.password);
                 if (pass) {
                     res(user);
                     return;
                 }
                 rej("Invalid password");
+            })
+            .catch(()=>{
+                rej("Invalid user");
             })
         })
     };
@@ -97,25 +102,37 @@ class UserService {
         description?: string,
         profilePicture?: Buffer
     ) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (res, rej) => {
 
             const profilePictureVar: any = {
                 data: profilePicture ? fs.readFileSync(profilePicture) : fs.readFileSync('/client/src/source/profile.png'),
                 contentType: 'image/png'
             }
-            // Return the updated document instead of the original document
-            await User.findOneAndUpdate({ email: email }, {
+           const user =  await User.findOneAndUpdate({ email: email }, {
                 name: name,
                 phone: phone,
                 description: description,
                 profilePicture: profilePictureVar
             }).exec()
-            .then(() => {
-                console.log("Updated!");
-                resolve(true);
-            }
-            ).catch((err: Error) => reject(err));
+                .then(() => {
+                    res(user);
+                    return;
+                }
+                ).catch((err: Error) => rej(err));
         });
+    };
+
+
+    async getUserInfo(email: string) {
+        return new Promise(async (res, rej) => {
+            const userInfo = await User.findOne({ email: email }).exec()
+                .then(() => {
+                    res(userInfo);
+                    return;
+                })
+                .catch((err: Error) => rej(err))
+        });
+
     };
 
 };

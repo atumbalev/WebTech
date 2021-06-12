@@ -6,100 +6,100 @@ import ProjectService from '../services/projectService';
 import TicketService from '../services/ticketService';
 
 export const getAllProjects = async (req: Request, res: Response) => {
-    const email = req.params.email;
-    if (email) {
-        const user = await User.findOne({ email: email }).populate('projects').select('projects').exec();
-        console.log(user);
-        if (user) {
-            const projects = user.get('projects', null, { getters: false });
-
-            res.status(200).json({ "projects": projects });
-            return;
-        }
+    if (!req.params.email) {
         res.status(400).json("error: No Project found");
+        return;
     }
-    else {
-        console.log("Not Found")
-        res.send(404).send();
-    }
+
+    const projects = await ProjectService.getProjectByEmail(req.params.email).then(() => {
+        res.status(200).json({ "projects": projects });
+        return;
+    }).catch((err: Error) => {
+        res.status(404).json({ "error": err });
+        return;
+    });
 }
 
-export const postNewProject = async (req: Request, res: Response) => { 
+export const postNewProject = async (req: Request, res: Response) => {
     const email = req.params.email;
     let body: IProject = req.body;
     body.creator = email;
+
+    if (!req.params.email || !req.body) {
+        res.status(400).json("error: Invalid input");
+        return;
+    }
+
     await ProjectService.addProject(body).then(() => {
         res.status(200).json("Project added");
-    }).catch(err => {
-        res.sendStatus(404).json({"No project added. Error ": err});
+    }).catch((err: Error) => {
+        res.sendStatus(400).json({ "Error ": err });
     })
 };
 
-export const getTicket = async (req: Request, res: Response) => {
+export const getAllContributers = async (req: Request, res: Response) => {
     const name = req.params.name;
-    if (name) {
-        const project = await Project.findOne({ name: name }).select('tickets').exec();
-        if (project) {
-            const tickets = project.get('tickets', null, { getters: false });
-            res.status(200).json({ "tickets": tickets });
-            return;
-        }
-        res.status(400).json("error: No tickets found");
+    if (!name) {
+        res.send(404).json("error: No valid user");
+        return;
     }
-    else {
-        res.send(404).json("error: No valid ID");
-    }
-};
 
-export const putTicket = async (req: Request, res: Response) => {
-    const name = req.params.name;
-    const taskName = req.params.ticketName;
-    const ticket = req.body;
-      
-    TicketService.updateTicket(name, taskName,ticket.description, ticket.category, ticket.status, ticket.assignees).then(() => {
-        res.sendStatus(200);
-    }).catch(err => {
-        res.status(404).send(err);
+    const contrubitors = await ProjectService.getAllContributors(name).then(() => {
+        res.status(200).json({ "contrubitors": contrubitors });
+        return;
+    }).catch((err: Error) => {
+        res.status(404).json({ "error": err });
+        return;
     });
-
 };
 
-export const postTicket = async (req: Request, res: Response) => { 
+export const addContributer = async (req: Request, res: Response) => {
     const name = req.params.name;
-    const newTicket = req.body;
-   
-    await TicketService.addTicket(name,newTicket).then(() => {
-        res.sendStatus(200);
-    }).catch(err => {
-        res.sendStatus(404).json("No ticket added");
+    const contributorEmail = req.body.email;
+    if(!name || !contributorEmail){
+        res.send(404).json("error: No valid input");
+        return;
+    }
+
+    await ProjectService.addContributer(name, contributorEmail).then(() => {
+        res.status(200).json("Contrubitor added");
+        return;
+    }).catch((err: Error) => {
+        res.status(404).json({ "error": err });
+        return;
     });
 }
+
+
+//////////////////////////////////Tickects////////////////////////////
+export const getTickets = async (req: Request, res: Response) => {
+    const name = req.params.name;
+    if (!name) {
+        res.status(400).json("error: Invalid input");
+        return;
+    }
+    const tickets = await ProjectService.getTickets(name)
+        .then(() => {
+            res.status(200).json({ "tickets": tickets });
+            return;
+        }).catch((err: Error) => {
+            res.send(404).json({ "error": err });
+            return;
+        });
+};
 
 export const deleteTicket = async (req: Request, res: Response) => {
     const name = req.params.name;
     const ticketName = req.params.ticketName;
 
-    await Project.updateOne({name: name}, {$pull: {tickets: {taskName:ticketName} }}).then(() => {
-        res.sendStatus(200).json("Deleted!");
+    if (!name || !ticketName) {
+        res.status(400).json("error: Invalid input");
         return;
-    }).catch(err =>{
-        res.sendStatus(404).send("No ticket added");
+    }
+    await Project.updateOne({ name: name }, { $pull: { tickets: { taskName: ticketName } } }).then(() => {
+        res.status(200).json("Deleted!");
+        return;
+    }).catch((err: Error) => {
+        res.status(404).json({"error": err});
     });
-};
-
-export const getAllContributers = async (req: Request, res: Response) => {
-    const name = req.params.name;
-    if (name) {
-        const project = await Project.findOne({ name: name }).select('contrubitors').exec();
-        if (project) {
-            const tickets = project.get('contrubitors', null, { getters: false });
-            res.status(200).json({ "contrubitors": tickets });
-            return;
-        }
-        res.status(400).json("error: No contrubitors found");
-
-    }
-    else {
-        res.send(404).json("error: No valid ID");
-    }
 };

@@ -9,99 +9,167 @@ import Ticket from '../schemas/TicketSchema'
 
 class TicketService {
 
-    async addTicket(name: string, ticket: ITicket) {
-        return new Promise((res, rej) => {
-            this.notExists(ticket.taskName).then(async () => {
-                const newTicket = new Ticket({
-                    _id: new mongoose.Types.ObjectId(),
-                    taskName: ticket.taskName,
-                    description: ticket.description,
-                    category: ticket.category,
-                    status: ticket.status,
-                    assignor: ticket.assignor,
-                    assignees: ticket.assignees
-                });
-
-                await newTicket.save();
-
-                Project.updateOne({ name: name }, { $addToSet: { tickets: newTicket } }).exec();
-
-                res(true);
-            }).catch((err) => {
-                console.log(`ProjectService: addProject: Error: ${err}`);
-                rej("Project exists");
-            });
-        })
-    }
-
-    notExists = (taskName: string) => {
-        return new Promise(async (res, rej) => {
-            const task = await Ticket.findOne({ taskName: taskName }).exec();
-            if (task) {
-                rej("Task exists");
-            }
-            res(true);
+  async addTicket(name: string, ticket: ITicket) {
+    return new Promise((res, rej) => {
+      this.notExists(ticket.taskName).then(async () => {
+        const newTicket = new Ticket({
+          _id: new mongoose.Types.ObjectId(),
+          taskName: ticket.taskName,
+          description: ticket.description,
+          category: ticket.category,
+          status: ticket.status,
+          assignor: ticket.assignor,
+          assignees: ticket.assignees
         });
-    };
 
-    private exists = (taskName: string) => {
-        return new Promise(async (res, rej) => {
-            const task = await Ticket.findOne({ taskName: taskName }).exec();
-            if (task) {
-                res(true);
-            }
-            rej("Task does not exists");
-        })
-    };
+        await newTicket.save();
 
-    async deleteTicket(name: string, taskName: string): Promise<Boolean> {
-        return new Promise(async (res, rej) => {
+        Project.updateOne({ name: name }, { $addToSet: { tickets: newTicket } }).exec();
 
-            const deletedTicket = await Ticket.deleteOne({ taskName: name }).exec();
-            if (deletedTicket) {
-                res(true);
-            }
-            rej("Un successfully deleted");
-        })
-    };
+        res(true);
+      }).catch((err) => {
+        console.log(`ProjectService: addProject: Error: ${err}`);
+        rej("Project exists");
+      });
+    })
+  }
 
-    async updateTicket(
-        name: string,
-        taskName: string,
-        description?: string,
-        category?: string,
-        status?: string,
-        assignees?: [string]
-      ){
-        return new Promise(async (resolve, reject) => {
-          const project = await Project.findOne({ name: name })
-            .select('tickets')
-            .exec();
-          console.log(project.tickets);
-          if (project) {
-            let tickets = project.tickets;
-            tickets.forEach((el: any) => {
-              if (el.taskName === taskName) {
-                el.description = description === null ? el.description : description;
-                el.category = category === null ? el.category : category;
-                el.status = status === null ? el.status : status;
-                el.assignees = assignees === null ? el.assignees : assignees;
-              }
-            });
-            console.log(tickets);
-    
-            Project.findOneAndUpdate({ name: name }, { tickets: tickets })
-              .exec()
-              .then((p: any) => {
-                console.log(p);
-                resolve(true);
-              })
-              .catch((err: Error) => reject(err));
-          } else {
-            reject('No project found');
+  notExists = (taskName: string) => {
+    return new Promise(async (res, rej) => {
+      const task = await Ticket.findOne({ taskName: taskName }).exec();
+      if (task) {
+        rej("Task exists");
+      }
+      res(true);
+    });
+  };
+
+  async deleteTicket(name: string, taskName: string): Promise<Boolean> {
+    return new Promise(async (res, rej) => {
+
+      const deletedTicket = await Ticket.deleteOne({ taskName: name }).exec();
+      if (deletedTicket) {
+        res(true);
+      }
+      rej("Un successfully deleted");
+    })
+  };
+
+  async updateTicket(
+    name: string,
+    taskName: string,
+    description?: string,
+    category?: string,
+    status?: string,
+    assignees?: [string]
+  ) {
+    return new Promise(async (res, rej) => {
+      const project = await Project.findOne({ name: name })
+        .select('tickets')
+        .exec();
+      if (project) {
+        let tickets = project.tickets;
+        tickets.forEach((el: any) => {
+          if (el.taskName === taskName) {
+            el.description = description === null ? el.description : description;
+            el.category = category === null ? el.category : category;
+            el.status = status === null ? el.status : status;
+            el.assignees = assignees === null ? el.assignees : assignees;
           }
         });
-      };
+
+        Project.findOneAndUpdate({ name: name }, { tickets: tickets })
+          .exec()
+          .then((p: any) => {
+            res(true);
+          })
+          .catch((err: Error) => rej(err));
+      } else {
+        rej('No project found');
+      }
+    });
+  };
+
+
+  async getByAssignee(name: string) {
+    return new Promise(async (res, rej) => {
+
+      const ticketsArr = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
+        .then(() => {
+          let ticketsByAssignee: Array<any> = [];
+          ticketsArr.forEach((el: any) => {
+            ticketsByAssignee.push({
+              taskName: el.taskName,
+              description: el.description,
+              assignee: el.assignor,
+              status: el.status,
+              category: el.category
+            });
+          })
+
+          res(ticketsByAssignee);
+          return;
+        }).catch((err: Error) => {
+          res(err);
+        })
+    });
+  }
+
+  async getByStatus(name: string, status: string) {
+    return new Promise(async (res, rej) => {
+
+      const ticketsArr = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
+        .then(() => {
+
+          let ticketsByStatus: Array<any> = [];
+
+          ticketsArr.forEach((el: any) => {
+            if (el.status === status) {
+              console.log(status);
+              ticketsByStatus.push({
+                taskName: el.taskName,
+                description: el.description,
+                assignee: el.assignor,
+                status: el.status,
+                category: el.category
+              });
+            }
+          })
+          res(ticketsByStatus);
+          return;
+        }).catch((err: Error) => {
+          res(err);
+        })
+    });
+  }
+
+  async getByCategory(name: string, category: string) {
+    return new Promise(async (res, rej) => {
+
+      const ticketsArr = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
+        .then(() => {
+          let ticketsByCategory: Array<any> = [];
+
+          ticketsArr.forEach((el: any) => {
+            if (el.category === category) {
+              ticketsByCategory.push({
+                taskName: el.taskName,
+                description: el.description,
+                assignee: el.assignor,
+                status: el.status,
+                category: el.category
+              });
+            }
+          });
+
+          res(ticketsByCategory);
+          return;
+        })
+        .catch((err: Error) => {
+          rej(err);
+        })
+    });
+  }
 }
 
 export default new TicketService();

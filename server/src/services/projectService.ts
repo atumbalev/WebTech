@@ -18,7 +18,7 @@ class ProjectService {
         });
     };
 
-    async deleteProject(name: string): Promise<Boolean>{
+    async deleteProject(name: string): Promise<Boolean> {
         return new Promise(async (res, rej) => {
             const deletedProject = await Project.deleteOne({ name: name }).exec();
             if (deletedProject) {
@@ -35,7 +35,7 @@ class ProjectService {
         description: string,
         tickets: ITicket[],
         contrubitors: String[]
-    ): Promise<void>{
+    ): Promise<void> {
         const project = await Project.findOne({ _id: id }).exec().then(async (u: any) => {
             await User.findOneAndUpdate(
                 { _id: id },
@@ -64,7 +64,7 @@ class ProjectService {
 
                 await newProject.save();
 
-                User.updateOne({email: project.creator}, {$push: {projects: newProject}}).exec();
+                User.updateOne({ email: project.creator }, { $push: { projects: newProject } }).exec();
 
                 res(true);
             }).catch((err) => {
@@ -74,7 +74,55 @@ class ProjectService {
         })
     }
 
+    async getProjectByEmail(email: string) {
+        return new Promise(async (res, rej) => {
+            const project = await User.findOne({ email: email }).select('projects').get('projects').exec()
+                .then(() => {
+                    res(project);
+                    return;
+                })
+                .catch((err: Error) => rej("No project found"))
 
+        });
+    }
+
+    async getAllContributors(name: string) {
+        return new Promise(async (res, rej) => {
+            const contrubitors = await Project.findOne({ name: name }).select('contrubitors').get('contrubitors').exec()
+                .then(() => {
+                    res(contrubitors);
+                    return;
+                })
+                .catch((err: Error) => rej("No contrubitors found"))
+        });
+
+    }
+
+    async getTickets(name: string) {
+        return new Promise(async (res, rej) => {
+            const tickets = await Project.findOne({ name: name }).select('tickets').get('tickets').exec()
+                .then(() => {
+                    res(tickets);
+                    return;
+                })
+                .catch((err: Error) => rej("No tickets found"))
+        });
+    }
+
+
+    async addContributer(name: string, email: string) {
+        return new Promise(async (res, rej) => {
+
+            Project.updateOne({ name: name }, { $addToSet: { contributers: email } }).exec()
+            .then(() => {
+                res(email);
+            })
+            .catch((err: Error) => {
+                rej(err);
+            });
+
+        });
+    }
 }
 
 export default new ProjectService();

@@ -9,7 +9,9 @@ const ticketSchema = new Schema<ITicket>({
       required: true,
       unique: true,
     },
-    description: String,
+    description: {
+      type:String
+    },
     category: {
       type: String,
       enum: ['Open', 'In progress', 'Resolved', 'Closed'],
@@ -17,17 +19,17 @@ const ticketSchema = new Schema<ITicket>({
     },
     status:{
       type: Number,
-      enum: [1, 2, 3, 4, 5],
+      enum: ['Highest','High','Normal', 'Low', 'Lowest'],
       required: true,
     },
     assignor: {
-      type: Schema.Types.ObjectId,
-      refPath: 'onModel',
+      type: String,
       required: true,
+      match:/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
     },
     assignees: [{
-      type: Schema.Types.ObjectId,
-      refPath: 'onModel'
+      type: String,
+      match: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
     }]
 })
 
