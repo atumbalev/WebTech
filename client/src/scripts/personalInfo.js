@@ -1,20 +1,44 @@
-const PersonalInfro = event => {
+function getPersonalInfo(event) {
     event.preventDefault();
 
-    const name = document.getElementById('fullName').value;
-    const email = document.getElementById('emailAddress').value;
-    const phone = document.getElementById('phone').value;
-    const description = document.getElementById('infoPer').value;
+    const email = localStorage.getItem('email');
 
-    const userInfo = {
-        name,
-        email,
-        phone,
-        description
+    const options = {
+        method: 'GET',
+        mode: 'cors',
+        withCredentials: true,
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const url = `http://localhost:3000/${email}/personalInfo`;
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(error => console.log("Errorz:" + error));
+};
+
+
+function updatePersonalInfo() {
+    const profilePic = document.getElementsByClassName('profilePicture');
+    const name = document.getElementById('fullName');
+    const phone = document.getElementById('phone');
+    const description = document.getElementById('infoPer');
+
+    const email = localStorage.getItem('email');
+
+    const user = {
+        "phone": phone,
+        "name ": name,
+        "description": description,
+        "profilePicture": profilePic
     };
 
     const options = {
-        method: 'POST',
+        method: 'PUT',
         mode: 'cors',
         withCredentials: true,
         credentials: 'same-origin',
@@ -24,25 +48,23 @@ const PersonalInfro = event => {
         body: JSON.stringify(user)
     };
 
-    const url = 'http://localhost:3000/user';
+    const url = `http://localhost:3000/${email}/update`;
 
-    sendRequest(url, options, loginUser, handleError);
-};
+    fetch(url, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(error => console.log("Errorz:" + error));
+}
 
-// const loginUser = response => {
-//     if (response.success) {
 
-//         // kakvo se slutchva sled vavejdane na dannite
-//     } else {
-//         console.log(response.error);
-//     }
-// }
 
-(function() {
-    const doneBtn = document.getElementsByClassName('done');
 
-    doneBtn.addEventListener('click', dashboard);
-})();
+
+// (function() {
+//     const doneBtn = document.getElementsByClassName('done');
+
+//     doneBtn.addEventListener('click', dashboard);
+// })();
 
 const lockAll = () => {
     document.getElementById('fullName').readOnly = true;
@@ -57,4 +79,6 @@ const editProfile = () => {
     document.getElementById('phone').readOnly = false;
     document.getElementById('infoPer').disabled = this.checked;
 }
-re
+
+const projectName = document.getElementById('projectName');
+//     const projectDescription = document.getElementById('projectDescription');depcos

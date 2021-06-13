@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="styles/dashboard.css">
     <link rel="stylesheet" href="styles/mainStyles.css">
     <link rel="stylesheet" href="styles/modal.css">
-
-    <script src="./scripts/dashboard.js "></script>
-    <script src="./scripts/main.js "></script>
-    
-
 </head>
 
 <body>
@@ -35,12 +30,7 @@
     </nav>
 
     <main class="main-container">
-        <aside class="toolBarSecond">
-
-            <ul id="collaburatorsList">
-                <li class="contributor" id="addContributor">+</li>
-            </ul>
-        </aside>
+        <aside class="toolBarSecond"> </aside>
         <div class="projects-form">
             <ul id="projects-container">
                 <li id="add">
@@ -53,15 +43,19 @@
     </main>
     <div id="myModal" class="addModal">
         <div class="modalContent">
-            <h1 class="header">Add a new project</h1>
+            <h1 class="header">Add new project</h1>
             <input id="projectName" class="headerField" placeholder="Enter name project">
             <input id="projectDescription" class="headerField" placeholder="Enter description">
             <div class="buttons">
-                <button id="deleteProject">Cancel</button>
-                <button id="done" onclick="add()">Save</button>
+                <button id="deleteProject" class="button">Cancel</button>
+                <button id="done" class="button">Save</button>
             </div>
         </div>
     </div>
+
+
+    <script src="./scripts/dashboard.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 
 </html>

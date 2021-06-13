@@ -13,7 +13,7 @@
     <nav class="toolBarFirst">
         <div class="navbarLeft">
             <img src="./source/logoOpaTask.jpg" class="logo">
-            <h class="dashboard">Dashboard</h>
+            <a class="dashboard" href="dashboard.html">Dashboard</a>
             <h id="name"></h>
         </div>
         <div class="navbarRight">
@@ -32,39 +32,25 @@
             </ul>
         </aside>
         <div class="projects-form">
-            <div id="taskGrid">
-                <table>
+            <table id="taskTable">
+                <thead>
                     <tr>
-                        <th>Project name</th>
+                        <th>viewByTasks name</th>
                         <th>Description</th>
-                        <th>Assignee</th>
+                        <th>Assignor</th>
                         <th>Status</th>
                         <th>Category</th>
                     </tr>
-                    <tr>
-                        <td>
-                            <!--dinamic from database-->
-                        </td>
-                        <td>
-                            <!--dinamic from database-->
-                        </td>
-                        <td>
-                            <!--dinamic from database-->
-                        </td>
-                        <td>
-                            <!--dinamic from database-->
-                        </td>
-                        <td>
-                            <!--dinamic from database-->
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                </thead>
+                <tbody id="tasks">
 
+                </tbody>
+            </table>
             <a href="viewByStatus.html"><button class="button" id="leftButton">View by status</button></a>
             <a href="viewByTasks.html"><button class="button" id="rightButton">View by task</button></a>
         </div>
-        <script src="scripts/main.js  "></script>
+        <script src="scripts/main.js "></script>
+        <script src="scripts/viewByAssignee.js "></script>
 </body>
 </main>
 

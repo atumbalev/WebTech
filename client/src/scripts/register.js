@@ -6,7 +6,13 @@ const sendForm = event => {
 
     const user = {
         "email": email,
-        "password": password
+        "password": password,
+        "projects": [{
+            "name": Math.random().toString(36).substring(7),
+            "tickets": [{
+                "taskName": Math.random().toString(36).substring(7)
+            }]
+        }]
     };
 
     localStorage.setItem('email', email);

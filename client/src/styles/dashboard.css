@@ -1,27 +1,10 @@
-.nameProject {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 100px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.descriptionProject {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 180px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
 #projects-container {
     width: 100%;
     height: 100%;
     left: 10%;
     top: 30%;
     background-color: lightgreen;
+    border-radius: 0.5em;
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

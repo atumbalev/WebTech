@@ -16,10 +16,11 @@ function hidePopup() {
     modal.style.display = "none";
 }
 
-// if (event.target === modal) {
-//     modal.style.display = "none";
-// }
-// }
+
+function openColaborator() {
+    let sth = document.getElementById("contributorsModal");
+}
+
 
 
 //to show myProfile and LogOut
@@ -38,12 +39,12 @@ function show() {
 };
 
 //statuses
-const btn5 = document.getElementById('status');
+// const btn5 = document.getElementById('status');
 
-btn5.addEventListener('click', function() {
-    if (btn4.style.marginTop != '290px') {
-        btn4.style.marginTop = '290px';
-    } else {
-        btn4.style.marginTop = '20px';
-    }
-});
+// btn5.addEventListener('click', function() {
+//     if (btn4.style.marginTop != '290px') {
+//         btn4.style.marginTop = '290px';
+//     } else {
+//         btn4.style.marginTop = '20px';
+//     }
+// });

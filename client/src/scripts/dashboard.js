@@ -95,8 +95,7 @@ function createProject() {
         'description': projectDescription.value,
         "tickets": [{
             "taskName": Math.random().toString(36).substring(7)
-        }],
-        "contrubitors": ["60bb3005e3ccc282a0dbd42f"],
+        }]
     }
     const email = localStorage.getItem('email');
     const url = `http://localhost:3000/projects/${email}`
@@ -120,7 +119,7 @@ function createProject() {
 }
 
 (function() {
-    const doneBtn = document.getElementById('done');
+    let doneBtn = document.getElementById("done");
     let btnClose = document.getElementById("deleteProject");
 
     window.addEventListener('load', (event) => {
@@ -128,6 +127,7 @@ function createProject() {
     });
 
     doneBtn.onclick = event => {
+        console.log("done");
         event.preventDefault();
         createProject();
     }

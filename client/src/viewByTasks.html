@@ -14,7 +14,7 @@
     <nav class="toolBarFirst">
         <div class="navbarLeft">
             <img src="./source/logoOpaTask.jpg" class="logo">
-            <h class="dashboard">Dashboard</h>
+            <a class="dashboard" href="dashboard.html">Dashboard</a>
             <h id="name"></h>
         </div>
         <div class="navbarRight">
@@ -33,32 +33,32 @@
                 <li class="contributor">
                     <img class="contributorProfilePicture" src="./source/profile.png">
                 </li>
-                <li class="contributor" id="addContributor">+</li>
+                <li class="contributor" id="addContributor">
+                    <img class="contributorProfilePicture" src="source/addButton.png" alt="add" />
+                </li>
             </ul>
         </aside>
         <div class="projects-form">
-            <div id="taskGrid">
-                <div id="issues">
-                    <div class="issueContainer">
-                        <h2>Open</h2>
-                        <ul class="issuesList" id="open">
-                        </ul>
-                    </div>
-                    <div class="issueContainer">
-                        <h2>In Progress</h2>
-                        <ul class="issuesList" id="in-progress"></ul>
-                    </div>
-                    <div class="issueContainer">
-                        <h2>Resolved</h2>
-                        <ul class="issuesList" id="resolved"></ul>
-                    </div>
-                    <div class="issueContainer">
-                        <h2>Closed</h2>
-                        <ul class="issuesList" id="closed"></ul>
-                    </div>
+            <div id="issues">
+                <div class="issueContainer">
+                    <h2>Open</h2>
+                    <ul class="issuesList" id="open">
+                    </ul>
                 </div>
-
+                <div class="issueContainer">
+                    <h2>In Progress</h2>
+                    <ul class="issuesList" id="in-progress"></ul>
+                </div>
+                <div class="issueContainer">
+                    <h2>Resolved</h2>
+                    <ul class="issuesList" id="resolved"></ul>
+                </div>
+                <div class="issueContainer">
+                    <h2>Closed</h2>
+                    <ul class="issuesList" id="closed"></ul>
+                </div>
             </div>
+            <div class="issuesList" id="deletion-tray"></div>
             <div class="navigationButtons">
                 <div>
                     <a href="viewByAssignee.html"><button class="button" id="leftButton">View by assignee</button></a>
@@ -67,23 +67,35 @@
                 <button class="button" id="centerButton" onclick="openModal()">+ Add task</button>
             </div>
         </div>
-        <div id="myModal" class="addModal">
-            <div class="modalContent">
-                <h1 class="header">Adding new task</h1>
-                <input class="headerField" placeholder="Enter name of task">
-                <input class="headerField" placeholder="Enter description">
-                <input class="headerField" placeholder="Enter category">
-                <input class="headerField" placeholder="Enter priority ">
-                <input class="headerField" placeholder="Enter assignee ">
-                <input class="headerField" placeholder="Enter participants ">
-                <div class="buttons">
-                    <button class="deleteProject" onclick="del() ">Cancel</button>
-                    <button class="done" onclick="add() ">Save</button>
-                </div>
-            </div>
-        </div>
-        <script src="scripts/main.js"></script>
-        <script src="scripts/viewByTasks.js"></script>
+
+
     </main>
 </body>
+
+<div id="contributorsModal" class="modalTwo">
+    <p>Add new collaborator</p>
+    <input id="emailCollaborator" class="headerField" placeholder="Enter email colaborator">
+    <div class="buttons">
+        <button id="cancelAdd" class="button">Cancel</button>
+        <button id="addContributorBtn" class="button">Save</button>
+    </div>
+</div>
+<div id="myModal" class="addModal">
+    <div class="modalContent">
+        <h1 class="header">Adding new task</h1>
+        <input id="task-name" class="headerField" placeholder="Enter name of task">
+        <input id="task-description" class="headerField" placeholder="Enter description">
+        <input id="task-priority" class="headerField" placeholder="Enter priority - Highest or High or Normal or Low or Lowest ">
+        <div class="buttons">
+            <button id="cancelTask" class="deleteProject">Cancel</button>
+            <button id="addTaskButton" class="done">Save</button>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/main.js"></script>
+<script src="scripts/viewByTasks.js"></script>
+<script src="scripts/dragAndDrop.js"></script>
+<script src="scripts/addContributor.js"></script>
+
 </html>

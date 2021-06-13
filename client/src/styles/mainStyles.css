@@ -15,7 +15,7 @@ body {
 .toolBarFirst {
     width: 100%;
     height: 7vh;
-    background-color: rgba(9, 200, 127, 1);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(107, 201, 110, 1) 100%);
     display: flex;
     justify-content: space-between;
 }
@@ -49,7 +49,7 @@ body {
 .logOut {
     width: 90px;
     height: 30px;
-    background-color: rgba(9, 200, 127, 1);
+    background-color: rgb(9, 200, 127);
     text-align: center;
     display: flex;
     justify-content: center;
@@ -83,17 +83,19 @@ body {
     display: flex;
     width: 7vh;
     height: 100%;
-    background-color: rgba(9, 200, 127, 1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(107, 201, 110, 1) 100%);
 }
 
 .dashboard {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 33px;
-    line-height: 42px;
-    color: #000000;
     margin: auto 1rem;
+    margin-left: 3rem;
+    font-size: 3rem;
+    text-align: center;
+    color: #000000;
+    font-family: "Niconne";
+    font-style: italic;
+    font-weight: 700;
+    text-shadow: 3px 3px 0px #fcedd8, 4px 4px 0px #efa032, 5px 5px 0px #017e7f;
 }
 
 .projects-form {
@@ -107,21 +109,21 @@ body {
     display: inline-block;
     padding: 0.3em 1.2em;
     margin: 0 0.3em 0.3em 0;
-    border-radius: 2em;
+    border-radius: 1em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    color: #FFFFFF;
-    background-color: #4eb5f1;
+    font-family: 'Niconne', sans-serif;
+    font-weight: 500;
+    font-style: bold;
+    color: white;
+    background-color: #048352;
     text-align: center;
     transition: all 0.2s;
 }
 
 .button:hover {
-    background-color: #4095c6;
+    background-color: #09c87f;
 }
-
 
 #collaburatorsList {
     list-style: none;
