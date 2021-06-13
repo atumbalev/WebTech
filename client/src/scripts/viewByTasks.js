@@ -1,3 +1,49 @@
+function changeTicketCategory(ticketName, category) {
+    let newCategory;
+    switch (category) {
+        case 'open':
+            newCategory = 'Open';
+            break;
+        case 'in-progress':
+            newCategory = 'In progress';
+            break;
+        case 'resolved':
+            newCategory = 'Resolved';
+            break;
+        case 'closed':
+            newCategory = 'Closed';
+            break;
+        default:
+            deleteTask(ticketName);
+            return;
+    }
+    console.log(newCategory)
+    const ticket = {
+        "category": newCategory
+    }
+    console.log(ticket)
+
+    const project = localStorage.getItem('projectName')
+    const url = `http://localhost:3000/projects/${project}/tickets/${ticketName}`
+    const options = {
+        method: 'PUT',
+        mode: 'cors',
+        withCredentials: true,
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ticket)
+    };
+
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+}
+
+
 function createIssue(titleMessage, descriptionMessage) {
     let newIssue = document.createElement("li")
     newIssue.classList.add('issue')
@@ -6,13 +52,18 @@ function createIssue(titleMessage, descriptionMessage) {
     newIssue.addEventListener('dragstart', () => {
         newIssue.classList.add('dragging')
         deletionTray.style.visibility = 'visible'
-        deletionTray.style.height = '30%'
+        deletionTray.style.height = '20%'
+        issuesContainer.style.height = '80%'
     })
 
     newIssue.addEventListener('dragend', () => {
         newIssue.classList.remove('dragging')
         deletionTray.style.visibility = 'hidden'
         deletionTray.style.height = '0'
+        issuesContainer.style.height = '100%'
+        let ticketName = newIssue.firstChild.innerHTML; // ticketName
+        let ticketStatus = newIssue.parentElement.id; // status
+        changeTicketCategory(ticketName, ticketStatus);
     })
 
     let title = document.createElement('p')
@@ -29,8 +80,8 @@ function createIssue(titleMessage, descriptionMessage) {
     return newIssue;
 }
 
-function addIssueToList(list, issueName, issueDescription) {
-    list.appendChild(createIssue("test", "testing"));
+function addIssueToList(list, issue) {
+    list.appendChild(createIssue(issue.taskName, issue.description));
 }
 
 function getIssues(category, listID) {
@@ -55,23 +106,21 @@ function getIssues(category, listID) {
         .catch(err => console.log(err))
 }
 
-
-
 function createTask() {
-    const title = document.getElementById("task-name")
-    const description = document.getElementById("task-description")
-    const priority = document.getElementById("task-priority")
+    const title = document.getElementById("task-name").value;
+    const description = document.getElementById("task-description").value;
+    const priority = document.getElementById("task-priority").value;
     const assignor = localStorage.getItem('email');
 
-    const task = {
+    const ticket = {
         "taskName": title,
         "description": description,
         "status": priority,
         "assignor": assignor,
         "assignees": []
     }
-    const projectName = localStorage.getItem('projectName');
-    const url = `http://localhost:3000/projects/${projectName}/tickets`
+    const project = localStorage.getItem('projectName');
+    const url = `http://localhost:3000/projects/${project}/tickets`
 
     const options = {
         method: 'POST',
@@ -81,8 +130,33 @@ function createTask() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(task)
+        body: JSON.stringify(ticket)
+
     };
+
+    console.log(ticket)
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+
+}
+
+function deleteTask(taskName) {
+    const projectName = localStorage.getItem('projectName');
+    const url = `http://localhost:3000/projects/${projectName}/tickets/${taskName}`
+
+    const options = {
+        method: 'DELETE',
+        mode: 'cors',
+        withCredentials: true,
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
     fetch(url, options)
         .then(res => res.json())
         .then(res => console.log(res))

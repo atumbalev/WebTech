@@ -10,12 +10,8 @@ export const putTicket = async (req: Request, res: Response) => {
     const taskName = req.params.taskName;
     const ticket = req.body;
 
-    // if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !name || !taskName || !ticket.category || !ticket.status) {
-    //     res.status(400).json("error: Invalid input");
-    //     return;
-    // }
 
-    if (!name || !taskName || !ticket) {
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !name || !taskName || !ticket.category) {
         res.status(400).json("error: Invalid input");
         return;
     }
@@ -32,11 +28,10 @@ export const postTicket = async (req: Request, res: Response) => {
     const name = req.params.name;
     const newTicket = req.body;
 
-  // if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !name || !newTicket.taskName || !newTicket.category || !newTicket.status) {
-    //     res.status(400).json("error: Invalid input");
-    //     return;
-    // }
-
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !name || !newTicket.taskName || !newTicket.status) {
+        res.status(400).json("error: Invalid input");
+        return;
+    }
 
     if (!name || !newTicket) {
         res.status(400).json("error: Invalid input");
@@ -45,7 +40,7 @@ export const postTicket = async (req: Request, res: Response) => {
 
     await TicketService.addTicket(name, newTicket)
         .then(() => {
-            res.status(200).json({'msg': 'Ticked added successfully'});
+            res.status(200).json({ 'msg': 'Ticked added successfully' });
         })
         .catch((err: Error) => {
             res.status(304).json({ "error": err });
@@ -60,9 +55,9 @@ export const getByAssignee = async (req: Request, res: Response) => {
     }
 
     await TicketService.getByAssignee(name).then((ticketsByAssignee) => {
-            res.status(200).json(ticketsByAssignee);
-            return;
-        })
+        res.status(200).json(ticketsByAssignee);
+        return;
+    })
         .catch((err: Error) => {
             res.status(405).json({ "err": err });
             return;

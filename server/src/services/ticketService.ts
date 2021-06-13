@@ -22,7 +22,9 @@ class TicketService {
           assignor: ticket.assignor,
           assignees: ticket.assignees
         });
-        
+
+        console.log(newTicket);
+
         await newTicket.save();
 
         Project.updateOne({ name: name }, { $addToSet: { tickets: newTicket } }).exec().then(() => {
@@ -74,10 +76,10 @@ class TicketService {
         let tickets = project.tickets;
         tickets.forEach((el: any) => {
           if (el.taskName === taskName) {
-            el.description = description === null ? el.description : description;
-            el.category = category === null ? el.category : category;
-            el.status = status === null ? el.status : status;
-            el.assignees = assignees === null ? el.assignees : assignees;
+            el.description = description ? description : el.description;
+            el.category = category ? category : el.category;
+            el.status = status ? status : el.status;
+            el.assignees = assignees ? assignees : el.assignees;
           }
         });
 

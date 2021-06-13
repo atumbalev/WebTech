@@ -15,6 +15,7 @@ const sendForm = event => {
         }]
     };
 
+    console.log(user)
     localStorage.setItem('email', email);
 
     const options = {
@@ -39,9 +40,9 @@ const sendForm = event => {
 
 const redirect = response => {
     console.log(response);
-    console.log(response.successk);
+    console.log(response.ok);
     if (response.ok) {
-        window.location = 'personalInfo.html';
+        window.location = 'registerPersonalInfo.html';
     } else {
         const errors = document.getElementsByClassName('regError');
         errors.innerHTML = response.error;
@@ -49,7 +50,7 @@ const redirect = response => {
 }
 
 (function() {
-    const register = document.getElementById('regBut');
+    const register = document.getElementById('centerButton');
 
     register.addEventListener('click', sendForm);
 })();

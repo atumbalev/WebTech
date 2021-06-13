@@ -15,6 +15,12 @@ class UserService {
         return new Promise(async (res, rej) => {
 
             this.notExists(user.email).then(async () => {
+
+                let passRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+                if (!passRegex.test(user.password)) {
+                    rej("Invalid pass");
+                    return;
+                }
                 const newUser = new User({
                     _id: new mongoose.Types.ObjectId(),
                     name: user.name,
@@ -23,21 +29,15 @@ class UserService {
                     phone: user.phone,
                     description: user.description,
                     profilePicture: user.profilePicture,
-                    projects: []
-                });
-
-                await this.validatePass(user.password)
-                    .catch((err: Error) => {
-                        rej(err);
-                        return;
-                    });
+                    projects: user.projects
+                }); 
 
                 newUser.password = await bcrypt.hash(user.password, SALT_ROUNDS);
                 await newUser.save();
 
                 res(true);
                 return;
-                
+
             }).catch((err) => {
                 console.log(`UserService: addUser: Error: ${err}`);
                 rej({ "error": err });
@@ -67,6 +67,7 @@ class UserService {
         })
     };
 
+
     async login(email: string, password: string): Promise<IUsers> {
         return new Promise((res, rej) => {
             this.exists(email).then(async () => {
@@ -84,6 +85,7 @@ class UserService {
                 rej("Invalid user");
             })
         })
+
     };
 
     async updateUserInfo(
@@ -99,34 +101,35 @@ class UserService {
                 data: profilePicture ? fs.readFileSync(profilePicture) : null,
                 contentType: 'image/png'
             }
-            
-            const user = await User.findOneAndUpdate({ email: email }, {
+
+            await User.findOneAndUpdate({ email: email }, {
                 name: name,
                 phone: phone,
                 description: description,
                 profilePicture: profilePictureVar
             }).exec()
-                .then(() => {
+                .then((u) => {
+                    console.log(u);
                     res(true);
                     return;
                 })
-                .catch((err: Error) => {console.log(err); rej(err)});
-        }); 
-}
+                .catch((err: Error) => { console.log(err); rej(err) });
+        });
+    }
 
-private validatePass = (pass: string) => {
-    return new Promise(async (res, rej) => {
-        // Minimum eight characters, at least one letter, one number and one special character:
-        let passRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
+    private validatePass = (pass: string) => {
+        return new Promise(async (res, rej) => {
+            // Minimum eight characters, at least one letter, one number and one special character:
+            let passRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
 
-        if (pass && !pass.match(passRegex)) {
-            rej("Invalid pass");
-            return;
-        }
+            if (pass && !pass.match(passRegex)) {
+                rej("Invalid pass");
+                return;
+            }
 
-        res(true);
-    });
-}
+            res(true);
+        });
+    }
 
 };
 

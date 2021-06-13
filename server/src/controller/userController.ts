@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 
 //uodateInfo
 export const updateInfo = async (req: Request, res: Response) => {
+    console.log(req.body)
     if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !req.params.email) {
         res.status(400).send("Invalid input");
         return;
@@ -57,7 +58,7 @@ export const register = async (req: Request, res: Response) => {
         return;
     }).catch((err: Error) => {
         res.status(406).json({ "error": err });
-        return;
+        return; 
     });
 }
 
@@ -67,8 +68,9 @@ export const login = async (req: Request, res: Response) => {
     //body check
     if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !req.body.email || !req.body.password) {
         res.status(406).send("Invalid input");
+        
         return;
-    }
+    } 
 
     UserService.login(body.email, body.password)
         .then(() => {
@@ -88,7 +90,7 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {//need to be tested and thought
-    localStorage.clear();
+    //delete token    
     res.status(200).send("Logout success!");
     return;
 };

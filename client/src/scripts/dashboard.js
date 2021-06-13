@@ -60,7 +60,7 @@ function createElement(text) {
 function addProjectsToDOM(projects) {
     console.log(projects)
 
-    Array.from(projects.projects).forEach(project => createElement(project.name))
+    Array.from(projects.projects).slice(1).forEach(project => createElement(project.name))
 }
 
 function getProjects() {

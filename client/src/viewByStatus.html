@@ -21,7 +21,7 @@
             <img src="./source/arrowDown.png" class="arrowDown" onclick="show()">
             <div id="hamburgerMenu" class="arrowButton">
                 <a href="personalInfo.html"><button class="myProfile">My profile</button></a>
-                <a href="opaTask.html"><button class="logOut">Log out</button></a>
+                <a href="index.html"><button class="logOut" onclick="localStorage.clear()">Log out</button></a>
             </div>
         </div>
     </nav>
@@ -35,7 +35,7 @@
 
             <table id="taskTable">
                 <thead>
-                    <tr>
+                    <tr id="descriptionNewColor">
                         <th class="table-header">Task Name</th>
                         <th class="table-header">Description</th>
                         <th class="table-header">Assignor</th>
@@ -44,29 +44,29 @@
                 </thead>
                 <tbody id="table-body">
                     <tr id="highest">
-                        <td colspan="4">Highest</td>
+                        <td colspan="4" class="status" id="highestSt">Highest</td>
                     </tr>
                     <tr id="high">
-                        <td colspan="4">High</td>
+                        <td colspan="4" class="status" id="highSt">High</td>
                     </tr>
                     <tr id="normal">
-                        <td colspan="4">Normal</td>
+                        <td colspan="4" class="status" id="normalSt">Normal</td>
                     </tr>
                     <tr id="low">
-                        <td colspan="4">Low</td>
+                        <td colspan="4" class="status" id="lowSt">Low</td>
                     </tr>
-                    <tr id="lowest">
-                        <td colspan="4">Lowest</td>
+                    <tr id="lowes">
+                        <td colspan="4" class="status" id="lowestSt">Lowest</td>
                     </tr>
                 </tbody>
             </table>
 
-            <a href="viewByAssignee.html "><button class="button" id = "leftButton">View by assignee</button></a>
+            <a href="viewByAssignee.html"><button class="button" id = "leftButton">View by assignee</button></a>
             <a href="viewByTasks.html"><button class="button" id="rightButton" >View by task</button></a>
 
         </div>
     </main>
     <script src="scripts/main.js"></script>
     <script src="scripts/viewByStatus.js"></script>
-    <!-- <script src="scripts/viewByStatus.js/script> -->
+    <script src="scripts/login.js"></script>
 </body>

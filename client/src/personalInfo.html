@@ -1,14 +1,16 @@
 <!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <meta charset="utf-8" />
-    <title> Register Personal info </title>
+    <title> Personal info </title>
     <link rel='stylesheet' href='styles/personalInfoStyle.css' type='text/css'>
     <link rel="stylesheet" href="styles/loginAndPersonal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body onload="lockAll()">
     <main class="container">
         <form>
             <div>
@@ -35,10 +37,15 @@
                     <div class="inputIcon"><i class="fa fa-heart"></i></div>
                 </div>
                 <div>
-                    <a href="dashboard.html"><button class="button" id="centerButton">GO TO DASHBOARD</button></a>
+                    <button class="button" id="leftButton" onclick="editProfile">EDIT</button>
+                    <button class="button" id="rightButton" onclick="window.location.href='./dashboard.html'">CLOSE/UPDATE</button>
                 </div>
-            </div>
             </div>
         </form>
     </main>
+    <script src="./scripts/personalInfo.js"></script>
 </body>
+
+
+
+</html>

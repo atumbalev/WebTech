@@ -41,7 +41,7 @@ const login = event => {
     // sendRequest(url, options, loginUser, handleError);
 
     fetch(url, options)
-        // .then(response => response.json())
+        .then(response => response.json())
         .then(response => loginUser(response))
         .catch(error => errorCallback(console.log(error)));
 
@@ -63,83 +63,13 @@ const loginUser = (data) => {
 
 (function() {
     const loginBtn = document.getElementById('login');
+    const logoutBtn = document.getElementById('logout');
 
     console.log("attached!")
 
     loginBtn.addEventListener('click', login);
+
+    logoutBtn.addEventListener('click', event => {
+        localStorage.clear();
+    })
 })();
-
-
-
-
-
-// const registerForm = document.getElementById('register-form');
-// const loginForm = document.getElementById('login-form');
-
-// if (registerForm != null) {
-//     registerForm.addEventListener('click', (event) => {
-//         event.preventDefault();
-
-//         const requestBody = {
-//             email: email.value,
-//             password: password.value
-//         }
-
-//         postRequest("http://localhost:3000/register", JSON.stringify(requestBody),
-//             (data) => {
-//                 localStorage.setItem('token', data.token);
-//                 window.location.replace("project.html");
-//             },
-//             (err) => {
-//                 showError("Invalid email or password");
-//             });
-//     });
-// }
-
-// if (loginForm != null) {
-//     loginForm.addEventListener('submit', event => {
-//         event.preventDefault();
-
-//         const requestBody = {
-//             email: email.value,
-//             password: password.value
-//         }
-
-//         postRequest("http://localhost:3000/login", JSON.stringify(requestBody),
-//             (data) => {
-//                 localStorage.setItem('token', data.token);
-//                 window.location.replace("Dashboard.html");
-//             },
-//             (err) => {
-//                 showError("Invalid email or password");
-//             });
-//     })
-// }
-
-// function postRequest(url, body, successCallback, errorCallback) {
-//     fetch(url, {
-//             method: "POST",
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: body
-//         })
-//         .then(resonse => resonse.json())
-//         .then(data => {
-//             successCallback(data);
-//         }).catch(err => {
-//             errorCallback(err);
-//         })
-// }
-
-// function showError(text) {
-//     error.style.display = 'block';
-//     const textNode = document.createTextNode(text);
-//     const paragraph = document.getElementsByClassName('forgot');
-//     paragraph.innerHTML = "";
-//     paragraph.appendChild(textNode);
-
-//     setTimeout(() => {
-//         error.style.display = 'none';
-//     }, 3000)
-// }

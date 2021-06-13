@@ -1,5 +1,5 @@
 function getPersonalInfo(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     const email = localStorage.getItem('email');
 
@@ -17,25 +17,36 @@ function getPersonalInfo(event) {
 
     fetch(url, options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => response.userInfo)
+        .then(response => showPersonalInfo(response))
         .catch(error => console.log("Errorz:" + error));
 };
 
+function showPersonalInfo(personalInfoObject) {
+    // document.getElementsByClassName('profilePicture').innerText = personalInfoObject.name;
+    document.getElementById('emailAddress').value = personalInfoObject.email;
+    document.getElementById('fullName').value = personalInfoObject.name;
+    document.getElementById('phone').value = personalInfoObject.phone;
+    document.getElementById('infoPer').value = personalInfoObject.description;
+
+}
 
 function updatePersonalInfo() {
-    const profilePic = document.getElementsByClassName('profilePicture');
-    const name = document.getElementById('fullName');
-    const phone = document.getElementById('phone');
-    const description = document.getElementById('infoPer');
+    const profilePic = document.getElementsByClassName('profilePicture').value;
+    const name = document.getElementById('fullName').value;
+    const phone = document.getElementById('phone').value;
+    const description = document.getElementById('infoPer').value;
 
     const email = localStorage.getItem('email');
 
     const user = {
+        "name": name,
         "phone": phone,
-        "name ": name,
         "description": description,
         "profilePicture": profilePic
     };
+
+    console.log(user);
 
     const options = {
         method: 'PUT',
@@ -60,11 +71,6 @@ function updatePersonalInfo() {
 
 
 
-// (function() {
-//     const doneBtn = document.getElementsByClassName('done');
-
-//     doneBtn.addEventListener('click', dashboard);
-// })();
 
 const lockAll = () => {
     document.getElementById('fullName').readOnly = true;
@@ -74,11 +80,31 @@ const lockAll = () => {
 }
 
 const editProfile = () => {
-    document.getElementById('fullName').readOnly = true;
-    document.getElementById('emailAddress').readOnly = true;
+    document.getElementById('fullName').readOnly = false;
+    document.getElementById('emailAddress').readOnly = false;
     document.getElementById('phone').readOnly = false;
-    document.getElementById('infoPer').disabled = this.checked;
+    document.getElementById('infoPer').readOnly = false;
 }
 
 const projectName = document.getElementById('projectName');
 //     const projectDescription = document.getElementById('projectDescription');depcos
+
+(function() {
+    const doneBtn = document.getElementById('rightButton');
+    const editBtn = document.getElementById('leftButton');
+
+    lockAll();
+    getPersonalInfo();
+
+
+    doneBtn.addEventListener('click', event => {
+        event.preventDefault();
+        updatePersonalInfo();
+    });
+
+    editBtn.onclick = event => {
+        event.preventDefault();
+        editProfile();
+    }
+
+})();

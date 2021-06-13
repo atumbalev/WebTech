@@ -22,7 +22,7 @@
             <img src="./source/arrowDown.png" class="arrowDown" onclick="show()">
             <div id="hamburgerMenu" class="arrowButton">
                 <a href="personalInfo.html"><button class="myProfile">My profile</button></a>
-                <a href="opaTask.html"><button class="logOut">Log out</button></a>
+                <a href="index.html"><button class="logOut" onclick="localStorage.clear()">Log out</button></a>
             </div>
         </div>
     </nav>
@@ -85,10 +85,10 @@
         <h1 class="header">Adding new task</h1>
         <input id="task-name" class="headerField" placeholder="Enter name of task">
         <input id="task-description" class="headerField" placeholder="Enter description">
-        <input id="task-priority" class="headerField" placeholder="Enter priority - Highest or High or Normal or Low or Lowest ">
+        <input id="task-priority" class="headerField" placeholder="Enter priority - Highest or High or Normal or Low or Lowest">
         <div class="buttons">
-            <button id="cancelTask" class="deleteProject">Cancel</button>
-            <button id="addTaskButton" class="done">Save</button>
+            <button id="cancelTask" class="button">Cancel</button>
+            <button id="addTaskButton" class="button">Save</button>
         </div>
     </div>
 </div>
