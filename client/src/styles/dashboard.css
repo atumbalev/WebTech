@@ -16,30 +16,6 @@
     background: rgba(255, 255, 255, 0.74);
 }
 
-#deleteProject {
-    position: absolute;
-    width: 200px;
-    height: 60px;
-    left: 20px;
-    top: 580px;
-    background: #09C87F;
-    border-radius: 3px;
-    border: none;
-    cursor: pointer;
-}
-
-#done {
-    position: absolute;
-    width: 200px;
-    height: 60px;
-    left: 667px;
-    top: 580px;
-    background: #09C87F;
-    border-radius: 3px;
-    border: none;
-    cursor: pointer;
-}
-
 #projects-container {
     width: 100%;
     height: 100%;

@@ -80,9 +80,9 @@ body {
 }
 
 .toolBarSecond {
-    /* display: flex; */
+    display: flex;
     width: 7vh;
-    height: 662px;
+    height: 100%;
     background-color: rgba(9, 200, 127, 1);
 }
 
@@ -122,49 +122,25 @@ body {
     background-color: #4095c6;
 }
 
-#rightButton {
-    float: right;
-}
 
-#leftButton {
-    float: left;
-}
-
-#centerButton {
-    float: left;
-    margin-left: 35%;
-    margin-right: 30%;
-}
-
-.addModal {
-    display: none;
-    position: fixed;
-    justify-content: center;
-    z-index: 1;
-    width: 60%;
-    height: 70%;
-    background-color: rgba(255, 255, 255, 0.74);
-    box-shadow: 0px 4px 4px #000000;
-}
-
-.headerBackground {
+#collaburatorsList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    position: fxed;
-    justify-content: center;
-    width: 60%;
-    height: 20%;
-    background: rgba(9, 200, 127, 1);
+    flex-direction: column;
+    width: 100%;
 }
 
-.header {
+.contributor {
+    width: 100%;
+    display: flex;
+    margin: 1rem auto;
     justify-content: center;
-    width: 308px;
-    height: 20px;
-    margin-left: 3px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 42px;
-    color: #000000;
+}
+
+.contributorProfilePicture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
 }

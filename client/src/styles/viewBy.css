@@ -62,75 +62,6 @@ th {
     background: #09C87F;
 }
 
-.nameTask {
-    width: 866px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.descriptionTask {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 180px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.categoryTask {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 260px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.priorityTask {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 340px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.assigneeTask {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 420px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.participantsTask {
-    position: absolute;
-    width: 866px;
-    height: 60px;
-    left: 14px;
-    top: 500px;
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.deleteProject {
-    position: absolute;
-    width: 200px;
-    height: 60px;
-    left: 20px;
-    top: 580px;
-    background: #09C87F;
-}
-
-.done {
-    position: absolute;
-    width: 200px;
-    height: 60px;
-    left: 667px;
-    top: 580px;
-    background: #09C87F;
-}
-
 a,
 a:hover,
 a:visited,
@@ -202,4 +133,11 @@ a:active {
     width: 100%;
     text-align: center;
     font-style: italic;
+}
+
+.navigationButtons {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

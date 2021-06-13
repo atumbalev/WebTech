@@ -7,6 +7,7 @@
     <title>ViewByTasks</title>
     <link rel="stylesheet" href="styles/mainStyles.css">
     <link rel="stylesheet" href="styles/viewBy.css">
+    <link rel="stylesheet" href="styles/modal.css">
 </head>
 
 <body>
@@ -17,7 +18,7 @@
             <h id="name"></h>
         </div>
         <div class="navbarRight">
-            <img id="icon"></img>
+            <img id="icon" src="./source/profile.png"></img>
             <img src="./source/arrowDown.png" class="arrowDown" onclick="show()">
             <div id="hamburgerMenu" class="arrowButton">
                 <a href="personalInfo.html"><button class="myProfile">My profile</button></a>
@@ -28,9 +29,12 @@
 
     <main class="main-container">
         <aside class="toolBarSecond">
-            <li id="collaburatorsList">
-                <!--list with collaburators && backend-->
-            </li>
+            <ul id="collaburatorsList">
+                <li class="contributor">
+                    <img class="contributorProfilePicture" src="./source/profile.png">
+                </li>
+                <li class="contributor" id="addContributor">+</li>
+            </ul>
         </aside>
         <div class="projects-form">
             <div id="taskGrid">
@@ -55,34 +59,31 @@
                 </div>
 
             </div>
-            <a href="viewByAssignee.html"><button class="button" id="leftButton">View by assignee</button></a>
-            <a href="viewByStatus.html"><button class="button" id="rightButton">View by status</button></a>
-            <button class="button" id="centerButton" onclick="openModal()">+ Add task</button>
+            <div class="navigationButtons">
+                <div>
+                    <a href="viewByAssignee.html"><button class="button" id="leftButton">View by assignee</button></a>
+                    <a href="viewByStatus.html"><button class="button" id="rightButton">View by status</button></a>
+                </div>
+                <button class="button" id="centerButton" onclick="openModal()">+ Add task</button>
+            </div>
         </div>
         <div id="myModal" class="addModal">
-            <div class="headerBackground">
+            <div class="modalContent">
                 <h1 class="header">Adding new task</h1>
+                <input class="headerField" placeholder="Enter name of task">
+                <input class="headerField" placeholder="Enter description">
+                <input class="headerField" placeholder="Enter category">
+                <input class="headerField" placeholder="Enter priority ">
+                <input class="headerField" placeholder="Enter assignee ">
+                <input class="headerField" placeholder="Enter participants ">
+                <div class="buttons">
+                    <button class="deleteProject" onclick="del() ">Cancel</button>
+                    <button class="done" onclick="add() ">Save</button>
+                </div>
             </div>
-            <!-- <div>
-                    <input class="nameTask" placeholder="Enter name of task">
-                    <input class="descriptionTask" placeholder="Enter description">
-                    <input class="categoryTask" placeholder="Enter category">
-                    <input class=" priorityTask " placeholder="Enter priority ">
-                    <input class="assigneeTask " placeholder="Enter assignee ">
-                    <input class="participantsTask " placeholder="Enter participants ">
-                    <button class="deleteProject " onclick="del() ">Delete</button>
-                    <button class="done " onclick="add() ">Done</button>
-                </div> -->
         </div>
         <script src="scripts/main.js"></script>
         <script src="scripts/viewByTasks.js"></script>
     </main>
 </body>
-
-</html>
-<script src="scripts/main.js"></script>
-<script src="scripts/viewByTasks.js"></script>
-</main>
-</body>
-
 </html>

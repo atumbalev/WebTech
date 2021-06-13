@@ -1,17 +1,18 @@
 // Get the modal
-let modal = document.getElementById("myModal");
+
 let btnClose = document.getElementById("deleteProject");
 // Get the <span> element that closes the modal
 let span = document.getElementsByClassName("close");
 
 function openModal() {
+    let modal = document.getElementById("myModal");
     modal.style.display = "flex";
 }
 
 
 // When the user clicks on <span> (x), close the modal
 function hidePopup() {
-    console.log('close')
+    const modal = document.getElementById("myModal");
     modal.style.display = "none";
 }
 
