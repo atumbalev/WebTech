@@ -22,7 +22,7 @@ const userSchema = new Schema<IUser>({
   },
   phone: {
     type: String,
-    match: /^\+?[0-9]+$/
+    match: /^08[789]\d{7}^/
   },
   description: {
     type: String

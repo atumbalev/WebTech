@@ -3,6 +3,7 @@ import ITicket from "../models/ticket"
 import IProject from '../models/project'
 import User from '../schemas/UserSchema'
 import Project from '../schemas/ProjectSchema'
+import UserService from '../services/userService'
 
 
 class ProjectService {
@@ -77,7 +78,7 @@ class ProjectService {
         return new Promise(async (res, rej) => {
             const projectArr = await User.findOne({ email: email }).select('projects').exec();
             const currentProject = projectArr.get('projects', null, { getters: false });
-            if(currentProject){
+            if (currentProject) {
                 //console.log(currentProject);
                 res(currentProject);
                 return;
@@ -89,7 +90,7 @@ class ProjectService {
     async getAllContributors(name: string) {
         return new Promise(async (res, rej) => {
             const contrubitors = (await Project.findOne({ name: name }).select('contrubitors').exec()).get('contrubitors');
-            if(contrubitors) {
+            if (contrubitors) {
                 res(contrubitors);
             } else {
                 rej("No contrubitors");
@@ -113,18 +114,44 @@ class ProjectService {
     async addContributer(name: string, email: string) {
         return new Promise(async (res, rej) => {
 
-            await Project.updateOne({ name: name }, { $addToSet: { contributers: email } }).exec()
-                .then(() => {
-                    console.log("in bull")
-                    res(true);
-                })
+            // if(this.notExists(name)){
+            //     rej("Invalid project name!");
+            //     return;
+            // }
+
+            // if(UserService.notExists(email)){
+            //     rej("Invalid contributer!");
+            //     return;
+            // }
+
+            const project = await Project.findOne({ name: name }).select('contrubitors').exec();
+            let curContributes: String[] = project.get('contrubitors', null, { getters: false });
+           
+           
+            if (!curContributes)
+                curContributes = [];
+
+            curContributes.forEach((element:any) => {
+                if(element === email){
+                    rej("Contribotor already added");
+                    return;
+                }
+            })
+
+            //add in UserSchema also
+            
+            curContributes.push(email);
+
+            Project.findOneAndUpdate({ name: name }, { contrubitors: curContributes }).exec().then(() => {
+                res(true);
+            })
                 .catch((err: Error) => {
                     console.log(err);
                     rej(err);
                 });
-
+    
         });
-    }
+    };
 }
 
 export default new ProjectService();

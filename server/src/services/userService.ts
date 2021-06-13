@@ -14,27 +14,30 @@ class UserService {
     async addUser(user: IUsers) {
         return new Promise(async (res, rej) => {
 
-            let passRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-            if (!user.password.match(passRegex)) {
-                rej("Invalid pass");
-                return;
-            }
-
-            const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
             this.notExists(user.email).then(async () => {
                 const newUser = new User({
                     _id: new mongoose.Types.ObjectId(),
                     name: user.name,
                     email: user.email,
-                    password: hashedPassword,
+                    password: user.password,
                     phone: user.phone,
                     description: user.description,
                     profilePicture: user.profilePicture,
                     projects: [{name:"jkdk", tickets: [{taskName:"hvbsfd"}]}]
                 });
+
+                await this.validatePass(user.password)
+                    .catch((err: Error) => {
+                        rej(err);
+                        return;
+                    });
+
+                newUser.password = await bcrypt.hash(user.password, SALT_ROUNDS);
                 await newUser.save();
+
                 res(true);
                 return;
+                
             }).catch((err) => {
                 console.log(`UserService: addUser: Error: ${err}`);
                 rej({ "error": err });
@@ -42,7 +45,7 @@ class UserService {
         })
     }
 
-    private notExists = (email: string) => {
+    notExists = (email: string) => {
         return new Promise(async (res, rej) => {
             const user = await User.findOne({ email: email }).exec();
             if (user) {
@@ -53,7 +56,7 @@ class UserService {
         });
     };
 
-    private exists = (email: string) => {
+    exists = (email: string) => {
         return new Promise(async (res, rej) => {
             const user = await User.findOne({ email: email }).exec();
             if (user) {
@@ -109,6 +112,20 @@ class UserService {
                 })
                 .catch((err: Error) => {console.log(err); rej(err)});
         }); 
+}
+
+private validatePass = (pass: string) => {
+    return new Promise(async (res, rej) => {
+        // Minimum eight characters, at least one letter, one number and one special character:
+        let passRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
+
+        if (pass && !pass.match(passRegex)) {
+            rej("Invalid pass");
+            return;
+        }
+
+        res(true);
+    });
 }
 
 };

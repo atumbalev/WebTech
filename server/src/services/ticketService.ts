@@ -22,13 +22,13 @@ class TicketService {
           assignor: ticket.assignor,
           assignees: ticket.assignees
         });
-
+        
         await newTicket.save();
 
         Project.updateOne({ name: name }, { $addToSet: { tickets: newTicket } }).exec().then(() => {
           res("ticket added");
-        }).catch((err : Error) => {
-          rej("error: " +  err);
+        }).catch((err: Error) => {
+          rej("error: " + err);
         })
 
         // res(true);
@@ -80,11 +80,11 @@ class TicketService {
             el.assignees = assignees === null ? el.assignees : assignees;
           }
         });
-        
+
         Project.findOneAndUpdate({ name: name }, { tickets: tickets }).exec().then(async (project: any) => {
-          const tic = (await Project.findOne({name:project.name}).select("tickets").exec()).tickets;
-            res(tic);
-          })
+          const tic = (await Project.findOne({ name: project.name }).select("tickets").exec()).tickets;
+          res(tic);
+        })
           .catch((err: Error) => rej(err));
       } else {
         rej('No project found');
@@ -96,7 +96,7 @@ class TicketService {
   async getByAssignee(name: string) {
     return new Promise(async (res, rej) => {
 
-   await Project.findOne({ name: name }).select('tickets').exec()
+      await Project.findOne({ name: name }).select('tickets').exec()
         .then((tickets) => {
           const ticketsArr = tickets.tickets;
           let ticketsByAssignee: Array<any> = [];
@@ -121,7 +121,7 @@ class TicketService {
   async getByStatus(name: string, status: string) {
     return new Promise(async (res, rej) => {
 
-     await Project.findOne({ name: name }).select('tickets').exec()
+      await Project.findOne({ name: name }).select('tickets').exec()
         .then((tickets) => {
           const ticketsArr = tickets.tickets;
           let ticketsByStatus: Array<any> = [];

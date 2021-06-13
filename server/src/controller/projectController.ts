@@ -56,15 +56,14 @@ export const getAllContributers = async (req: Request, res: Response) => {
 };
 
 export const addContributer = async (req: Request, res: Response) => {
-    console.log(req.body);
+        
     const name = req.params.name;
     const contributorEmail = req.body.email;
-    // if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !contributorEmail || !name) {
-    //     res.send(404).json("error: No valid input");
-    //     return;
-    // }
-
-    console.log(name);
+   
+    if ((req.body.constructor === Object && Object.keys(req.body).length === 0) || !contributorEmail || !name) {
+        res.send(404).json("error: No valid input");
+        return;
+    }
 
     await ProjectService.addContributer(name, contributorEmail).then(() => {
         res.status(200).json("Contrubitor added");
@@ -96,7 +95,7 @@ export const getTickets = async (req: Request, res: Response) => {
 
 export const deleteTicket = async (req: Request, res: Response) => {
     const name = req.params.name;
-    const ticketName = req.params.ticketName;
+    const ticketName = req.params.taskName;
 
     if (!name || !ticketName) {
         res.status(400).json("error: Invalid input");
